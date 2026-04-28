@@ -2,6 +2,7 @@
   "name": "foxstudio",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "FoxStudio — R&D lab of FoxCase. Showcase site.",
   "engines": {
     "node": ">=20.0.0"
@@ -22,7 +23,12 @@
     "payload": "PAYLOAD_CONFIG_PATH=payload.config.ts payload",
     "payload:migrate": "PAYLOAD_CONFIG_PATH=payload.config.ts payload migrate",
     "payload:types": "PAYLOAD_CONFIG_PATH=payload.config.ts payload generate:types",
-    "payload:importmap": "PAYLOAD_CONFIG_PATH=payload.config.ts payload generate:importmap"
+    "payload:importmap": "PAYLOAD_CONFIG_PATH=payload.config.ts payload generate:importmap",
+    "services:up": "docker compose up -d postgres minio && docker compose up minio-init && docker compose ps",
+    "services:down": "docker compose down",
+    "services:logs": "docker compose logs -f postgres minio",
+    "services:reset": "docker compose down -v && pnpm services:up",
+    "services:status": "docker compose ps"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",

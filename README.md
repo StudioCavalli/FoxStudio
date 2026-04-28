@@ -24,12 +24,19 @@ Runtime cible : **Bun** (recommandé par le CDC §6.1). Le repo fonctionne avec 
 ## Setup local
 
 ```bash
-# Prérequis : Node ≥ 20, pnpm ≥ 10 (ou bun ≥ 1.1)
+# Prérequis : Node ≥ 20, pnpm ≥ 10, Docker + Docker Compose v2
 pnpm install
+cp .env.docker.example .env.local
+pnpm services:up        # Postgres + MinIO en Docker
+pnpm payload:migrate
+pnpm payload:types
 pnpm dev
 ```
 
-Ouvrir [http://localhost:3000](http://localhost:3000).
+Ouvrir [http://localhost:3000](http://localhost:3000) (site) / [http://localhost:3000/admin](http://localhost:3000/admin) (CMS).
+
+→ Détails et troubleshooting : [`docs/LOCAL-DEV.md`](./docs/LOCAL-DEV.md).
+→ Setup Neon + R2 (prod-grade) : [`docs/SETUP-CMS.md`](./docs/SETUP-CMS.md).
 
 ## Scripts
 

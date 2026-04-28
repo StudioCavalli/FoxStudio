@@ -1,6 +1,8 @@
-# Setup runbook — Payload CMS
+# Setup runbook — Payload CMS (production stack)
 
-Ce document est la marche à suivre **étape par étape** pour activer le CMS sur ton poste local. Compte ~ 20 minutes la première fois.
+Ce document est la marche à suivre **étape par étape** pour activer le CMS avec Neon (Postgres SaaS) + Cloudflare R2 (object storage). Compte ~ 20 minutes la première fois.
+
+> 💡 **Tu n'es pas obligé de faire ça maintenant.** Pour bosser en local sans compte Neon ni R2, suis [`LOCAL-DEV.md`](./LOCAL-DEV.md) — le dev démarre en 30 secondes avec Postgres + MinIO en Docker.
 
 > Pré-requis : compte Cloudflare (gratuit), compte Neon (gratuit), Node 20+, pnpm 10+.
 

@@ -7,8 +7,13 @@
  * before the CMS is wired up to a real database.
  */
 
+import type { Project as PayloadProject } from "@/payload-types";
 import { MOCK_PROJECTS, type MockProject } from "./projects.mock";
 
+/**
+ * View model — the projection of a project that the front actually consumes.
+ * Decouples the UI from the CMS shape so the CMS can evolve independently.
+ */
 export type Project = {
   id: string;
   number: string;
@@ -20,7 +25,7 @@ export type Project = {
   status: "live" | "wip" | "archived";
 };
 
-function mockToProject(m: MockProject): Project {
+function fromMock(m: MockProject): Project {
   return {
     id: m.id,
     number: m.number,
@@ -33,8 +38,20 @@ function mockToProject(m: MockProject): Project {
   };
 }
 
+function fromPayloadDoc(doc: PayloadProject): Project {
+  return {
+    id: String(doc.id),
+    number: doc.number,
+    slug: doc.slug,
+    name: doc.name,
+    summary: doc.summary ?? undefined,
+    year: doc.year,
+    stack: (doc.stack ?? []).map((s) => s.tech).filter((t): t is string => Boolean(t)),
+    status: doc.status,
+  };
+}
+
 async function fromPayload(): Promise<Project[] | null> {
-  // Skip Payload entirely when no DB is configured.
   if (!process.env.DATABASE_URL) return null;
 
   try {
@@ -52,24 +69,8 @@ async function fromPayload(): Promise<Project[] | null> {
       depth: 0,
     });
 
-    return result.docs.map((doc) => {
-      const stackArr = ((doc.stack as Array<{ tech?: string }> | null | undefined) ?? [])
-        .map((s) => s.tech)
-        .filter((t): t is string => Boolean(t));
-
-      return {
-        id: String(doc.id),
-        number: doc.number as string,
-        slug: doc.slug as string,
-        name: doc.name as string,
-        summary: (doc.summary as string | null | undefined) ?? undefined,
-        year: doc.year as number,
-        stack: stackArr,
-        status: doc.status as Project["status"],
-      } satisfies Project;
-    });
+    return result.docs.map(fromPayloadDoc);
   } catch {
-    // DB unreachable, table missing, etc. — quietly fall back.
     return null;
   }
 }
@@ -77,7 +78,7 @@ async function fromPayload(): Promise<Project[] | null> {
 export async function getProjects(): Promise<Project[]> {
   const fromCms = await fromPayload();
   if (fromCms && fromCms.length > 0) return fromCms;
-  return MOCK_PROJECTS.map(mockToProject);
+  return MOCK_PROJECTS.map(fromMock);
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {

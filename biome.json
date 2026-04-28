@@ -16,7 +16,9 @@
       "test-results",
       "playwright-report",
       "next-env.d.ts",
-      "docs/j1/tokens/theme.css"
+      "docs/j1/tokens/theme.css",
+      "payload-types.ts",
+      "app/(payload)/admin/importMap.js"
     ]
   },
   "formatter": {
