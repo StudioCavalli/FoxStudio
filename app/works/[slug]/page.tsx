@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Reveal } from "@/components/effects/Reveal";
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
 import { getProjectBySlug, getProjects } from "@/lib/data/projects";
@@ -44,18 +45,24 @@ export default async function ProjectPage({ params }: Args) {
       {/* HERO */}
       <section className="border-b border-[var(--color-border)] py-[var(--spacing-9)] md:py-[var(--spacing-11)]">
         <Container>
-          <MonoLabel number={project.number}>
-            {project.year} · {project.status}
-          </MonoLabel>
+          <Reveal>
+            <MonoLabel number={project.number}>
+              {project.year} · {project.status}
+            </MonoLabel>
+          </Reveal>
 
-          <h1 className="mt-[var(--spacing-6)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
-            {project.name}
-          </h1>
+          <Reveal delay={80}>
+            <h1 className="mt-[var(--spacing-6)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
+              {project.name}
+            </h1>
+          </Reveal>
 
           {project.summary && (
-            <p className="mt-[var(--spacing-7)] max-w-[60ch] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[var(--color-fg-secondary)]">
-              {project.summary}
-            </p>
+            <Reveal delay={160}>
+              <p className="mt-[var(--spacing-7)] max-w-[60ch] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[var(--color-fg-secondary)]">
+                {project.summary}
+              </p>
+            </Reveal>
           )}
         </Container>
       </section>
@@ -99,12 +106,18 @@ export default async function ProjectPage({ params }: Args) {
       {/* ACT 2 — APPROACH */}
       <section className="border-t border-[var(--color-border)] py-[var(--spacing-10)]">
         <Container>
-          <MonoLabel number="02">Approach</MonoLabel>
-          <div className="mt-[var(--spacing-7)] aspect-[16/9] w-full border border-[var(--color-border)] bg-[var(--color-bg-secondary)]" />
-          <p className="mt-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-            Visual material and detailed approach narrative go here. Will be sourced from Payload's{" "}
-            <code>narrative</code> rich text field once content is added.
-          </p>
+          <Reveal>
+            <MonoLabel number="02">Approach</MonoLabel>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="mt-[var(--spacing-7)] aspect-[16/9] w-full border border-[var(--color-border)] bg-[var(--color-bg-secondary)]" />
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
+              Visual material and detailed approach narrative go here. Will be sourced from
+              Payload's <code>narrative</code> rich text field once content is added.
+            </p>
+          </Reveal>
         </Container>
       </section>
 

@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/effects/Reveal";
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
 import { SignatureScene } from "./SignatureScene";
@@ -27,15 +28,23 @@ export function Hero() {
         </div>
 
         <div className="max-w-[40ch] space-y-[var(--spacing-3)] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
-          <p>We build what we wish existed.</p>
-          <p>We break what we don&apos;t understand.</p>
-          <p>We publish what holds up.</p>
+          <Reveal>
+            <p>We build what we wish existed.</p>
+          </Reveal>
+          <Reveal delay={100}>
+            <p>We break what we don&apos;t understand.</p>
+          </Reveal>
+          <Reveal delay={200}>
+            <p>We publish what holds up.</p>
+          </Reveal>
         </div>
 
-        <p className="mt-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-          No commercial roadmap. No jargon. Prototypes that actually run, technical notes, use cases
-          that survive production.
-        </p>
+        <Reveal delay={350}>
+          <p className="mt-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
+            No commercial roadmap. No jargon. Prototypes that actually run, technical notes, use
+            cases that survive production.
+          </p>
+        </Reveal>
       </Container>
     </section>
   );
