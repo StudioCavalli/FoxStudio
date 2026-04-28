@@ -58,3 +58,6 @@ bun.lockb
 
 # misc
 *.log
+
+# payload local media fallback (uploads stored on R2 in prod)
+public/uploads/

@@ -3,9 +3,11 @@ import Link from "next/link";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
-import { MOCK_PROJECTS } from "@/lib/data/projects.mock";
+import { getProjects } from "@/lib/data/projects";
 
-export function Index() {
+export async function Index() {
+  const projects = (await getProjects()).slice(0, 4);
+
   return (
     <section
       className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
@@ -20,7 +22,7 @@ export function Index() {
         </div>
 
         <ul className="border-t border-[var(--color-border)]">
-          {MOCK_PROJECTS.map((project) => (
+          {projects.map((project) => (
             <li key={project.id} className="border-b border-[var(--color-border)]">
               <Link
                 href={`/works/${project.slug}` as never}
