@@ -1,0 +1,150 @@
+/*
+ * FoxStudio — Tailwind v4 theme
+ * Generated from tokens.json. Drop into app/globals.css or import.
+ *
+ * Usage with Tailwind v4 CSS-first config:
+ *   @import "tailwindcss";
+ *   @import "./theme.css";
+ *
+ * Mode: dark by default. .light overrides on html.
+ */
+
+@theme {
+  /* ─── Colors (dark mode default) ─────────────────────────── */
+  --color-bg:           #0A0A0A;
+  --color-bg-secondary: #141414;
+  --color-bg-tertiary:  #1F1F1F;
+
+  --color-fg:           #F4F4F4;
+  --color-fg-secondary: #A0A0A0;
+  --color-fg-tertiary:  #666666;
+
+  --color-border:        #262626;
+  --color-border-strong: #404040;
+
+  --color-focus: #FFFFFF;
+
+  /* ─── Typography ─────────────────────────────────────────── */
+  --font-display: "PP Neue Montreal", "Inter Tight", system-ui, sans-serif;
+  --font-body:    "Geist Sans", "Inter", system-ui, sans-serif;
+  --font-mono:    "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* Mobile defaults; desktop via media queries below */
+  --text-mono-s:     12px;
+  --text-mono-m:     13px;
+  --text-body:       16px;
+  --text-body-l:     18px;
+  --text-heading:    24px;
+  --text-display-m:  36px;
+  --text-display-l:  48px;
+  --text-display-xl: 64px;
+
+  --leading-tight:   1.0;
+  --leading-snug:    1.15;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.7;
+
+  --tracking-display: -0.02em;
+  --tracking-mono:    0.04em;
+
+  /* ─── Spacing (8px scale) ────────────────────────────────── */
+  --spacing-1:  4px;
+  --spacing-2:  8px;
+  --spacing-3:  12px;
+  --spacing-4:  16px;
+  --spacing-5:  24px;
+  --spacing-6:  32px;
+  --spacing-7:  48px;
+  --spacing-8:  64px;
+  --spacing-9:  96px;
+  --spacing-10: 128px;
+  --spacing-11: 192px;
+  --spacing-12: 256px;
+
+  /* ─── Radius ─────────────────────────────────────────────── */
+  --radius-none: 0;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-full: 9999px;
+
+  /* ─── Border ─────────────────────────────────────────────── */
+  --border-1: 1px;
+  --border-2: 2px;
+
+  /* ─── Grid ───────────────────────────────────────────────── */
+  --grid-gutter:  16px;
+  --grid-margin:  20px;
+  --grid-max:     1440px;
+
+  /* ─── Breakpoints ────────────────────────────────────────── */
+  --breakpoint-sm:  640px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ─── Motion ─────────────────────────────────────────────── */
+  --duration-instant: 100ms;
+  --duration-fast:    150ms;
+  --duration-base:    300ms;
+  --duration-slow:    600ms;
+  --duration-page:    400ms;
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-reveal:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-page:    cubic-bezier(0.83, 0, 0.17, 1);
+
+  /* ─── Z-index scale ──────────────────────────────────────── */
+  --z-base:    0;
+  --z-raised:  10;
+  --z-sticky:  20;
+  --z-overlay: 30;
+  --z-modal:   40;
+  --z-toast:   50;
+  --z-cursor:  60;
+}
+
+/* Desktop typography overrides */
+@media (min-width: 1024px) {
+  @theme {
+    --grid-gutter:    24px;
+    --grid-margin:    48px;
+    --text-heading:    32px;
+    --text-display-m:  64px;
+    --text-display-l:  96px;
+    --text-display-xl: 160px;
+  }
+}
+
+/* Light mode overrides */
+.light {
+  --color-bg:           #FFFFFF;
+  --color-bg-secondary: #F4F4F4;
+  --color-bg-tertiary:  #EAEAEA;
+
+  --color-fg:           #0A0A0A;
+  --color-fg-secondary: #666666;
+  --color-fg-tertiary:  #999999;
+
+  --color-border:        #E5E5E5;
+  --color-border-strong: #CCCCCC;
+
+  --color-focus: #0A0A0A;
+}
+
+/* Reduced motion: kill anything > 200ms */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
