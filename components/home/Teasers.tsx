@@ -1,6 +1,9 @@
+import { useTranslations } from "next-intl";
+
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
+import { Link } from "@/i18n/navigation";
 
 const LAB_EXPERIMENTS = [
   { id: "exp_004", name: "WebGPU compute shader", status: "live" as const },
@@ -9,16 +12,18 @@ const LAB_EXPERIMENTS = [
 ];
 
 export function LabTeaser() {
+  const t = useTranslations("Home");
+
   return (
     <section
       className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
-      aria-label="Lab"
+      aria-label={t("labLabel")}
     >
       <Container>
         <div className="mb-[var(--spacing-8)] flex items-end justify-between">
-          <MonoLabel number="02">Lab</MonoLabel>
+          <MonoLabel number="02">{t("labLabel")}</MonoLabel>
           <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-            Live experiments
+            {t("liveExperiments")}
           </span>
         </div>
 
@@ -47,7 +52,7 @@ export function LabTeaser() {
         </ul>
 
         <div className="mt-[var(--spacing-7)] flex justify-end">
-          <ArrowLink href="/lab">Enter the lab</ArrowLink>
+          <ArrowLink href="/lab">{t("enterLab")}</ArrowLink>
         </div>
       </Container>
     </section>
@@ -55,27 +60,23 @@ export function LabTeaser() {
 }
 
 export function StudioTeaser() {
+  const t = useTranslations("Home");
+
   return (
     <section
       className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
-      aria-label="Studio"
+      aria-label={t("studioLabel")}
     >
       <Container>
-        <MonoLabel number="03">Studio</MonoLabel>
+        <MonoLabel number="03">{t("studioLabel")}</MonoLabel>
 
         <div className="mt-[var(--spacing-7)] grid gap-[var(--spacing-7)] md:grid-cols-[2fr_1fr]">
           <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
-            <p>
-              We&apos;re a small group of engineers and designers who picked R&amp;D over the
-              roadmap.
-            </p>
-            <p className="text-[var(--color-fg-secondary)]">
-              FoxStudio is what FoxCase explores when no client is asking — and what we propose when
-              one does.
-            </p>
+            <p>{t("studioLead")}</p>
+            <p className="text-[var(--color-fg-secondary)]">{t("studioSecondary")}</p>
           </div>
           <div className="flex md:items-end md:justify-end">
-            <ArrowLink href="/studio">More about the studio</ArrowLink>
+            <ArrowLink href="/studio">{t("moreAboutStudio")}</ArrowLink>
           </div>
         </div>
       </Container>
@@ -100,23 +101,25 @@ const JOURNAL_PREVIEWS = [
 ];
 
 export function JournalTeaser() {
+  const t = useTranslations("Home");
+
   return (
     <section
       className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
-      aria-label="Journal"
+      aria-label={t("journalLabel")}
     >
       <Container>
         <div className="mb-[var(--spacing-8)] flex items-end justify-between">
-          <MonoLabel number="04">Journal</MonoLabel>
+          <MonoLabel number="04">{t("journalLabel")}</MonoLabel>
           <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-            Latest notes
+            {t("latestNotes")}
           </span>
         </div>
 
         <ul className="border-t border-[var(--color-border)]">
           {JOURNAL_PREVIEWS.map((entry) => (
             <li key={entry.title} className="border-b border-[var(--color-border)]">
-              <a
+              <Link
                 href="/journal"
                 className="group flex flex-col gap-[var(--spacing-2)] py-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-bg-secondary)] md:flex-row md:items-baseline md:justify-between md:gap-[var(--spacing-7)]"
               >
@@ -131,42 +134,44 @@ export function JournalTeaser() {
                 <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
                   {entry.tag} · {entry.read}
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         <div className="mt-[var(--spacing-7)] flex justify-end">
-          <ArrowLink href="/journal">All notes</ArrowLink>
+          <ArrowLink href="/journal">{t("allNotes")}</ArrowLink>
         </div>
       </Container>
     </section>
   );
 }
 
-const DOORS = [
-  { number: "01", title: "Incubators", body: "You run a program, a fund, an accelerator." },
-  { number: "02", title: "Companies", body: "You have a problem, we might have an angle." },
-  { number: "03", title: "Talents", body: "You build things, you'd like to build with us." },
-];
-
 export function ContactTeaser() {
+  const t = useTranslations("Home");
+
+  const doors = [
+    { number: "01", title: t("doorIncubators"), body: t("doorIncubatorsBody") },
+    { number: "02", title: t("doorCompanies"), body: t("doorCompaniesBody") },
+    { number: "03", title: t("doorTalents"), body: t("doorTalentsBody") },
+  ];
+
   return (
     <section
       className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
-      aria-label="Talk to us"
+      aria-label={t("talkLabel")}
     >
       <Container>
-        <MonoLabel number="05">Talk to us</MonoLabel>
+        <MonoLabel number="05">{t("talkLabel")}</MonoLabel>
 
         <h2 className="mt-[var(--spacing-6)] mb-[var(--spacing-8)] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-l)]">
-          Pick your door.
+          {t("pickYourDoor")}
         </h2>
 
         <ul className="grid gap-[var(--spacing-4)] md:grid-cols-3">
-          {DOORS.map((door) => (
+          {doors.map((door) => (
             <li key={door.number}>
-              <a
+              <Link
                 href="/contact"
                 className="group flex h-full flex-col justify-between border border-[var(--color-border)] p-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)]"
               >
@@ -185,9 +190,9 @@ export function ContactTeaser() {
                   aria-hidden
                   className="mt-[var(--spacing-7)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]"
                 >
-                  Open ▸
+                  {t("openDoor")} ▸
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

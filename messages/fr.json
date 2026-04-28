@@ -1,0 +1,72 @@
+{
+  "Site": {
+    "tagline": "Le laboratoire R&D de FoxCase.",
+    "subsidiary": "Filiale de"
+  },
+  "Nav": {
+    "works": "Projets",
+    "lab": "Lab",
+    "studio": "Studio",
+    "journal": "Journal",
+    "contact": "Contact"
+  },
+  "Footer": {
+    "navigate": "Naviguer",
+    "contact": "Contact",
+    "legal": "Mentions",
+    "mentions": "Mentions",
+    "privacy": "Confidentialité",
+    "footprint": "Empreinte",
+    "thisView": "cette vue",
+    "subsidiary": "Filiale de"
+  },
+  "Home": {
+    "manifestoLabel": "Manifeste",
+    "manifestoTitle": "FoxStudio est le laboratoire R&D de FoxCase.",
+    "manifestoLine1": "On construit ce qu'on aimerait voir exister.",
+    "manifestoLine2": "On casse ce qu'on ne comprend pas.",
+    "manifestoLine3": "On publie ce qui tient debout.",
+    "manifestoCoda": "Pas de roadmap commerciale. Pas de jargon. Des prototypes qui tournent, des notes techniques, des cas d'usage qui se vérifient en production.",
+    "indexLabel": "Index",
+    "latestWorks": "Derniers projets",
+    "viewAll": "Voir tout",
+    "labLabel": "Lab",
+    "liveExperiments": "Expériences en cours",
+    "enterLab": "Entrer dans le lab",
+    "studioLabel": "Studio",
+    "studioLead": "Une petite équipe d'ingénieurs et de designers qui a choisi la R&D plutôt que la roadmap.",
+    "studioSecondary": "FoxStudio est ce que FoxCase explore quand aucun client ne demande — et ce qu'on propose quand un client demande.",
+    "moreAboutStudio": "En savoir plus sur le studio",
+    "journalLabel": "Journal",
+    "latestNotes": "Dernières notes",
+    "allNotes": "Toutes les notes",
+    "talkLabel": "Parlons",
+    "pickYourDoor": "Choisis ta porte.",
+    "doorIncubators": "Incubateurs",
+    "doorIncubatorsBody": "Vous gérez un programme, un fonds, un accélérateur.",
+    "doorCompanies": "Entreprises",
+    "doorCompaniesBody": "Vous avez un problème, on a peut-être un angle.",
+    "doorTalents": "Talents",
+    "doorTalentsBody": "Vous construisez, vous voulez construire avec nous.",
+    "openDoor": "Ouvrir"
+  },
+  "Works": {
+    "label": "Projets",
+    "projectCount": "{count, plural, one {# projet} other {# projets}}.",
+    "yearProjectCount": "{count, plural, one {# projet} other {# projets}}"
+  },
+  "Project": {
+    "context": "Contexte",
+    "approach": "Approche",
+    "results": "Résultats",
+    "year": "Année",
+    "status": "Statut",
+    "stack": "Stack",
+    "next": "Suivant",
+    "placeholderBody": "L'étude de cas complète (narration longue, médias, démontage technique) est stockée dans Payload et apparaîtra ici une fois la base de données branchée.",
+    "placeholderSubBody": "Pour l'instant, ceci est un placeholder structurel montrant la mise en page en 3 actes (Contexte / Approche / Résultats) définie dans les wireframes J1.",
+    "approachPlaceholder": "Matériel visuel et narration détaillée de l'approche ici. Sera alimenté par le champ rich text « narrative » de Payload une fois le contenu ajouté.",
+    "metricPending": "métrique à venir"
+  },
+  "ScrollHint": "Faire défiler"
+}

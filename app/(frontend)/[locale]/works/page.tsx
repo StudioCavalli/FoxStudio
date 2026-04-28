@@ -1,17 +1,30 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
+import { Link } from "@/i18n/navigation";
 import { getProjects } from "@/lib/data/projects";
 
-export const metadata: Metadata = {
-  title: "Works",
-  description: "FoxStudio works — projects, prototypes, case studies.",
+type Args = {
+  params: Promise<{ locale: string }>;
 };
 
-export default async function WorksPage() {
+export async function generateMetadata({ params }: Args): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Works" });
+  return {
+    title: t("label"),
+    description: "FoxStudio works — projects, prototypes, case studies.",
+  };
+}
+
+export default async function WorksPage({ params }: Args) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const projects = await getProjects();
+  const t = await getTranslations("Works");
 
   const byYear: Record<number, typeof projects> = {};
   for (const p of projects) {
@@ -27,10 +40,10 @@ export default async function WorksPage() {
   return (
     <section className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
       <Container>
-        <MonoLabel number="01">Works</MonoLabel>
+        <MonoLabel number="01">{t("label")}</MonoLabel>
 
         <h1 className="mt-[var(--spacing-6)] mb-[var(--spacing-9)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
-          {projects.length} project{projects.length !== 1 ? "s" : ""}.
+          {t("projectCount", { count: projects.length })}
           <br />
           <span className="text-[var(--color-fg-secondary)]">
             {years[0] ?? "—"}–{years[years.length - 1] ?? "—"}.
@@ -44,8 +57,7 @@ export default async function WorksPage() {
                 {year}
               </span>
               <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-tertiary)]">
-                {(byYear[year] ?? []).length} project
-                {(byYear[year] ?? []).length !== 1 ? "s" : ""}
+                {t("yearProjectCount", { count: (byYear[year] ?? []).length })}
               </span>
             </div>
 
@@ -53,7 +65,7 @@ export default async function WorksPage() {
               {(byYear[year] ?? []).map((project) => (
                 <li key={project.id} className="border-b border-[var(--color-border)]">
                   <Link
-                    href={`/works/${project.slug}` as never}
+                    href={`/works/${project.slug}`}
                     className="grid grid-cols-[auto_1fr_auto] items-baseline gap-[var(--spacing-5)] py-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-bg-secondary)] md:gap-[var(--spacing-7)] md:py-[var(--spacing-6)]"
                   >
                     <span className="font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">

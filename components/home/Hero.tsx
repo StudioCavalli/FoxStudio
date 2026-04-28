@@ -1,23 +1,24 @@
+import { useTranslations } from "next-intl";
+
 import { Reveal } from "@/components/effects/Reveal";
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
+
 import { SignatureScene } from "./SignatureScene";
 
 export function Hero() {
+  const t = useTranslations("Home");
+
   return (
     <section
       className="relative pt-[var(--spacing-9)] pb-[var(--spacing-10)] md:pt-[var(--spacing-10)] md:pb-[var(--spacing-12)]"
-      aria-label="Manifesto"
+      aria-label={t("manifestoLabel")}
     >
       <Container>
-        <MonoLabel number="00">Manifesto</MonoLabel>
+        <MonoLabel number="00">{t("manifestoLabel")}</MonoLabel>
 
         <h1 className="mt-[var(--spacing-6)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
-          FoxStudio
-          <br />
-          is the R&amp;D lab
-          <br />
-          of FoxCase.
+          {t("manifestoTitle")}
         </h1>
 
         <div
@@ -29,20 +30,19 @@ export function Hero() {
 
         <div className="max-w-[40ch] space-y-[var(--spacing-3)] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
           <Reveal>
-            <p>We build what we wish existed.</p>
+            <p>{t("manifestoLine1")}</p>
           </Reveal>
           <Reveal delay={100}>
-            <p>We break what we don&apos;t understand.</p>
+            <p>{t("manifestoLine2")}</p>
           </Reveal>
           <Reveal delay={200}>
-            <p>We publish what holds up.</p>
+            <p>{t("manifestoLine3")}</p>
           </Reveal>
         </div>
 
         <Reveal delay={350}>
           <p className="mt-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-            No commercial roadmap. No jargon. Prototypes that actually run, technical notes, use
-            cases that survive production.
+            {t("manifestoCoda")}
           </p>
         </Reveal>
       </Container>

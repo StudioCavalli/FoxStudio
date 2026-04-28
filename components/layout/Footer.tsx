@@ -1,34 +1,14 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Children } from "react";
 
 import { Container } from "@/components/ui/Container";
-import { NAV, SITE } from "@/lib/site";
-
-const FOOTER_GROUPS: ReadonlyArray<{
-  title: string;
-  items: ReadonlyArray<{ label: string; href: string; external?: boolean }>;
-}> = [
-  {
-    title: "Navigate",
-    items: NAV.map((n) => ({ label: n.label, href: n.href })),
-  },
-  {
-    title: "Contact",
-    items: [
-      { label: SITE.contact.email, href: `mailto:${SITE.contact.email}` },
-      { label: SITE.contact.location, href: "/studio" },
-    ],
-  },
-  {
-    title: "Legal",
-    items: [
-      { label: "Mentions", href: "/legal/mentions" },
-      { label: "Privacy", href: "/legal/privacy" },
-      { label: "Footprint", href: "/footprint" },
-    ],
-  },
-];
+import { Link } from "@/i18n/navigation";
+import { SITE } from "@/lib/site";
 
 export function Footer() {
+  const t = useTranslations("Footer");
+  const tNav = useTranslations("Nav");
+
   return (
     <footer
       className="mt-[var(--spacing-12)] border-t border-[var(--color-border)] py-[var(--spacing-9)]"
@@ -41,7 +21,7 @@ export function Footer() {
               {SITE.name}
             </p>
             <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-              Subsidiary of{" "}
+              {t("subsidiary")}{" "}
               <a
                 href={SITE.parent.url}
                 target="_blank"
@@ -55,34 +35,23 @@ export function Footer() {
           </div>
 
           <div className="grid grid-cols-3 gap-[var(--spacing-5)]">
-            {FOOTER_GROUPS.map((group) => (
-              <div key={group.title}>
-                <p className="mb-[var(--spacing-4)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                  {group.title}
-                </p>
-                <ul className="space-y-[var(--spacing-2)]">
-                  {group.items.map((item) => (
-                    <li key={item.href}>
-                      {item.href.startsWith("mailto:") || item.external ? (
-                        <a
-                          href={item.href}
-                          className="text-[var(--text-body)] text-[var(--color-fg)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-fg-secondary)]"
-                        >
-                          {item.label}
-                        </a>
-                      ) : (
-                        <Link
-                          href={item.href as never}
-                          className="text-[var(--text-body)] text-[var(--color-fg)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-fg-secondary)]"
-                        >
-                          {item.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <FooterGroup title={t("navigate")}>
+              <Link href="/works">{tNav("works")}</Link>
+              <Link href="/lab">{tNav("lab")}</Link>
+              <Link href="/studio">{tNav("studio")}</Link>
+              <Link href="/journal">{tNav("journal")}</Link>
+            </FooterGroup>
+
+            <FooterGroup title={t("contact")}>
+              <a href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a>
+              <Link href="/studio">{SITE.contact.location}</Link>
+            </FooterGroup>
+
+            <FooterGroup title={t("legal")}>
+              <Link href={"/legal/mentions" as "/"}>{t("mentions")}</Link>
+              <Link href={"/legal/privacy" as "/"}>{t("privacy")}</Link>
+              <Link href={"/footprint" as "/"}>{t("footprint")}</Link>
+            </FooterGroup>
           </div>
         </div>
 
@@ -93,11 +62,32 @@ export function Footer() {
             {SITE.contact.location} · {SITE.contact.timezone}
           </span>
           <span aria-label="Carbon footprint placeholder">
-            <span className="text-[var(--color-fg)]">~ 0.18 g CO₂</span> · this view
+            <span className="text-[var(--color-fg)]">~ 0.18 g CO₂</span> · {t("thisView")}
           </span>
           <span>v{SITE.version}</span>
         </div>
       </Container>
     </footer>
+  );
+}
+
+function FooterGroup({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <p className="mb-[var(--spacing-4)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+        {title}
+      </p>
+      <ul className="space-y-[var(--spacing-2)] [&_a]:text-[var(--text-body)] [&_a]:text-[var(--color-fg)] [&_a]:transition-colors [&_a]:duration-[var(--duration-fast)] hover:[&_a]:text-[var(--color-fg-secondary)]">
+        {Children.map(children, (child) => (
+          <li>{child}</li>
+        ))}
+      </ul>
+    </div>
   );
 }

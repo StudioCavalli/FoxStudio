@@ -1,0 +1,72 @@
+{
+  "Site": {
+    "tagline": "The R&D lab of FoxCase.",
+    "subsidiary": "Subsidiary of"
+  },
+  "Nav": {
+    "works": "Works",
+    "lab": "Lab",
+    "studio": "Studio",
+    "journal": "Journal",
+    "contact": "Contact"
+  },
+  "Footer": {
+    "navigate": "Navigate",
+    "contact": "Contact",
+    "legal": "Legal",
+    "mentions": "Mentions",
+    "privacy": "Privacy",
+    "footprint": "Footprint",
+    "thisView": "this view",
+    "subsidiary": "Subsidiary of"
+  },
+  "Home": {
+    "manifestoLabel": "Manifesto",
+    "manifestoTitle": "FoxStudio is the R&D lab of FoxCase.",
+    "manifestoLine1": "We build what we wish existed.",
+    "manifestoLine2": "We break what we don't understand.",
+    "manifestoLine3": "We publish what holds up.",
+    "manifestoCoda": "No commercial roadmap. No jargon. Prototypes that actually run, technical notes, use cases that survive production.",
+    "indexLabel": "Index",
+    "latestWorks": "Latest works",
+    "viewAll": "View all",
+    "labLabel": "Lab",
+    "liveExperiments": "Live experiments",
+    "enterLab": "Enter the lab",
+    "studioLabel": "Studio",
+    "studioLead": "We're a small group of engineers and designers who picked R&D over the roadmap.",
+    "studioSecondary": "FoxStudio is what FoxCase explores when no client is asking — and what we propose when one does.",
+    "moreAboutStudio": "More about the studio",
+    "journalLabel": "Journal",
+    "latestNotes": "Latest notes",
+    "allNotes": "All notes",
+    "talkLabel": "Talk to us",
+    "pickYourDoor": "Pick your door.",
+    "doorIncubators": "Incubators",
+    "doorIncubatorsBody": "You run a program, a fund, an accelerator.",
+    "doorCompanies": "Companies",
+    "doorCompaniesBody": "You have a problem, we might have an angle.",
+    "doorTalents": "Talents",
+    "doorTalentsBody": "You build things, you'd like to build with us.",
+    "openDoor": "Open"
+  },
+  "Works": {
+    "label": "Works",
+    "projectCount": "{count, plural, one {# project} other {# projects}}.",
+    "yearProjectCount": "{count, plural, one {# project} other {# projects}}"
+  },
+  "Project": {
+    "context": "Context",
+    "approach": "Approach",
+    "results": "Results",
+    "year": "Year",
+    "status": "Status",
+    "stack": "Stack",
+    "next": "Next",
+    "placeholderBody": "The full case study (long-form narrative, media, technical breakdown) is stored in Payload and rendered here once the CMS is wired to a database.",
+    "placeholderSubBody": "For now, this is a structural placeholder showing the 3-act layout (Context / Approach / Results) defined in the J1 wireframes.",
+    "approachPlaceholder": "Visual material and detailed approach narrative go here. Will be sourced from Payload's narrative rich text field once content is added.",
+    "metricPending": "metric pending"
+  },
+  "ScrollHint": "Scroll to explore"
+}

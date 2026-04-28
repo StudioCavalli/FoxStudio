@@ -1,7 +1,11 @@
 import { AxeBuilder } from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const PAGES = [{ name: "Home", path: "/" }];
+const PAGES = [
+  { name: "Home (en)", path: "/en" },
+  { name: "Works (en)", path: "/en/works" },
+  { name: "Project (en)", path: "/en/works/edge-inference" },
+];
 
 for (const { name, path } of PAGES) {
   test(`${name} has no critical or serious axe violations`, async ({ page }) => {

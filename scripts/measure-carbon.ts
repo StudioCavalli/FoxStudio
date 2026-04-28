@@ -19,7 +19,14 @@ const GRAMS_PER_BYTE = 3.33e-7;
 const BUDGET_GRAMS = 0.2;
 
 // Routes whose chunks are loaded on the home page (excluding 404).
-const HOME_ROUTE_KEYS = ["/layout", "/page"];
+// Key format depends on Next.js bundler: webpack uses "/page" / "/layout",
+// the (frontend) route group + [locale] segment yields "/(frontend)/[locale]/page" etc.
+const HOME_ROUTE_KEYS = [
+  "/layout",
+  "/page",
+  "/(frontend)/[locale]/layout",
+  "/(frontend)/[locale]/page",
+];
 
 // Dev artifacts that may appear in the manifest but aren't shipped in production.
 const DEV_PATTERNS = [/\[turbopack\]/, /hmr-client/, /devtools/, /_dev_/];
