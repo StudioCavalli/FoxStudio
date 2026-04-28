@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
+import { SignatureScene } from "./SignatureScene";
 
 export function Hero() {
   return (
@@ -18,14 +19,11 @@ export function Hero() {
           of FoxCase.
         </h1>
 
-        {/* J2 task #26 — 3D R3F signature scene placeholder */}
         <div
           aria-hidden
-          className="my-[var(--spacing-8)] flex aspect-[16/9] w-full items-center justify-center border border-[var(--color-border)] bg-[var(--color-bg-secondary)] md:my-[var(--spacing-9)]"
+          className="my-[var(--spacing-8)] aspect-[16/9] w-full border border-[var(--color-border)] bg-[var(--color-bg-secondary)] md:my-[var(--spacing-9)]"
         >
-          <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-tertiary)]">
-            [ signature scene · R3F · pending ]
-          </span>
+          <SignatureScene />
         </div>
 
         <div className="max-w-[40ch] space-y-[var(--spacing-3)] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">

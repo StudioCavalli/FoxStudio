@@ -4,6 +4,8 @@ import type { Metadata, Viewport } from "next";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { CustomCursor } from "@/components/providers/CustomCursor";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { SITE } from "@/lib/site";
 
 import "./globals.css";
@@ -53,6 +55,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body>
+        <SmoothScroll />
+        <CustomCursor />
         <Header />
         <main>{children}</main>
         <Footer />
