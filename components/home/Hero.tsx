@@ -32,15 +32,17 @@ export function Hero() {
         <span className="tabular">v{SITE.version}</span>
       </div>
 
-      {/* Title — top, full bleed */}
+      {/* Title — top, full bleed.
+          Note: NOT wrapped in <Reveal> on purpose. This is the LCP element
+          on the home page; pre-hydration <Reveal> renders it at opacity:0
+          which pushes LCP past 3 s on mobile 4G. Visual entry is provided
+          by the parent layout's natural paint. */}
       <div className="flex flex-1 flex-col justify-between px-[var(--grid-margin)] py-[var(--spacing-9)]">
-        <Reveal>
-          <h1 className="font-[var(--font-display)] font-medium leading-[0.88] tracking-[-0.03em] text-[clamp(72px,14vw,240px)]">
-            FoxStudio<span className="text-fg-tertiary">.</span>
-            <br />
-            <span className="text-fg-secondary">R&amp;D Lab.</span>
-          </h1>
-        </Reveal>
+        <h1 className="font-[var(--font-display)] font-medium leading-[0.88] tracking-[-0.03em] text-[clamp(72px,14vw,240px)]">
+          FoxStudio<span className="text-fg-tertiary">.</span>
+          <br />
+          <span className="text-fg-secondary">R&amp;D Lab.</span>
+        </h1>
 
         <div className="mt-[var(--spacing-9)] grid gap-[var(--spacing-6)] md:grid-cols-[1fr_1fr] md:items-end">
           <div className="space-y-[var(--spacing-2)] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2.4vw,40px)] md:max-w-[28ch]">

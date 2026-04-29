@@ -83,13 +83,14 @@ export default async function ProjectPage({ params }: Args) {
           </span>
         </div>
 
-        {/* Title */}
+        {/* Title — h1 NOT wrapped in <Reveal>: it is the LCP element on
+            project pages and pre-hydration opacity:0 was pushing LCP > 3 s
+            on mobile 4G. Subtitle keeps a small delayed reveal since it's
+            below the fold on small viewports. */}
         <div className="flex flex-1 flex-col justify-end px-[var(--grid-margin)] py-[var(--spacing-9)]">
-          <Reveal>
-            <h1 className="font-[var(--font-display)] font-medium leading-[0.92] tracking-[-0.03em] text-[clamp(56px,11vw,220px)]">
-              {project.name}
-            </h1>
-          </Reveal>
+          <h1 className="font-[var(--font-display)] font-medium leading-[0.92] tracking-[-0.03em] text-[clamp(56px,11vw,220px)]">
+            {project.name}
+          </h1>
 
           {project.summary && (
             <Reveal delay={120}>
