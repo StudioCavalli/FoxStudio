@@ -95,7 +95,7 @@ export async function JournalTeaser({ locale }: { locale: "fr" | "en" | "it" }) 
 
   return (
     <section
-      className="invert border-t border-border py-[var(--spacing-10)]"
+      className="tone-flip border-t border-border py-[var(--spacing-10)]"
       aria-label={t("journalLabel")}
     >
       <Container>

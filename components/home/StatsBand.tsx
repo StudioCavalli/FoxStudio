@@ -15,7 +15,7 @@ export function StatsBand() {
   const t = useTranslations("Home");
 
   return (
-    <section className="invert border-t border-b border-border" aria-label={t("statsBandLabel")}>
+    <section className="tone-flip border-t border-b border-border" aria-label={t("statsBandLabel")}>
       <Container>
         <div className="py-[var(--spacing-9)]">
           <SectionHeader number="02" label={t("statsBandLabel")} meta="Q2 · 2026" />

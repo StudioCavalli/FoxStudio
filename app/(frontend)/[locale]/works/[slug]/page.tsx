@@ -140,7 +140,7 @@ export default async function ProjectPage({ params }: Args) {
       </section>
 
       {/* ACT 2 — APPROACH */}
-      <section className="invert border-t border-border py-[var(--spacing-10)]">
+      <section className="tone-flip border-t border-border py-[var(--spacing-10)]">
         <Container>
           <SectionHeader number="02" label={t("approach")} />
 

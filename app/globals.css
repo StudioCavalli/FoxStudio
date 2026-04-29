@@ -194,7 +194,7 @@ a {
 
 /* ─── Section inversion utility ──────────────────────────────────── */
 /* Used for "punctuation" sections that flip to the opposite tone. */
-.invert {
+.tone-flip {
   background-color: var(--color-fg);
   color: var(--color-bg);
   --color-bg: #f4f4f4;
@@ -207,7 +207,7 @@ a {
   --color-border-strong: #a0a0a0;
   --color-focus: #0a0a0a;
 }
-.light .invert {
+.light .tone-flip {
   background-color: #0a0a0a;
   color: #f4f4f4;
   --color-bg: #0a0a0a;
