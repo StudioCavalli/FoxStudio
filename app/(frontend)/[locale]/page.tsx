@@ -2,6 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 
 import { Hero } from "@/components/home/Hero";
 import { Index } from "@/components/home/Index";
+import { MarqueeBand } from "@/components/home/MarqueeBand";
+import { StatsBand } from "@/components/home/StatsBand";
 import { ContactTeaser, JournalTeaser, LabTeaser, StudioTeaser } from "@/components/home/Teasers";
 
 type Args = {
@@ -15,7 +17,9 @@ export default async function HomePage({ params }: Args) {
   return (
     <>
       <Hero />
+      <MarqueeBand />
       <Index />
+      <StatsBand />
       <LabTeaser />
       <StudioTeaser />
       <JournalTeaser />

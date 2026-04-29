@@ -1,8 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { Reveal } from "@/components/effects/Reveal";
-import { Container } from "@/components/ui/Container";
-import { MonoLabel } from "@/components/ui/MonoLabel";
+import { SITE } from "@/lib/site";
 
 import { SignatureScene } from "./SignatureScene";
 
@@ -11,41 +10,61 @@ export function Hero() {
 
   return (
     <section
-      className="relative pt-[var(--spacing-9)] pb-[var(--spacing-10)] md:pt-[var(--spacing-10)] md:pb-[var(--spacing-12)]"
+      className="relative isolate flex min-h-[calc(100vh-64px)] flex-col overflow-hidden border-b border-[var(--color-border)]"
       aria-label={t("manifestoLabel")}
     >
-      <Container>
-        <MonoLabel number="00">{t("manifestoLabel")}</MonoLabel>
+      {/* 3D scene as background — dominates the viewport */}
+      <div className="absolute inset-0 -z-10">
+        <SignatureScene />
+      </div>
 
-        <h1 className="mt-[var(--spacing-6)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
-          {t("manifestoTitle")}
-        </h1>
+      {/* Top metadata strip */}
+      <div className="flex items-center justify-between border-b border-[var(--color-border)] px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+        <span>00 ▸ {t("manifestoLabel")}</span>
+        <span className="hidden md:inline">
+          {SITE.contact.location} · {SITE.contact.timezone}
+        </span>
+        <span>v{SITE.version}</span>
+      </div>
 
-        <div
-          aria-hidden
-          className="my-[var(--spacing-8)] aspect-[16/9] w-full border border-[var(--color-border)] bg-[var(--color-bg-secondary)] md:my-[var(--spacing-9)]"
-        >
-          <SignatureScene />
-        </div>
-
-        <div className="max-w-[40ch] space-y-[var(--spacing-3)] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
-          <Reveal>
-            <p>{t("manifestoLine1")}</p>
-          </Reveal>
-          <Reveal delay={100}>
-            <p>{t("manifestoLine2")}</p>
-          </Reveal>
-          <Reveal delay={200}>
-            <p>{t("manifestoLine3")}</p>
-          </Reveal>
-        </div>
-
-        <Reveal delay={350}>
-          <p className="mt-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-            {t("manifestoCoda")}
-          </p>
+      {/* Title — top left, full bleed */}
+      <div className="flex flex-1 flex-col justify-between px-[var(--grid-margin)] py-[var(--spacing-9)]">
+        <Reveal>
+          <h1 className="font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[0.92] tracking-[var(--tracking-display)] md:text-[clamp(64px,11vw,200px)]">
+            FoxStudio
+            <br />
+            <span className="text-[var(--color-fg-secondary)]">R&amp;D Lab.</span>
+          </h1>
         </Reveal>
-      </Container>
+
+        <div className="mt-[var(--spacing-9)] grid gap-[var(--spacing-6)] md:grid-cols-[1fr_1fr] md:items-end">
+          <div className="space-y-[var(--spacing-2)] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:max-w-[28ch]">
+            <Reveal>
+              <p>{t("manifestoLine1")}</p>
+            </Reveal>
+            <Reveal delay={100}>
+              <p>{t("manifestoLine2")}</p>
+            </Reveal>
+            <Reveal delay={200}>
+              <p>{t("manifestoLine3")}</p>
+            </Reveal>
+          </div>
+
+          <Reveal delay={350}>
+            <p className="max-w-[42ch] text-[var(--color-fg-secondary)] md:text-right md:justify-self-end">
+              {t("manifestoCoda")}
+            </p>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* Bottom strip */}
+      <div className="flex items-center justify-between border-t border-[var(--color-border)] px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+        <span aria-hidden>↓ {t("scrollHint")}</span>
+        <span>
+          <span className="text-[var(--color-fg)]">~ 0.18 g CO₂</span>
+        </span>
+      </div>
     </section>
   );
 }

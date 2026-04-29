@@ -48,7 +48,13 @@
     "doorCompaniesBody": "Hai un problema, potremmo avere un angolo.",
     "doorTalents": "Talenti",
     "doorTalentsBody": "Tu costruisci, vorresti costruire con noi.",
-    "openDoor": "Aprire"
+    "openDoor": "Aprire",
+    "scrollHint": "Scorri per esplorare",
+    "statsBandLabel": "In numeri",
+    "statYears": "Anni",
+    "statProjects": "Progetti",
+    "statLocales": "Lingue",
+    "statBundle": "Bundle Home"
   },
   "Works": {
     "label": "Progetti",

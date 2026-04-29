@@ -2,7 +2,8 @@ import { useTranslations } from "next-intl";
 
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
-import { MonoLabel } from "@/components/ui/MonoLabel";
+import { Pattern } from "@/components/visual/Pattern";
+import { SectionHeader } from "@/components/visual/SectionHeader";
 import { Link } from "@/i18n/navigation";
 
 const LAB_EXPERIMENTS = [
@@ -20,33 +21,38 @@ export function LabTeaser() {
       aria-label={t("labLabel")}
     >
       <Container>
-        <div className="mb-[var(--spacing-8)] flex items-end justify-between">
-          <MonoLabel number="02">{t("labLabel")}</MonoLabel>
-          <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-            {t("liveExperiments")}
-          </span>
-        </div>
+        <SectionHeader
+          number="03"
+          label={t("labLabel")}
+          meta={`${LAB_EXPERIMENTS.length} · ${t("liveExperiments")}`}
+        />
 
         <ul className="grid gap-[var(--spacing-4)] md:grid-cols-3">
           {LAB_EXPERIMENTS.map((exp) => (
-            <li
-              key={exp.id}
-              className="flex aspect-[4/3] flex-col justify-between border border-[var(--color-border)] p-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)]"
-            >
-              <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                {exp.id}
-              </span>
-              <div>
-                <p className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
-                  {exp.name}
-                </p>
-                <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                  <span aria-hidden className="text-[var(--color-fg)]">
-                    {exp.state === "live" ? "◉" : "◯"}
-                  </span>{" "}
-                  {exp.state}
-                </p>
-              </div>
+            <li key={exp.id}>
+              <Link
+                href="/lab"
+                className="group flex aspect-[4/5] flex-col justify-between border border-[var(--color-border)] p-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)] relative overflow-hidden"
+              >
+                <div className="absolute inset-0 -z-10 opacity-30 transition-opacity duration-[var(--duration-base)] group-hover:opacity-60 text-[var(--color-fg)]">
+                  <Pattern seed={exp.id} className="h-full w-full" />
+                </div>
+
+                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                  {exp.id}
+                </span>
+                <div>
+                  <p className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
+                    {exp.name}
+                  </p>
+                  <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                    <span aria-hidden className="text-[var(--color-fg)]">
+                      {exp.state === "live" ? "◉" : "◯"}
+                    </span>{" "}
+                    {exp.state}
+                  </p>
+                </div>
+              </Link>
             </li>
           ))}
         </ul>
@@ -68,9 +74,9 @@ export function StudioTeaser() {
       aria-label={t("studioLabel")}
     >
       <Container>
-        <MonoLabel number="03">{t("studioLabel")}</MonoLabel>
+        <SectionHeader number="04" label={t("studioLabel")} />
 
-        <div className="mt-[var(--spacing-7)] grid gap-[var(--spacing-7)] md:grid-cols-[2fr_1fr]">
+        <div className="grid gap-[var(--spacing-7)] md:grid-cols-[2fr_1fr]">
           <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
             <p>{t("studioLead")}</p>
             <p className="text-[var(--color-fg-secondary)]">{t("studioSecondary")}</p>
@@ -105,33 +111,30 @@ export function JournalTeaser() {
 
   return (
     <section
-      className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
+      className="invert border-t border-[var(--color-border)] py-[var(--spacing-10)]"
       aria-label={t("journalLabel")}
     >
       <Container>
-        <div className="mb-[var(--spacing-8)] flex items-end justify-between">
-          <MonoLabel number="04">{t("journalLabel")}</MonoLabel>
-          <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-            {t("latestNotes")}
-          </span>
-        </div>
+        <SectionHeader
+          number="05"
+          label={t("journalLabel")}
+          meta={`${JOURNAL_PREVIEWS.length} · ${t("latestNotes")}`}
+        />
 
-        <ul className="border-t border-[var(--color-border)]">
-          {JOURNAL_PREVIEWS.map((entry) => (
-            <li key={entry.title} className="border-b border-[var(--color-border)]">
+        <ul>
+          {JOURNAL_PREVIEWS.map((entry, i) => (
+            <li key={entry.title} className="border-t border-[var(--color-border)] last:border-b">
               <Link
                 href="/journal"
-                className="group flex flex-col gap-[var(--spacing-2)] py-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-bg-secondary)] md:flex-row md:items-baseline md:justify-between md:gap-[var(--spacing-7)]"
+                className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-[var(--spacing-5)] py-[var(--spacing-6)] transition-opacity duration-[var(--duration-fast)] md:gap-[var(--spacing-7)] md:py-[var(--spacing-7)]"
               >
-                <span className="flex items-baseline gap-[var(--spacing-5)]">
-                  <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                    {entry.date}
-                  </span>
-                  <span className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
-                    {entry.title}
-                  </span>
-                </span>
                 <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                  {String(i + 1).padStart(2, "0")} · {entry.date}
+                </span>
+                <span className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] group-hover:underline underline-offset-[6px]">
+                  {entry.title}
+                </span>
+                <span className="hidden font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)] md:inline">
                   {entry.tag} · {entry.read}
                 </span>
               </Link>
@@ -151,9 +154,14 @@ export function ContactTeaser() {
   const t = useTranslations("Home");
 
   const doors = [
-    { number: "01", title: t("doorIncubators"), body: t("doorIncubatorsBody") },
-    { number: "02", title: t("doorCompanies"), body: t("doorCompaniesBody") },
-    { number: "03", title: t("doorTalents"), body: t("doorTalentsBody") },
+    {
+      number: "01",
+      title: t("doorIncubators"),
+      body: t("doorIncubatorsBody"),
+      seed: "door-incubator",
+    },
+    { number: "02", title: t("doorCompanies"), body: t("doorCompaniesBody"), seed: "door-company" },
+    { number: "03", title: t("doorTalents"), body: t("doorTalentsBody"), seed: "door-talent" },
   ];
 
   return (
@@ -162,9 +170,9 @@ export function ContactTeaser() {
       aria-label={t("talkLabel")}
     >
       <Container>
-        <MonoLabel number="05">{t("talkLabel")}</MonoLabel>
+        <SectionHeader number="06" label={t("talkLabel")} />
 
-        <h2 className="mt-[var(--spacing-6)] mb-[var(--spacing-8)] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-l)]">
+        <h2 className="mb-[var(--spacing-9)] font-[var(--font-display)] text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[clamp(64px,9vw,160px)]">
           {t("pickYourDoor")}
         </h2>
 
@@ -173,25 +181,28 @@ export function ContactTeaser() {
             <li key={door.number}>
               <Link
                 href="/contact"
-                className="group flex h-full flex-col justify-between border border-[var(--color-border)] p-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)]"
+                className="group relative flex aspect-[3/4] flex-col justify-between overflow-hidden border border-[var(--color-border)] p-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)]"
               >
-                <div>
-                  <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                    {door.number}
-                  </p>
-                  <p className="mt-[var(--spacing-3)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
+                <div className="absolute inset-0 -z-10 opacity-25 transition-opacity duration-[var(--duration-base)] group-hover:opacity-50 text-[var(--color-fg)]">
+                  <Pattern seed={door.seed} className="h-full w-full" />
+                </div>
+
+                <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                  {door.number}
+                </p>
+
+                <div className="space-y-[var(--spacing-3)]">
+                  <p className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)]">
                     {door.title}
                   </p>
-                  <p className="mt-[var(--spacing-3)] text-[var(--color-fg-secondary)]">
-                    {door.body}
+                  <p className="text-[var(--color-fg-secondary)]">{door.body}</p>
+                  <p
+                    aria-hidden
+                    className="pt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]"
+                  >
+                    {t("openDoor")} ▸
                   </p>
                 </div>
-                <span
-                  aria-hidden
-                  className="mt-[var(--spacing-7)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]"
-                >
-                  {t("openDoor")} ▸
-                </span>
               </Link>
             </li>
           ))}

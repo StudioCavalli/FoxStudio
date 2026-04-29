@@ -51,6 +51,18 @@
       }
     }
   },
+  "overrides": [
+    {
+      "include": ["components/visual/Pattern.tsx"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noArrayIndexKey": "off"
+          }
+        }
+      }
+    }
+  ],
   "javascript": {
     "formatter": {
       "quoteStyle": "double",
