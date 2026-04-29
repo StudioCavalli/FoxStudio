@@ -150,5 +150,12 @@
     "send": "Send",
     "sending": "Sending"
   },
-  "ScrollHint": "Scroll to explore"
+  "ScrollHint": "Scroll to explore",
+  "NotFound": {
+    "label": "Not found",
+    "title": "This page doesn't exist.\nProbably never did.",
+    "body": "Either the URL is wrong, or we removed it. Either way, the rest of the site is still here.",
+    "hint": "Pick one of the doors below.",
+    "backHome": "Back to home"
+  }
 }

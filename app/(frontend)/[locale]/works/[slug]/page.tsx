@@ -3,12 +3,15 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { Reveal } from "@/components/effects/Reveal";
+import { LdJson } from "@/components/seo/LdJson";
 import { Container } from "@/components/ui/Container";
 import { Pattern } from "@/components/visual/Pattern";
 import { SectionHeader } from "@/components/visual/SectionHeader";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getProjectBySlug, getProjects } from "@/lib/data/projects";
+import { breadcrumbSchema, creativeWorkSchema } from "@/lib/seo/schema";
+import { SITE } from "@/lib/site";
 
 type Args = {
   params: Promise<{ slug: string; locale: string }>;
@@ -46,8 +49,18 @@ export default async function ProjectPage({ params }: Args) {
 
   const stateLabel = t(`state.${project.state}` as `state.${typeof project.state}`);
 
+  const ldData = [
+    creativeWorkSchema(project, locale as LocaleParam),
+    breadcrumbSchema([
+      { name: SITE.name, url: `${SITE.url}/${locale}` },
+      { name: "Works", url: `${SITE.url}/${locale}/works` },
+      { name: project.name, url: `${SITE.url}/${locale}/works/${project.slug}` },
+    ]),
+  ];
+
   return (
     <article>
+      <LdJson data={ldData} />
       {/* HERO — full bleed pattern + overlay text */}
       <section className="relative isolate flex min-h-[calc(100vh-64px)] flex-col overflow-hidden border-b border-[var(--color-border)]">
         <div className="absolute inset-0 -z-10 opacity-40 text-[var(--color-fg)]">

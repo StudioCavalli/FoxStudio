@@ -150,5 +150,12 @@
     "send": "Envoyer",
     "sending": "Envoi…"
   },
-  "ScrollHint": "Faire défiler"
+  "ScrollHint": "Faire défiler",
+  "NotFound": {
+    "label": "Introuvable",
+    "title": "Cette page n'existe pas.\nProbablement jamais existé.",
+    "body": "Soit l'URL est fausse, soit on l'a retirée. Dans les deux cas, le reste du site est toujours là.",
+    "hint": "Choisis une des portes ci-dessous.",
+    "backHome": "Retour à l'accueil"
+  }
 }

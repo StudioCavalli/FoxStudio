@@ -3,10 +3,13 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { LdJson } from "@/components/seo/LdJson";
 import { Container } from "@/components/ui/Container";
 import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 import { getJournalArticleBySlug, getJournalArticles } from "@/lib/data/journal";
+import { articleSchema, breadcrumbSchema } from "@/lib/seo/schema";
+import { SITE } from "@/lib/site";
 
 type Args = {
   params: Promise<{ slug: string; locale: string }>;
@@ -42,8 +45,18 @@ export default async function JournalArticlePage({ params }: Args) {
 
   const t = await getTranslations("Journal");
 
+  const ldData = [
+    articleSchema(article, locale as Locale),
+    breadcrumbSchema([
+      { name: SITE.name, url: `${SITE.url}/${locale}` },
+      { name: "Journal", url: `${SITE.url}/${locale}/journal` },
+      { name: article.title, url: `${SITE.url}/${locale}/journal/${article.slug}` },
+    ]),
+  ];
+
   return (
     <article className="pt-[var(--spacing-7)] pb-[var(--spacing-12)]">
+      <LdJson data={ldData} />
       <Container>
         <Link
           href="/journal"

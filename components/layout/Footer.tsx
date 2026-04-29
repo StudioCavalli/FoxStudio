@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Children } from "react";
 
+import { FootprintLive } from "@/components/layout/FootprintLive";
 import { Container } from "@/components/ui/Container";
 import { Link } from "@/i18n/navigation";
 import { SITE } from "@/lib/site";
@@ -62,9 +63,7 @@ export function Footer() {
           <span>
             {SITE.contact.location} · {SITE.contact.timezone}
           </span>
-          <span aria-label="Carbon footprint placeholder">
-            <span className="text-[var(--color-fg)]">~ 0.18 g CO₂</span> · {t("thisView")}
-          </span>
+          <FootprintLive />
           <span>v{SITE.version}</span>
         </div>
       </Container>

@@ -150,5 +150,12 @@
     "send": "Inviare",
     "sending": "Invio…"
   },
-  "ScrollHint": "Scorri per esplorare"
+  "ScrollHint": "Scorri per esplorare",
+  "NotFound": {
+    "label": "Non trovato",
+    "title": "Questa pagina non esiste.\nProbabilmente non è mai esistita.",
+    "body": "O l'URL è sbagliato, o l'abbiamo rimossa. In entrambi i casi, il resto del sito è ancora qui.",
+    "hint": "Scegli una delle porte qui sotto.",
+    "backHome": "Torna alla home"
+  }
 }
