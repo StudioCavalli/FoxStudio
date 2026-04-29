@@ -155,7 +155,7 @@ export default async function ProjectPage({ params }: Args) {
                   <span className="h-2 w-2 rounded-full border border-[var(--color-fg-tertiary)]" />
                   <span className="h-2 w-2 rounded-full border border-[var(--color-fg-tertiary)]" />
                 </span>
-                <span className="ml-3 truncate">{`foxstudio.fr/works/${project.slug}`}</span>
+                <span className="ml-3 truncate">{`${SITE.url.replace(/^https?:\/\//, "")}/works/${project.slug}`}</span>
               </div>
               <div className="absolute inset-0 mt-[28px] opacity-50 text-[var(--color-fg)]">
                 <Pattern seed={`${project.slug}-approach`} className="h-full w-full" />

@@ -1,7 +1,7 @@
 export const SITE = {
   name: "FoxStudio",
   description: "R&D lab of FoxCase. Prototypes, technical demos, workshop notes.",
-  url: "https://foxstudio.fr",
+  url: "https://studio.foxcase.fr",
   parent: {
     name: "FoxCase",
     url: "https://foxcase.fr",

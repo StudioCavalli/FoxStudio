@@ -85,6 +85,25 @@ function fromPayloadDoc(doc: PayloadProject): Project {
 
 type LocaleParam = "fr" | "en" | "it";
 
+/**
+ * Slugs that should appear before the chronological order. Order matters:
+ * the first entry shows first. Easy to extend (or empty) without touching
+ * the CMS schema.
+ */
+const PINNED_SLUGS = ["memoria"] as const;
+
+function pinFeatured(projects: Project[]): Project[] {
+  const pinned: Project[] = [];
+  const rest: Project[] = [...projects];
+  for (const slug of PINNED_SLUGS) {
+    const idx = rest.findIndex((p) => p.slug === slug);
+    if (idx === -1) continue;
+    const [match] = rest.splice(idx, 1);
+    if (match) pinned.push(match);
+  }
+  return [...pinned, ...rest];
+}
+
 async function fromPayload(locale?: LocaleParam): Promise<Project[] | null> {
   if (!process.env.DATABASE_URL) return null;
 
@@ -112,8 +131,8 @@ async function fromPayload(locale?: LocaleParam): Promise<Project[] | null> {
 
 export async function getProjects(locale?: LocaleParam): Promise<Project[]> {
   const fromCms = await fromPayload(locale);
-  if (fromCms && fromCms.length > 0) return fromCms;
-  return MOCK_PROJECTS.map(fromMock);
+  const list = fromCms && fromCms.length > 0 ? fromCms : MOCK_PROJECTS.map(fromMock);
+  return pinFeatured(list);
 }
 
 export async function getProjectBySlug(

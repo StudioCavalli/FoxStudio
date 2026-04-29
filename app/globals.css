@@ -12,8 +12,8 @@
   --color-bg-tertiary: #1f1f1f;
 
   --color-fg: #f4f4f4;
-  --color-fg-secondary: #a0a0a0;
-  --color-fg-tertiary: #666666;
+  --color-fg-secondary: #b3b3b3;
+  --color-fg-tertiary: #808080;
 
   --color-border: #262626;
   --color-border-strong: #404040;
@@ -214,8 +214,8 @@ a {
   --color-bg-secondary: #141414;
   --color-bg-tertiary: #1f1f1f;
   --color-fg: #f4f4f4;
-  --color-fg-secondary: #a0a0a0;
-  --color-fg-tertiary: #666666;
+  --color-fg-secondary: #b3b3b3;
+  --color-fg-tertiary: #808080;
   --color-border: #262626;
   --color-border-strong: #404040;
   --color-focus: #ffffff;
