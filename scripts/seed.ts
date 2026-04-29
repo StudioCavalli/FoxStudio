@@ -1,187 +1,24 @@
 /**
- * Seed script — populates the local DB with the 12 real FoxStudio projects.
- * Source of truth: README.md of each repo under github.com/StudioCavalli.
+ * Seed script — populates the local DB with FoxStudio's 12 real projects
+ * and 6 lab experiments, all localized in fr/en/it.
  *
- * Idempotent: skips any project whose slug already exists. To force a
- * fresh seed, use `pnpm services:reset` (wipes the Postgres volume) and
- * re-run.
+ * Strategy : create with `en` payload (default locale), then payload.update
+ * once per non-default locale to fill localized fields. Idempotent: skips
+ * any document whose unique key (slug for projects, code for experiments)
+ * already exists. To force a fresh seed, run `pnpm services:reset` first.
  *
- * Usage: pnpm payload:seed
+ * Usage : pnpm payload:seed
  */
 
 import dotenv from "dotenv";
 
+import { LAB_EXPERIMENTS, type LabExperimentSeed } from "./seed-data/lab";
+import { type Locale, PROJECTS, type ProjectSeed } from "./seed-data/projects";
+
 dotenv.config({ path: ".env.local" });
 dotenv.config();
 
-type SeedProject = {
-  number: string;
-  slug: string;
-  name: string;
-  summary: string;
-  year: number;
-  state: "live" | "wip" | "archived";
-  stack: { tech: string }[];
-};
-
-const PROJECTS: SeedProject[] = [
-  {
-    number: "001",
-    slug: "nonno-robot",
-    name: "NonnoRobot",
-    summary:
-      "AI-powered robotic chef cooking pizza and pasta from scratch — vision, motion planning and recipe generation in one stack.",
-    year: 2026,
-    state: "wip",
-    stack: [
-      { tech: "FastAPI" },
-      { tech: "ROS 2 Jazzy" },
-      { tech: "PyTorch" },
-      { tech: "Next.js 15" },
-      { tech: "Postgres" },
-      { tech: "Docker" },
-    ],
-  },
-  {
-    number: "002",
-    slug: "memoria",
-    name: "Memoria",
-    summary:
-      "Biographical AI for seniors 80+. Voice companion that gathers life memories, sends a weekly Gazette to families, and watches for early cognitive decline signals.",
-    year: 2026,
-    state: "live",
-    stack: [
-      { tech: "FastAPI" },
-      { tech: "Postgres" },
-      { tech: "React Native" },
-      { tech: "Next.js 15" },
-      { tech: "Tailwind v4" },
-    ],
-  },
-  {
-    number: "003",
-    slug: "kidverse",
-    name: "Kidverse",
-    summary:
-      "Phygital app for kids 3–15 that rewards them when they put down the phone and act in the real world. Quests, AI companion, parent dashboard.",
-    year: 2026,
-    state: "wip",
-    stack: [
-      { tech: "React Native" },
-      { tech: "Expo" },
-      { tech: "NestJS" },
-      { tech: "Apollo Router" },
-      { tech: "Claude" },
-    ],
-  },
-  {
-    number: "004",
-    slug: "flov",
-    name: "Flov.",
-    summary:
-      "Music & video streaming platform built in Cannes. No ads, no tracking, no compromise.",
-    year: 2026,
-    state: "live",
-    stack: [{ tech: "Laravel 13" }, { tech: "React 19" }, { tech: "TypeScript" }],
-  },
-  {
-    number: "005",
-    slug: "ombrys",
-    name: "Ombrys",
-    summary:
-      "A documented-truth collective. Investigative platform for citizens and journalists — long-form, verifiable, transparent.",
-    year: 2026,
-    state: "live",
-    stack: [{ tech: "Next.js" }, { tech: "TypeScript" }, { tech: "Sanity" }],
-  },
-  {
-    number: "006",
-    slug: "clayr",
-    name: "Clayr",
-    summary:
-      "A digital cosmic refuge. Quotes, texts, music, AI companion, immersive therapy — a space to inspire, create and reconnect.",
-    year: 2026,
-    state: "live",
-    stack: [
-      { tech: "Next.js 16" },
-      { tech: "Supabase" },
-      { tech: "Tailwind v4" },
-      { tech: "TypeScript" },
-    ],
-  },
-  {
-    number: "007",
-    slug: "foxcube",
-    name: "FoxCube",
-    summary:
-      "Multilingual e-commerce for an Italian embroidery import/export house. Variant-aware catalog, embroidery customisation, multi-currency checkout.",
-    year: 2026,
-    state: "live",
-    stack: [
-      { tech: "Laravel 12" },
-      { tech: "Tailwind v4" },
-      { tech: "PHP 8.4" },
-      { tech: "Stripe" },
-      { tech: "Docker" },
-    ],
-  },
-  {
-    number: "008",
-    slug: "moes-coffee",
-    name: "Moe's Coffee",
-    summary:
-      "Springfield's finest, au gramme près. A serious e-commerce skin wrapped in the universe of Moe Szyslak — built as a stress test of the stack.",
-    year: 2026,
-    state: "live",
-    stack: [
-      { tech: "React Router v7" },
-      { tech: "TypeScript 5.9" },
-      { tech: "Tailwind v4" },
-      { tech: "SQLite" },
-      { tech: "Drizzle" },
-    ],
-  },
-  {
-    number: "009",
-    slug: "klown",
-    name: "Klown",
-    summary:
-      "Cross-platform desktop framework for authorised ethical hacking and security research. Strict legal scope, audit logging, sandboxed modules.",
-    year: 2025,
-    state: "archived",
-    stack: [{ tech: "TypeScript" }, { tech: "Electron" }, { tech: "Rust" }, { tech: "Node.js" }],
-  },
-  {
-    number: "010",
-    slug: "klown-network",
-    name: "Klown Network",
-    summary:
-      "Community platform for the Klown ecosystem — social layer, content hub, identity service.",
-    year: 2025,
-    state: "wip",
-    stack: [{ tech: "Next.js" }, { tech: "TypeScript" }, { tech: "MongoDB" }],
-  },
-  {
-    number: "011",
-    slug: "klown-vitrine",
-    name: "Klown Vitrine",
-    summary:
-      "Public-facing showcase for the Klown brand and product line — narrative-led, motion-light, server-rendered.",
-    year: 2025,
-    state: "archived",
-    stack: [{ tech: "Next.js" }, { tech: "TypeScript" }, { tech: "Tailwind" }],
-  },
-  {
-    number: "012",
-    slug: "foxcard",
-    name: "FoxCard",
-    summary:
-      "Card-shaped roadmap and issue planner. Generates GitHub issues from a single source-of-truth markdown roadmap.",
-    year: 2025,
-    state: "archived",
-    stack: [{ tech: "TypeScript" }, { tech: "GitHub CLI" }, { tech: "Markdown" }],
-  },
-];
+const SECONDARY_LOCALES: Locale[] = ["fr", "it"];
 
 async function main() {
   if (!process.env.DATABASE_URL) {
@@ -193,7 +30,15 @@ async function main() {
   const config = (await import("../payload.config")).default;
   const payload = await getPayload({ config });
 
-  console.log(`→ Seeding ${PROJECTS.length} projects…`);
+  await seedProjects(payload);
+  await seedLab(payload);
+
+  console.log("\n✓ Seed complete.");
+  process.exit(0);
+}
+
+async function seedProjects(payload: Awaited<ReturnType<typeof import("payload").getPayload>>) {
+  console.log(`→ Seeding ${PROJECTS.length} projects (en + fr + it)…`);
 
   let created = 0;
   let skipped = 0;
@@ -203,6 +48,7 @@ async function main() {
       collection: "projects",
       where: { slug: { equals: project.slug } },
       limit: 1,
+      locale: "en",
     });
 
     if (existing.docs.length > 0) {
@@ -211,20 +57,118 @@ async function main() {
       continue;
     }
 
-    await payload.create({
+    const enDoc = await payload.create({
       collection: "projects",
-      data: {
-        ...project,
-        publishedAt: new Date().toISOString(),
-      },
+      locale: "en",
+      data: enPayload(project),
+      draft: false,
     });
+
+    for (const locale of SECONDARY_LOCALES) {
+      await payload.update({
+        collection: "projects",
+        id: enDoc.id,
+        locale,
+        data: localePayload(project, locale),
+      });
+    }
 
     console.log(`  ✓ ${project.slug}`);
     created++;
   }
 
-  console.log(`\nDone. ${created} created, ${skipped} skipped.`);
-  process.exit(0);
+  console.log(`  → Projects: ${created} created, ${skipped} skipped.`);
+}
+
+async function seedLab(payload: Awaited<ReturnType<typeof import("payload").getPayload>>) {
+  console.log(`\n→ Seeding ${LAB_EXPERIMENTS.length} lab experiments (en + fr + it)…`);
+
+  let created = 0;
+  let skipped = 0;
+
+  for (const exp of LAB_EXPERIMENTS) {
+    const existing = await payload.find({
+      collection: "lab-experiments",
+      where: { code: { equals: exp.code } },
+      limit: 1,
+      locale: "en",
+    });
+
+    if (existing.docs.length > 0) {
+      console.log(`  · ${exp.code} already exists, skipping`);
+      skipped++;
+      continue;
+    }
+
+    const enDoc = await payload.create({
+      collection: "lab-experiments",
+      locale: "en",
+      data: labEnPayload(exp) as never,
+      draft: false,
+    });
+
+    for (const locale of SECONDARY_LOCALES) {
+      await payload.update({
+        collection: "lab-experiments",
+        id: enDoc.id,
+        locale,
+        data: labLocalePayload(exp, locale),
+      });
+    }
+
+    console.log(`  ✓ ${exp.code}`);
+    created++;
+  }
+
+  console.log(`  → Lab experiments: ${created} created, ${skipped} skipped.`);
+}
+
+/* ─── Project payload builders ─────────────────────────────────── */
+
+function enPayload(p: ProjectSeed) {
+  return {
+    number: p.number,
+    slug: p.slug,
+    name: p.name.en,
+    summary: p.summary.en,
+    year: p.year,
+    state: p.state,
+    stack: p.stack,
+    partners: p.partners ?? [],
+    results: p.results.map((r) => ({ value: r.value, label: r.label.en })),
+    publishedAt: new Date().toISOString(),
+  };
+}
+
+function localePayload(p: ProjectSeed, locale: Locale) {
+  return {
+    name: p.name[locale],
+    summary: p.summary[locale],
+    results: p.results.map((r) => ({ value: r.value, label: r.label[locale] })),
+  };
+}
+
+/* ─── Lab payload builders ─────────────────────────────────────── */
+
+function labEnPayload(e: LabExperimentSeed) {
+  const base: Record<string, unknown> = {
+    code: e.code,
+    name: e.name.en,
+    summary: e.summary.en,
+    state: e.state,
+    tags: e.tags,
+    startedAt: e.startedAt,
+  };
+  if (e.sourceUrl) base.sourceUrl = e.sourceUrl;
+  if (e.demoUrl) base.demoUrl = e.demoUrl;
+  return base;
+}
+
+function labLocalePayload(e: LabExperimentSeed, locale: Locale) {
+  return {
+    name: e.name[locale],
+    summary: e.summary[locale],
+  };
 }
 
 main().catch((err) => {

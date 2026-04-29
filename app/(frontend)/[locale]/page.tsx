@@ -18,7 +18,7 @@ export default async function HomePage({ params }: Args) {
     <>
       <Hero />
       <MarqueeBand />
-      <Index />
+      <Index locale={locale as "fr" | "en" | "it"} />
       <StatsBand />
       <LabTeaser />
       <StudioTeaser />

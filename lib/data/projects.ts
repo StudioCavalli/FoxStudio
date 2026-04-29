@@ -16,6 +16,16 @@ import { MOCK_PROJECTS, type MockProject } from "./projects.mock";
  */
 export type ProjectState = "live" | "wip" | "archived";
 
+export type ProjectResult = {
+  value: string;
+  label: string;
+};
+
+export type ProjectPartner = {
+  name: string;
+  url?: string;
+};
+
 export type Project = {
   id: string;
   number: string;
@@ -25,6 +35,8 @@ export type Project = {
   year: number;
   stack: string[];
   state: ProjectState;
+  results: ProjectResult[];
+  partners: ProjectPartner[];
 };
 
 function fromMock(m: MockProject): Project {
@@ -37,10 +49,22 @@ function fromMock(m: MockProject): Project {
     year: m.year,
     stack: m.stack,
     state: m.status,
+    results: [],
+    partners: [],
   };
 }
 
 function fromPayloadDoc(doc: PayloadProject): Project {
+  const results = ((doc.results ?? []) as Array<{ value: string; label: string }>).map((r) => ({
+    value: r.value,
+    label: r.label,
+  }));
+  const partners = ((doc.partners ?? []) as Array<{ name: string; url?: string | null }>).map(
+    (p) => ({
+      name: p.name,
+      url: p.url ?? undefined,
+    }),
+  );
   return {
     id: String(doc.id),
     number: doc.number,
@@ -50,10 +74,14 @@ function fromPayloadDoc(doc: PayloadProject): Project {
     year: doc.year,
     stack: (doc.stack ?? []).map((s) => s.tech).filter((t): t is string => Boolean(t)),
     state: doc.state,
+    results,
+    partners,
   };
 }
 
-async function fromPayload(): Promise<Project[] | null> {
+type LocaleParam = "fr" | "en" | "it";
+
+async function fromPayload(locale?: LocaleParam): Promise<Project[] | null> {
   if (!process.env.DATABASE_URL) return null;
 
   try {
@@ -69,6 +97,7 @@ async function fromPayload(): Promise<Project[] | null> {
       limit: 50,
       sort: "-year,number",
       depth: 0,
+      locale: locale ?? "en",
     });
 
     return result.docs.map(fromPayloadDoc);
@@ -77,13 +106,16 @@ async function fromPayload(): Promise<Project[] | null> {
   }
 }
 
-export async function getProjects(): Promise<Project[]> {
-  const fromCms = await fromPayload();
+export async function getProjects(locale?: LocaleParam): Promise<Project[]> {
+  const fromCms = await fromPayload(locale);
   if (fromCms && fromCms.length > 0) return fromCms;
   return MOCK_PROJECTS.map(fromMock);
 }
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  const all = await getProjects();
+export async function getProjectBySlug(
+  slug: string,
+  locale?: LocaleParam,
+): Promise<Project | null> {
+  const all = await getProjects(locale);
   return all.find((p) => p.slug === slug) ?? null;
 }

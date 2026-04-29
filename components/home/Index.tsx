@@ -7,8 +7,8 @@ import { getProjects } from "@/lib/data/projects";
 
 import { HoverIndex } from "./HoverIndex";
 
-export async function Index() {
-  const projects = (await getProjects()).slice(0, 4);
+export async function Index({ locale }: { locale: "fr" | "en" | "it" }) {
+  const projects = (await getProjects(locale)).slice(0, 4);
   const t = await getTranslations("Home");
 
   const items = projects.map((p) => ({

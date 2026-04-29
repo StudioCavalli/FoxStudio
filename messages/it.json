@@ -72,7 +72,11 @@
     "placeholderBody": "Il caso di studio completo (narrazione lunga, media, scomposizione tecnica) è memorizzato in Payload e verrà visualizzato qui quando il CMS sarà collegato a un database.",
     "placeholderSubBody": "Per ora, questo è un placeholder strutturale che mostra la disposizione in 3 atti (Contesto / Approccio / Risultati) definita nei wireframe J1.",
     "approachPlaceholder": "Materiale visivo e narrazione dettagliata dell'approccio qui. Verrà alimentato dal campo rich text « narrative » di Payload una volta aggiunto il contenuto.",
-    "metricPending": "metrica in arrivo"
+    "metricPending": "metrica in arrivo",
+    "state": { "live": "in servizio", "wip": "in corso", "archived": "archiviato" },
+    "viewSource": "Vedi il codice",
+    "viewSite": "Visita il sito",
+    "partners": "Partner"
   },
   "Lab": {
     "label": "Lab",

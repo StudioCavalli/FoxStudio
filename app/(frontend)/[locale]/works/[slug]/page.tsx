@@ -14,17 +14,16 @@ type Args = {
   params: Promise<{ slug: string; locale: string }>;
 };
 
+type LocaleParam = "fr" | "en" | "it";
+
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
-  const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const { slug, locale } = await params;
+  const project = await getProjectBySlug(slug, locale as LocaleParam);
   if (!project) return { title: "Not found" };
   return {
     title: project.name,
     description: project.summary,
-    openGraph: {
-      title: project.name,
-      description: project.summary,
-    },
+    openGraph: { title: project.name, description: project.summary },
   };
 }
 
@@ -37,13 +36,15 @@ export default async function ProjectPage({ params }: Args) {
   const { slug, locale } = await params;
   setRequestLocale(locale);
 
-  const project = await getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug, locale as LocaleParam);
   if (!project) notFound();
 
   const t = await getTranslations("Project");
-  const all = await getProjects();
+  const all = await getProjects(locale as LocaleParam);
   const idx = all.findIndex((p) => p.slug === slug);
   const next = all[(idx + 1) % all.length];
+
+  const stateLabel = t(`state.${project.state}` as `state.${typeof project.state}`);
 
   return (
     <article>
@@ -55,7 +56,7 @@ export default async function ProjectPage({ params }: Args) {
 
         {/* Top metadata strip */}
         <div className="flex items-center justify-between border-b border-[var(--color-border)] px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-          <span>
+          <span className="tabular">
             {project.number} ▸ {project.year}
           </span>
           <span className="hidden md:inline">{project.stack.join(" · ")}</span>
@@ -63,14 +64,14 @@ export default async function ProjectPage({ params }: Args) {
             <span aria-hidden className="text-[var(--color-fg)]">
               {project.state === "live" ? "◉" : project.state === "archived" ? "×" : "◯"}
             </span>{" "}
-            {project.state}
+            {stateLabel}
           </span>
         </div>
 
         {/* Title */}
         <div className="flex flex-1 flex-col justify-end px-[var(--grid-margin)] py-[var(--spacing-9)]">
           <Reveal>
-            <h1 className="font-[var(--font-display)] font-medium leading-[0.92] tracking-[var(--tracking-display)] text-[clamp(56px,10vw,200px)]">
+            <h1 className="font-[var(--font-display)] font-medium leading-[0.92] tracking-[-0.03em] text-[clamp(56px,11vw,220px)]">
               {project.name}
             </h1>
           </Reveal>
@@ -91,43 +92,40 @@ export default async function ProjectPage({ params }: Args) {
           <SectionHeader
             number="01"
             label={t("context")}
-            meta={`${project.year} · ${project.state}`}
+            meta={`${project.year} · ${stateLabel}`}
           />
 
           <div className="grid gap-[var(--spacing-7)] md:grid-cols-[1fr_2fr]">
             <aside className="md:sticky md:top-[80px] md:self-start">
               <dl className="space-y-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]">
-                <div className="flex justify-between gap-[var(--spacing-3)] border-t border-[var(--color-border)] pt-[var(--spacing-3)]">
-                  <dt className="text-[var(--color-fg-secondary)]">{t("year")}</dt>
-                  <dd>{project.year}</dd>
-                </div>
-                <div className="flex justify-between gap-[var(--spacing-3)] border-t border-[var(--color-border)] pt-[var(--spacing-3)]">
-                  <dt className="text-[var(--color-fg-secondary)]">{t("status")}</dt>
-                  <dd>{project.state}</dd>
-                </div>
-                <div className="flex flex-col gap-[var(--spacing-2)] border-t border-[var(--color-border)] pt-[var(--spacing-3)]">
-                  <dt className="text-[var(--color-fg-secondary)]">{t("stack")}</dt>
-                  <dd className="text-right">{project.stack.join(" · ")}</dd>
-                </div>
+                <Row label={t("year")} value={String(project.year)} />
+                <Row label={t("status")} value={stateLabel} />
+                <Row label={t("stack")} value={project.stack.join(" · ")} stacked />
+                {project.partners.length > 0 && (
+                  <Row
+                    label={t("partners")}
+                    value={project.partners.map((p) => p.name).join(" · ")}
+                    stacked
+                  />
+                )}
               </dl>
             </aside>
 
             <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
-              <p>{t("placeholderBody")}</p>
+              <p>{project.summary}</p>
               <p className="text-[var(--color-fg-secondary)]">{t("placeholderSubBody")}</p>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ACT 2 — APPROACH (inverted section, mockup-style frame) */}
+      {/* ACT 2 — APPROACH */}
       <section className="invert border-t border-[var(--color-border)] py-[var(--spacing-10)]">
         <Container>
           <SectionHeader number="02" label={t("approach")} />
 
           <Reveal>
             <div className="relative isolate aspect-[16/9] w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
-              {/* Browser-style mockup frame */}
               <div className="absolute inset-x-0 top-0 flex items-center gap-2 border-b border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-[var(--spacing-3)] py-[var(--spacing-2)] font-[var(--font-mono)] text-[var(--text-mono-s)] text-[var(--color-fg-tertiary)]">
                 <span className="flex gap-1">
                   <span className="h-2 w-2 rounded-full border border-[var(--color-fg-tertiary)]" />
@@ -155,21 +153,39 @@ export default async function ProjectPage({ params }: Args) {
         <Container>
           <SectionHeader number="03" label={t("results")} />
 
-          <div className="grid gap-[var(--spacing-5)] md:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={`result-${i}`}
-                className="border border-[var(--color-border)] p-[var(--spacing-6)]"
-              >
-                <p className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-l)]">
-                  —
-                </p>
-                <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                  {t("metricPending")}
-                </p>
-              </div>
-            ))}
-          </div>
+          {project.results.length > 0 ? (
+            <div className="grid gap-[var(--spacing-5)] md:grid-cols-3">
+              {project.results.map((r) => (
+                <div
+                  key={`${r.value}-${r.label}`}
+                  className="flex flex-col justify-between gap-[var(--spacing-7)] border border-[var(--color-border)] p-[var(--spacing-6)]"
+                >
+                  <p className="font-[var(--font-display)] font-medium leading-[0.92] tracking-[-0.03em] text-[clamp(48px,6vw,96px)] tabular">
+                    {r.value}
+                  </p>
+                  <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                    {r.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid gap-[var(--spacing-5)] md:grid-cols-3">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={`result-${i}`}
+                  className="border border-[var(--color-border)] p-[var(--spacing-6)]"
+                >
+                  <p className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)]">
+                    —
+                  </p>
+                  <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                    {t("metricPending")}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </Container>
       </section>
 
@@ -193,5 +209,28 @@ export default async function ProjectPage({ params }: Args) {
         </section>
       )}
     </article>
+  );
+}
+
+function Row({
+  label,
+  value,
+  stacked = false,
+}: {
+  label: string;
+  value: string;
+  stacked?: boolean;
+}) {
+  return (
+    <div
+      className={`border-t border-[var(--color-border)] pt-[var(--spacing-3)] ${
+        stacked
+          ? "flex flex-col gap-[var(--spacing-2)]"
+          : "flex justify-between gap-[var(--spacing-3)]"
+      }`}
+    >
+      <dt className="text-[var(--color-fg-secondary)]">{label}</dt>
+      <dd className={stacked ? "" : "text-right"}>{value}</dd>
+    </div>
   );
 }

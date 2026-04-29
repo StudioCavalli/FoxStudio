@@ -72,7 +72,11 @@
     "placeholderBody": "The full case study (long-form narrative, media, technical breakdown) is stored in Payload and rendered here once the CMS is wired to a database.",
     "placeholderSubBody": "For now, this is a structural placeholder showing the 3-act layout (Context / Approach / Results) defined in the J1 wireframes.",
     "approachPlaceholder": "Visual material and detailed approach narrative go here. Will be sourced from Payload's narrative rich text field once content is added.",
-    "metricPending": "metric pending"
+    "metricPending": "metric pending",
+    "state": { "live": "live", "wip": "work in progress", "archived": "archived" },
+    "viewSource": "View source",
+    "viewSite": "Visit site",
+    "partners": "Partners"
   },
   "Lab": {
     "label": "Lab",

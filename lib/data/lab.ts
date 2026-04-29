@@ -68,7 +68,9 @@ function fromDoc(doc: PayloadLabExperiment): LabExperiment {
   };
 }
 
-export async function getLabExperiments(): Promise<LabExperiment[]> {
+type LabLocale = "fr" | "en" | "it";
+
+export async function getLabExperiments(locale?: LabLocale): Promise<LabExperiment[]> {
   if (!process.env.DATABASE_URL) return MOCK;
 
   try {
@@ -83,6 +85,7 @@ export async function getLabExperiments(): Promise<LabExperiment[]> {
       limit: 50,
       sort: "-startedAt,code",
       depth: 0,
+      locale: locale ?? "en",
     });
 
     if (result.docs.length === 0) return MOCK;

@@ -72,7 +72,11 @@
     "placeholderBody": "L'étude de cas complète (narration longue, médias, démontage technique) est stockée dans Payload et apparaîtra ici une fois la base de données branchée.",
     "placeholderSubBody": "Pour l'instant, ceci est un placeholder structurel montrant la mise en page en 3 actes (Contexte / Approche / Résultats) définie dans les wireframes J1.",
     "approachPlaceholder": "Matériel visuel et narration détaillée de l'approche ici. Sera alimenté par le champ rich text « narrative » de Payload une fois le contenu ajouté.",
-    "metricPending": "métrique à venir"
+    "metricPending": "métrique à venir",
+    "state": { "live": "en service", "wip": "en cours", "archived": "archivé" },
+    "viewSource": "Voir le code",
+    "viewSite": "Visiter le site",
+    "partners": "Partenaires"
   },
   "Lab": {
     "label": "Lab",

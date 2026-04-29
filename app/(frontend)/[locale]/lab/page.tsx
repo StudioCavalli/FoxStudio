@@ -22,7 +22,7 @@ export default async function LabPage({ params }: Args) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const experiments = await getLabExperiments();
+  const experiments = await getLabExperiments(locale as "fr" | "en" | "it");
   const t = await getTranslations("Lab");
 
   return (

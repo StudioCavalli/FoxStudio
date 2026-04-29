@@ -23,7 +23,7 @@ export default async function WorksPage({ params }: Args) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const projects = await getProjects();
+  const projects = await getProjects(locale as "fr" | "en" | "it");
   const t = await getTranslations("Works");
 
   const years = Array.from(new Set(projects.map((p) => p.year))).sort((a, b) => b - a);
