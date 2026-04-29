@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image";
 
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
 import { getTeamMembers } from "@/lib/data/team";
 import { SITE } from "@/lib/site";
+
+/**
+ * Mirror of /team page focus logic — Christopher's source image is
+ * pre-cropped to a wide aspect, so we slide horizontally to keep the
+ * subject centred inside the portrait frame on this page.
+ */
+function photoFocus(slug: string): string {
+  if (slug === "christopher") return "30% center";
+  return "center";
+}
 
 type Args = {
   params: Promise<{ locale: string }>;
@@ -54,12 +65,22 @@ export default async function StudioPage({ params }: Args) {
           <MonoLabel number="01">{t("teamLabel")}</MonoLabel>
 
           <ul className="mt-[var(--spacing-7)] grid gap-[var(--spacing-7)] md:grid-cols-2 lg:grid-cols-3">
-            {team.map((member) => (
+            {team.map((member, idx) => (
               <li
                 key={member.id}
                 className="flex flex-col gap-[var(--spacing-3)] border-t border-border pt-[var(--spacing-5)]"
               >
-                <div className="aspect-[4/5] w-full border border-border bg-bg-secondary" />
+                <figure className="relative aspect-[4/5] w-full overflow-hidden border border-border bg-bg-secondary">
+                  <Image
+                    src={`/team/${member.photoSlug}.jpg?v=4`}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover grayscale transition duration-[var(--duration-base)] hover:grayscale-0"
+                    style={{ objectPosition: photoFocus(member.photoSlug) }}
+                    priority={idx === 0}
+                  />
+                </figure>
                 <p className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
                   {member.name}
                 </p>
