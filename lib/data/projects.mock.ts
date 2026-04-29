@@ -144,12 +144,12 @@ export const MOCK_PROJECTS: MockProject[] = [
   {
     id: "012",
     number: "012",
-    slug: "foxcard",
-    name: "FoxCard",
+    slug: "shark",
+    name: "Shark",
     description:
-      "Card-shaped roadmap and issue planner. Generates GitHub issues from a single source-of-truth markdown roadmap.",
+      "Cloud gaming desktop client: stream PC games over WebRTC with sub-30 ms end-to-end latency.",
     year: 2025,
-    status: "archived",
-    stack: ["TypeScript", "GitHub CLI", "Markdown"],
+    status: "wip",
+    stack: ["Electron 39", "React 19", "TypeScript", "WebRTC", "Socket.io"],
   },
 ];

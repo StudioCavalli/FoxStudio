@@ -193,10 +193,13 @@ a {
 }
 
 /* ─── Section inversion utility ──────────────────────────────────── */
-/* Used for "punctuation" sections that flip to the opposite tone. */
+/* "Punctuation" sections that flip to the opposite tone.
+ * Uses explicit colour values (not var()) for the section's own
+ * bg/text — referencing var(--color-fg) would resolve to the
+ * *redeclared* value below, defeating the flip. */
 .tone-flip {
-  background-color: var(--color-fg);
-  color: var(--color-bg);
+  background-color: #f4f4f4;
+  color: #0a0a0a;
   --color-bg: #f4f4f4;
   --color-bg-secondary: #ffffff;
   --color-bg-tertiary: #eaeaea;
