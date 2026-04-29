@@ -19,7 +19,7 @@ type LegalLayoutProps = {
  */
 export function LegalLayout({ number, label, title, intro, meta, children }: LegalLayoutProps) {
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <SectionHeader number={number} label={label} meta={meta} />
 

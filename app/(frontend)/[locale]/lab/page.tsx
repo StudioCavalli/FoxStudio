@@ -26,7 +26,7 @@ export default async function LabPage({ params }: Args) {
   const t = await getTranslations("Lab");
 
   return (
-    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <MonoLabel number="01">{t("label")}</MonoLabel>
 

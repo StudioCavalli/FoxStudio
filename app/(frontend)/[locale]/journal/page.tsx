@@ -32,7 +32,7 @@ export default async function JournalPage({ params, searchParams }: Args) {
   const t = await getTranslations("Journal");
 
   return (
-    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <MonoLabel number="01">{t("label")}</MonoLabel>
 

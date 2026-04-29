@@ -39,7 +39,7 @@ export default async function StudioPage({ params }: Args) {
   const t = await getTranslations("Studio");
 
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       {/* MANIFESTO */}
       <section className="border-b border-border pb-[var(--spacing-10)]">
         <Container>

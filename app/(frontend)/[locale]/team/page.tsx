@@ -63,7 +63,7 @@ export default async function TeamPage({ params }: Args) {
       : T.countPlural[l].replace("{n}", String(members.length));
 
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <SectionHeader number="01" label={T.label[l]} meta={count} />
 

@@ -55,7 +55,7 @@ export default async function JournalArticlePage({ params }: Args) {
   ];
 
   return (
-    <article className="pt-[var(--spacing-7)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-7)] pb-[var(--spacing-10)]">
       <LdJson data={ldData} />
       <Container>
         <Link

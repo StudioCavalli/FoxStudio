@@ -40,7 +40,7 @@ export default async function ContactPage({ params, searchParams }: Args) {
   }
 
   return (
-    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <MonoLabel number="01">{t("label")}</MonoLabel>
 
@@ -96,7 +96,7 @@ async function ContactPicked({ type }: { type: ContactType }) {
   const t = await getTranslations("Contact");
 
   return (
-    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <MonoLabel number="01">{t(`door.${type}.title`)}</MonoLabel>
 

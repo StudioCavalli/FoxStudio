@@ -7,7 +7,7 @@ import { SkeletonBlock, SkeletonLine, SkeletonText } from "@/components/ui/Skele
  */
 export default function StudioLoading() {
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       {/* MANIFESTO */}
       <section className="border-b border-border pb-[var(--spacing-10)]">
         <Container>

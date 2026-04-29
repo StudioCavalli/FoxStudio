@@ -36,7 +36,7 @@ export default async function WorksPage({ params }: Args) {
   }));
 
   return (
-    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <SectionHeader
           number="01"

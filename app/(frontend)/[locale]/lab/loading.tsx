@@ -6,7 +6,7 @@ import { SkeletonBlock, SkeletonLine, SkeletonSectionHeader } from "@/components
  */
 export default function LabLoading() {
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <SkeletonSectionHeader />
 

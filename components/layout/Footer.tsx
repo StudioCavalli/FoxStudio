@@ -11,10 +11,7 @@ export function Footer() {
   const tNav = useTranslations("Nav");
 
   return (
-    <footer
-      className="mt-[var(--spacing-12)] border-t border-border py-[var(--spacing-9)]"
-      aria-label="Site footer"
-    >
+    <footer className="border-t border-border py-[var(--spacing-9)]" aria-label="Site footer">
       <Container>
         <div className="grid gap-[var(--spacing-7)] md:grid-cols-[1fr_2fr]">
           <div>

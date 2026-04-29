@@ -6,7 +6,7 @@ import { SkeletonBlock, SkeletonLine, SkeletonText } from "@/components/ui/Skele
  */
 export default function TeamLoading() {
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <div className="flex items-baseline justify-between border-t border-border pt-[var(--spacing-3)]">
           <SkeletonLine width="22ch" height="13px" />

@@ -94,7 +94,7 @@ export default async function OmbrysPage({ params }: Args) {
   const l = locale as Locale;
 
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <SectionHeader number="00" label={T.label[l]} meta={T.meta[l]} />
 

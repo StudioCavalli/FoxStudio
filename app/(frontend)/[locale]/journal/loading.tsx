@@ -7,7 +7,7 @@ import { SkeletonBlock, SkeletonLine, SkeletonSectionHeader } from "@/components
  */
 export default function JournalLoading() {
   return (
-    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <article className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <SkeletonSectionHeader />
 

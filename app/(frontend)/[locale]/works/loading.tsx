@@ -8,7 +8,7 @@ import { SkeletonBlock, SkeletonLine, SkeletonSectionHeader } from "@/components
  */
 export default function WorksLoading() {
   return (
-    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
+    <section className="pt-[var(--spacing-9)] pb-[var(--spacing-10)]">
       <Container>
         <SkeletonSectionHeader />
 
