@@ -1,8 +1,7 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-
-import { useTranslations } from "next-intl";
 
 /**
  * Live carbon footprint indicator for the current page view.
@@ -10,19 +9,19 @@ import { useTranslations } from "next-intl";
  * Reads the Performance API once the page settles (load + a beat), sums
  * `transferSize` (over-the-wire bytes) for resources + the navigation
  * itself, then applies the SWD v3 simplified coefficient
- * (3.33e-7 g CO₂e / byte) — same maths as `scripts/measure-carbon.ts`.
+ * (3.33e-7 g CO₂e / byte) — same maths as `scripts/measure-carbon.ts`
+ * and the live measurement on /footprint.
  *
- * Falls back to a static "~ 0.18 g CO₂" placeholder if the Performance
- * API isn't available (very old browsers) or before the calculation
- * settles. No layout jitter — the slot reserves its width with a
- * monospace-tabular figure.
+ * Until the value is available we show the same animated bar loader as
+ * /footprint plus a localised "MESURE…" / "MEASURING…" label, so the
+ * reader sees that the figure is actually being computed (not faked).
  */
 
 const GRAMS_PER_BYTE = 3.33e-7;
-const FALLBACK = "~ 0.18 g";
 
 export function FootprintLive() {
   const t = useTranslations("Footer");
+  const locale = useLocale();
   const [grams, setGrams] = useState<number | null>(null);
 
   useEffect(() => {
@@ -45,7 +44,7 @@ export function FootprintLive() {
           setGrams(totalBytes * GRAMS_PER_BYTE);
         }
       } catch {
-        // Silent — we'll fall back to the placeholder.
+        // Silent — the loader stays visible until the next render.
       }
     };
 
@@ -65,12 +64,23 @@ export function FootprintLive() {
     };
   }, []);
 
-  const display =
-    grams === null
-      ? FALLBACK
-      : grams < 0.01
-        ? "< 0,01 g"
-        : `~ ${grams.toFixed(2).replace(".", ",")} g`;
+  if (grams === null) {
+    return (
+      <span
+        aria-label="Carbon footprint estimate for this page view"
+        className="inline-flex items-center gap-[var(--spacing-2)]"
+      >
+        <span aria-hidden className="footprint-bars">
+          <span />
+          <span />
+          <span />
+        </span>
+        <span className="text-fg-secondary">{locale === "fr" ? "MESURE…" : "MEASURING…"}</span>
+      </span>
+    );
+  }
+
+  const display = grams < 0.01 ? "< 0,01 g" : `~ ${grams.toFixed(2).replace(".", ",")} g`;
 
   return (
     <span aria-label="Carbon footprint estimate for this page view">
