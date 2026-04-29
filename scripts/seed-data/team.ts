@@ -36,9 +36,9 @@ export const TEAM: TeamMemberSeed[] = [
     location: "Cannes",
     order: 0,
     bio: tri(
-      "Fondateur et CEO de FoxStudio, basé à Cannes. Construit côté IA et fullstack. Créateur d'idées pour un futur plus intelligent et plus équitable. C'est lui qui prototype, qui casse, qui recommence — et qui finit par publier.",
-      "Founder and CEO of FoxStudio, based in Cannes. Builds on the AI and fullstack side. Crafts ideas for a smarter, fairer future. The one who prototypes, breaks it, starts again — and eventually ships.",
-      "Fondatore e CEO di FoxStudio, con base a Cannes. Costruisce sul lato IA e fullstack. Crea idee per un futuro più intelligente ed equo. È colui che prototipa, rompe, ricomincia — e alla fine pubblica.",
+      "Fondateur et CEO de FoxStudio, basé à Cannes. Construit côté IA et fullstack, prototype, casse, recommence. C'est lui qui pitche — aux incubateurs, aux clients, aux talents. Créateur d'idées pour un futur plus intelligent et plus équitable.",
+      "Founder and CEO of FoxStudio, based in Cannes. Builds on the AI and fullstack side, prototypes, breaks, starts again. He's the one who pitches — to incubators, clients, talents. Crafts ideas for a smarter, fairer future.",
+      "Fondatore e CEO di FoxStudio, con base a Cannes. Costruisce sul lato IA e fullstack, prototipa, rompe, ricomincia. È lui che presenta — agli incubatori, ai clienti, ai talenti. Crea idee per un futuro più intelligente ed equo.",
     ),
     links: [
       { label: "GitHub", url: "https://github.com/SwaynIO" },
@@ -56,9 +56,9 @@ export const TEAM: TeamMemberSeed[] = [
     location: "Paris",
     order: 1,
     bio: tri(
-      "Cofondateur et Co-CEO de FoxStudio, basé à Paris. Garde un pied dans le code de production et l'autre dans la stratégie d'incubation. C'est lui qui défend le calendrier, qui dit non quand il faut, et qui relit les pull-requests à 23 h.",
-      "Co-founder and Co-CEO of FoxStudio, based in Paris. Keeps one foot in production code and the other in incubation strategy. The one who guards the schedule, says no when needed, and reviews pull-requests at 11 pm.",
-      "Cofondatore e Co-CEO di FoxStudio, con base a Parigi. Tiene un piede nel codice di produzione e l'altro nella strategia di incubazione. È colui che difende il calendario, dice no quando serve, e revisiona le pull-request alle 23.",
+      "Cofondateur et Co-CEO de FoxStudio, basé à Paris. C'est lui qui revoit le code, qui casse celui de Christopher quand ça déraille, et qui le remet droit. Très terre à terre — pas de promesse qu'on ne peut pas tenir, pas de feature qu'on ne peut pas livrer.",
+      "Co-founder and Co-CEO of FoxStudio, based in Paris. He's the one who reviews the code, breaks Christopher's when it goes off the rails, and straightens it back out. Deeply pragmatic — no promise we can't keep, no feature we can't ship.",
+      "Cofondatore e Co-CEO di FoxStudio, con base a Parigi. È lui che revisiona il codice, rompe quello di Christopher quando deraglia, e lo rimette in carreggiata. Molto pragmatico — nessuna promessa che non si possa mantenere, nessuna feature che non si possa consegnare.",
     ),
     links: [
       {

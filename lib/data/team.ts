@@ -29,7 +29,7 @@ const MOCK: TeamMember[] = [
     name: "Christopher Cavalli",
     photoSlug: "christopher",
     role: "CEO · AI Engineer · Fullstack Developer",
-    bio: "Fondateur et CEO de FoxStudio, basé à Cannes.",
+    bio: "Fondateur et CEO de FoxStudio, basé à Cannes. C'est lui qui pitche.",
     location: "Cannes",
     order: 0,
     links: [
@@ -42,7 +42,7 @@ const MOCK: TeamMember[] = [
     name: "Chahine Benlahcen Tlemcani",
     photoSlug: "chahine",
     role: "Co-CEO · Software Engineer",
-    bio: "Cofondateur et Co-CEO de FoxStudio, basé à Paris.",
+    bio: "Cofondateur et Co-CEO, basé à Paris. C'est lui qui casse le code de Christopher quand ça va pas.",
     location: "Paris",
     order: 1,
     links: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/chahine-benlahcen-tlemcani/" }],
