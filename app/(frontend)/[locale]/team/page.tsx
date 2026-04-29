@@ -89,7 +89,7 @@ export default async function TeamPage({ params }: Args) {
         {members.map((member, idx) => {
           // Version suffix busts Next/Image's optimised cache when the source
           // file is recropped without renaming. Bump on every photo update.
-          const photo = `/team/${member.photoSlug}.jpg?v=2`;
+          const photo = `/team/${member.photoSlug}.jpg?v=3`;
           const isOdd = idx % 2 === 1;
           return (
             <Container key={member.id}>
