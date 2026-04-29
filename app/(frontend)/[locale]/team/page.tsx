@@ -35,9 +35,10 @@ const T = {
  * subject on the left third).
  */
 function photoFocus(slug: string): string {
-  // Christopher: body sits left of centre, hands-at-belt are at the bottom —
-  // crop them out by lifting the visible window up.
-  if (slug === "christopher") return "30% 18%";
+  // Christopher: source image pre-cropped (top 64 %) to remove the belt /
+  // hands area. The remaining frame is wider than the square container
+  // (~2.34:1), so only horizontal centring matters.
+  if (slug === "christopher") return "30% center";
   return "center";
 }
 
@@ -86,7 +87,9 @@ export default async function TeamPage({ params }: Args) {
         </Container>
 
         {members.map((member, idx) => {
-          const photo = `/team/${member.photoSlug}.jpg`;
+          // Version suffix busts Next/Image's optimised cache when the source
+          // file is recropped without renaming. Bump on every photo update.
+          const photo = `/team/${member.photoSlug}.jpg?v=2`;
           const isOdd = idx % 2 === 1;
           return (
             <Container key={member.id}>
