@@ -48,9 +48,9 @@ export function Footer() {
             </FooterGroup>
 
             <FooterGroup title={t("legal")}>
-              <Link href={"/legal/mentions" as "/"}>{t("mentions")}</Link>
-              <Link href={"/legal/privacy" as "/"}>{t("privacy")}</Link>
-              <Link href={"/footprint" as "/"}>{t("footprint")}</Link>
+              <Link href="/legal/mentions">{t("mentions")}</Link>
+              <Link href="/legal/privacy">{t("privacy")}</Link>
+              <Link href="/footprint">{t("footprint")}</Link>
             </FooterGroup>
           </div>
         </div>
