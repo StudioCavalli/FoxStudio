@@ -153,39 +153,22 @@ export default async function ProjectPage({ params }: Args) {
         <Container>
           <SectionHeader number="03" label={t("results")} />
 
-          {project.results.length > 0 ? (
-            <div className="grid gap-[var(--spacing-5)] md:grid-cols-3">
-              {project.results.map((r) => (
-                <div
-                  key={`${r.value}-${r.label}`}
-                  className="flex flex-col justify-between gap-[var(--spacing-7)] border border-[var(--color-border)] p-[var(--spacing-6)]"
-                >
-                  <p className="font-[var(--font-display)] font-medium leading-[0.92] tracking-[-0.03em] text-[clamp(48px,6vw,96px)] tabular">
-                    {r.value}
-                  </p>
-                  <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                    {r.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid gap-[var(--spacing-5)] md:grid-cols-3">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={`result-${i}`}
-                  className="border border-[var(--color-border)] p-[var(--spacing-6)]"
-                >
-                  <p className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)]">
-                    —
-                  </p>
-                  <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                    {t("metricPending")}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="grid gap-[var(--spacing-5)] md:grid-cols-3">
+            {(project.results.length > 0
+              ? project.results
+              : ([1, 2, 3].map(() => ({
+                  value: "—",
+                  label: t("metricPending"),
+                })) as typeof project.results)
+            ).map((r, i) => (
+              <ResultCard
+                key={`${r.value}-${r.label}-${i}`}
+                index={i + 1}
+                value={r.value}
+                label={r.label}
+              />
+            ))}
+          </div>
         </Container>
       </section>
 
@@ -231,6 +214,49 @@ function Row({
     >
       <dt className="text-[var(--color-fg-secondary)]">{label}</dt>
       <dd className={stacked ? "" : "text-right"}>{value}</dd>
+    </div>
+  );
+}
+
+/**
+ * A single Result card. Auto-scales the value font based on character
+ * length: short tokens (numbers, "MIT", "PWA") get the full display
+ * size, longer ones ("WebSocket", "Drizzle") get a smaller scale that
+ * actually fits inside the card.
+ */
+function ResultCard({
+  index,
+  value,
+  label,
+}: {
+  index: number;
+  value: string;
+  label: string;
+}) {
+  // Scale tier based on token length — keeps long words inside the card.
+  const len = value.length;
+  const valueClass =
+    len <= 4
+      ? "text-[clamp(56px,7vw,112px)]"
+      : len <= 7
+        ? "text-[clamp(40px,5vw,80px)]"
+        : "text-[clamp(28px,3.6vw,56px)]";
+
+  return (
+    <div className="group relative flex aspect-[5/4] flex-col justify-between overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg)] p-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)] md:p-[var(--spacing-6)]">
+      <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-tertiary)]">
+        {String(index).padStart(2, "0")}
+      </span>
+
+      <p
+        className={`font-[var(--font-display)] font-medium leading-[0.95] tracking-[-0.03em] tabular break-words ${valueClass}`}
+      >
+        {value}
+      </p>
+
+      <p className="border-t border-[var(--color-border)] pt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg)]">
+        {label}
+      </p>
     </div>
   );
 }
