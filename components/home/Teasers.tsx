@@ -6,9 +6,9 @@ import { MonoLabel } from "@/components/ui/MonoLabel";
 import { Link } from "@/i18n/navigation";
 
 const LAB_EXPERIMENTS = [
-  { id: "exp_004", name: "WebGPU compute shader", status: "live" as const },
-  { id: "exp_005", name: "Edge AI inference", status: "live" as const },
-  { id: "exp_006", name: "Haptic UI surface", status: "wip" as const },
+  { id: "exp_004", name: "WebGPU compute shader", state: "live" as const },
+  { id: "exp_005", name: "Edge AI inference", state: "live" as const },
+  { id: "exp_006", name: "Haptic UI surface", state: "wip" as const },
 ];
 
 export function LabTeaser() {
@@ -42,9 +42,9 @@ export function LabTeaser() {
                 </p>
                 <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
                   <span aria-hidden className="text-[var(--color-fg)]">
-                    {exp.status === "live" ? "◉" : "◯"}
+                    {exp.state === "live" ? "◉" : "◯"}
                   </span>{" "}
-                  {exp.status}
+                  {exp.state}
                 </p>
               </div>
             </li>

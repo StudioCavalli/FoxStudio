@@ -7,9 +7,15 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 
+import { JournalArticles } from "./cms/collections/JournalArticles";
+import { LabExperiments } from "./cms/collections/LabExperiments";
 import { Media } from "./cms/collections/Media";
+import { Pages } from "./cms/collections/Pages";
 import { Projects } from "./cms/collections/Projects";
+import { TeamMembers } from "./cms/collections/TeamMembers";
 import { Users } from "./cms/collections/Users";
+import { Navigation } from "./cms/globals/Navigation";
+import { Settings } from "./cms/globals/Settings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -32,7 +38,8 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, Projects],
+  collections: [Users, Media, Projects, LabExperiments, JournalArticles, TeamMembers, Pages],
+  globals: [Settings, Navigation],
 
   editor: lexicalEditor(),
 

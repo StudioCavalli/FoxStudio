@@ -70,6 +70,10 @@ export interface Config {
     users: User;
     media: Media;
     projects: Project;
+    'lab-experiments': LabExperiment;
+    'journal-articles': JournalArticle;
+    'team-members': TeamMember;
+    pages: Page;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -81,6 +85,10 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    'lab-experiments': LabExperimentsSelect<false> | LabExperimentsSelect<true>;
+    'journal-articles': JournalArticlesSelect<false> | JournalArticlesSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -91,8 +99,14 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fr' | 'en' | 'it') | ('fr' | 'en' | 'it')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    settings: Setting;
+    navigation: Navigation;
+  };
+  globalsSelect: {
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+  };
   locale: 'fr' | 'en' | 'it';
   widgets: {
     collections: CollectionsWidget;
@@ -244,7 +258,10 @@ export interface Project {
    */
   summary?: string | null;
   year: number;
-  status: 'live' | 'wip' | 'archived';
+  /**
+   * Editorial state (avoid name 'status' which collides with Payload's draft system).
+   */
+  state: 'live' | 'wip' | 'archived';
   stack?:
     | {
         tech: string;
@@ -291,6 +308,139 @@ export interface Project {
       }[]
     | null;
   publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Prototypes and ongoing experiments. Each becomes a /lab card.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lab-experiments".
+ */
+export interface LabExperiment {
+  id: number;
+  /**
+   * e.g. exp_004
+   */
+  code: string;
+  name: string;
+  summary?: string | null;
+  state: 'live' | 'wip' | 'archived';
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Link to live demo (sandboxed iframe target).
+   */
+  demoUrl?: string | null;
+  /**
+   * Link to GitHub source if open.
+   */
+  sourceUrl?: string | null;
+  startedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Long-form notes and articles. Rendered at /journal/[slug].
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "journal-articles".
+ */
+export interface JournalArticle {
+  id: number;
+  title: string;
+  slug: string;
+  /**
+   * Italic lead paragraph shown above the body.
+   */
+  lead?: string | null;
+  tag: 'perf' | '3d' | 'tooling' | 'opinion' | 'process';
+  /**
+   * Estimated reading time in minutes.
+   */
+  readingTimeMinutes?: number | null;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  author?: (number | null) | TeamMember;
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * FoxStudio team — shown on /studio.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members".
+ */
+export interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  bio?: string | null;
+  photo?: (number | null) | Media;
+  links?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Sort order on /studio (ascending). Founders typically 0–10.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Editorial pages. Slug determines which front route renders the content.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  /**
+   * e.g. studio, contact, footprint
+   */
+  slug: string;
+  intro?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -422,6 +572,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'lab-experiments';
+        value: number | LabExperiment;
+      } | null)
+    | ({
+        relationTo: 'journal-articles';
+        value: number | JournalArticle;
+      } | null)
+    | ({
+        relationTo: 'team-members';
+        value: number | TeamMember;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -563,7 +729,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   slug?: T;
   summary?: T;
   year?: T;
-  status?: T;
+  state?: T;
   stack?:
     | T
     | {
@@ -587,6 +753,78 @@ export interface ProjectsSelect<T extends boolean = true> {
         id?: T;
       };
   publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lab-experiments_select".
+ */
+export interface LabExperimentsSelect<T extends boolean = true> {
+  code?: T;
+  name?: T;
+  summary?: T;
+  state?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  demoUrl?: T;
+  sourceUrl?: T;
+  startedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "journal-articles_select".
+ */
+export interface JournalArticlesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  lead?: T;
+  tag?: T;
+  readingTimeMinutes?: T;
+  body?: T;
+  author?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  bio?: T;
+  photo?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  intro?: T;
+  body?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -663,6 +901,98 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Site-wide settings: SEO defaults, contact endpoints, footprint thresholds.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  siteName?: string | null;
+  tagline?: string | null;
+  defaultDescription?: string | null;
+  contactEmail?: string | null;
+  footprint?: {
+    /**
+     * Per-view CO₂ budget enforced in CI (CDC §7.2).
+     */
+    budgetGramsCO2?: number | null;
+    displayInFooter?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Header / footer navigation links. Override the static defaults from lib/site.ts.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: number;
+  primary?:
+    | {
+        label: string;
+        /**
+         * Internal path, e.g. /works
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  footerExtras?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  tagline?: T;
+  defaultDescription?: T;
+  contactEmail?: T;
+  footprint?:
+    | T
+    | {
+        budgetGramsCO2?: T;
+        displayInFooter?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  primary?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  footerExtras?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "collections_widget".
  */
@@ -680,10 +1010,23 @@ export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    doc?: {
-      relationTo: 'projects';
-      value: number | Project;
-    } | null;
+    doc?:
+      | ({
+          relationTo: 'projects';
+          value: number | Project;
+        } | null)
+      | ({
+          relationTo: 'lab-experiments';
+          value: number | LabExperiment;
+        } | null)
+      | ({
+          relationTo: 'journal-articles';
+          value: number | JournalArticle;
+        } | null)
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null);
     global?: string | null;
     user?: (number | null) | User;
   };

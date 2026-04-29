@@ -68,5 +68,76 @@
     "approachPlaceholder": "Matériel visuel et narration détaillée de l'approche ici. Sera alimenté par le champ rich text « narrative » de Payload une fois le contenu ajouté.",
     "metricPending": "métrique à venir"
   },
+  "Lab": {
+    "label": "Lab",
+    "title": "Work in progress, par défaut.",
+    "subtitle": "Expériences en cours et prototypes. Certains arrivent en prod, d'autres non. Tous sont documentés.",
+    "status": { "live": "live", "wip": "en cours", "archived": "archivé" },
+    "started": "Démarré",
+    "openDemo": "Ouvrir la démo",
+    "source": "Source"
+  },
+  "Studio": {
+    "label": "Studio",
+    "title": "Qui on est.",
+    "intro": "Une petite équipe d'ingénieurs et de designers qui a choisi la R&D plutôt que la roadmap.",
+    "manifesto1": "Une petite équipe d'ingénieurs et de designers qui a choisi la R&D plutôt que la roadmap.",
+    "manifesto2": "FoxStudio est ce que FoxCase explore quand aucun client ne demande — et ce qu'on propose quand un client demande.",
+    "manifesto3": "On assume nos goûts, notre stack, nos budgets. On publie nos notes. On nomme nos prototypes.",
+    "teamLabel": "Équipe",
+    "foxcaseLabel": "FoxCase",
+    "foxcaseBody": "FoxStudio est le laboratoire R&D de FoxCase. L'agence opère les projets clients. Le studio creuse les questions.",
+    "visitFoxcase": "Visiter FoxCase",
+    "principlesLabel": "Principes",
+    "principle1": "Construire avant d'expliquer.",
+    "principle2": "Publier ce qui tient debout.",
+    "principle3": "Mesurer ce qu'on prétend.",
+    "principle4": "Rester petit, rester aiguisé."
+  },
+  "Journal": {
+    "label": "Journal",
+    "title": "Notes d'atelier.",
+    "subtitle": "Notes techniques, prises de position, process. Pas de marketing, pas de récap.",
+    "filterAll": "Tout",
+    "empty": "Rien encore pour ce tag.",
+    "backToJournal": "Retour au journal",
+    "bodyPlaceholder": "Le corps complet de l'article est stocké dans Payload et apparaîtra ici une fois publié.",
+    "bodyPlaceholderHint": "Cette page montre la mise en forme — fontes, line-height, max-width — sans le vrai contenu."
+  },
+  "Contact": {
+    "label": "Contact",
+    "title": "Choisis ta porte.",
+    "intro": "Trois façons de nous parler. Choisis celle qui colle.",
+    "door": {
+      "incubator": {
+        "title": "Incubateurs",
+        "body": "Vous gérez un programme, un fonds, un accélérateur. On aimerait pitcher."
+      },
+      "company": {
+        "title": "Entreprises",
+        "body": "Vous avez un problème, on a peut-être un angle. Parlons-en."
+      },
+      "talent": {
+        "title": "Talents",
+        "body": "Vous construisez et vous aimeriez construire avec nous."
+      }
+    },
+    "openDoor": "Ouvrir",
+    "orDirect": "Ou directement :",
+    "name": "Votre nom",
+    "email": "Email",
+    "organization": "Structure",
+    "program": "Programme",
+    "company": "Société",
+    "topic": "Sujet",
+    "topicOther": "Autre / pas sûr",
+    "budget": "Budget indicatif",
+    "budgetUnsure": "Pas encore sûr",
+    "role": "Rôle qui vous intéresse",
+    "portfolioUrl": "Portfolio / GitHub",
+    "message": "Message",
+    "send": "Envoyer",
+    "sending": "Envoi…"
+  },
   "ScrollHint": "Faire défiler"
 }

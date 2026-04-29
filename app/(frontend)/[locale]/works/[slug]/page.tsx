@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: Args) {
         <Container>
           <Reveal>
             <MonoLabel number={project.number}>
-              {project.year} · {project.status}
+              {project.year} · {project.state}
             </MonoLabel>
           </Reveal>
 
@@ -84,7 +84,7 @@ export default async function ProjectPage({ params }: Args) {
                 </div>
                 <div className="flex justify-between gap-[var(--spacing-3)] border-t border-[var(--color-border)] pt-[var(--spacing-3)]">
                   <dt className="text-[var(--color-fg-secondary)]">{t("status")}</dt>
-                  <dd>{project.status}</dd>
+                  <dd>{project.state}</dd>
                 </div>
                 <div className="flex flex-col justify-between gap-[var(--spacing-2)] border-t border-[var(--color-border)] pt-[var(--spacing-3)]">
                   <dt className="text-[var(--color-fg-secondary)]">{t("stack")}</dt>

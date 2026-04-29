@@ -6,7 +6,7 @@ export const Projects: CollectionConfig = {
   labels: { singular: "Project", plural: "Projects" },
   admin: {
     useAsTitle: "name",
-    defaultColumns: ["number", "name", "year", "status", "_status", "publishedAt"],
+    defaultColumns: ["number", "name", "year", "state", "_status", "publishedAt"],
     description: "FoxStudio works. Each project becomes /works/[slug] on the site.",
   },
   versions: {
@@ -83,7 +83,7 @@ export const Projects: CollectionConfig = {
       max: 2030,
     },
     {
-      name: "status",
+      name: "state",
       type: "select",
       required: true,
       defaultValue: "live",
@@ -92,6 +92,10 @@ export const Projects: CollectionConfig = {
         { label: "Work in progress", value: "wip" },
         { label: "Archived", value: "archived" },
       ],
+      admin: {
+        description:
+          "Editorial state (avoid name 'status' which collides with Payload's draft system).",
+      },
     },
     {
       name: "stack",

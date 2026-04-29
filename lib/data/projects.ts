@@ -14,6 +14,8 @@ import { MOCK_PROJECTS, type MockProject } from "./projects.mock";
  * View model — the projection of a project that the front actually consumes.
  * Decouples the UI from the CMS shape so the CMS can evolve independently.
  */
+export type ProjectState = "live" | "wip" | "archived";
+
 export type Project = {
   id: string;
   number: string;
@@ -22,7 +24,7 @@ export type Project = {
   summary?: string;
   year: number;
   stack: string[];
-  status: "live" | "wip" | "archived";
+  state: ProjectState;
 };
 
 function fromMock(m: MockProject): Project {
@@ -34,7 +36,7 @@ function fromMock(m: MockProject): Project {
     summary: m.description,
     year: m.year,
     stack: m.stack,
-    status: m.status,
+    state: m.status,
   };
 }
 
@@ -47,7 +49,7 @@ function fromPayloadDoc(doc: PayloadProject): Project {
     summary: doc.summary ?? undefined,
     year: doc.year,
     stack: (doc.stack ?? []).map((s) => s.tech).filter((t): t is string => Boolean(t)),
-    status: doc.status,
+    state: doc.state,
   };
 }
 
