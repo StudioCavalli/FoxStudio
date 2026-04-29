@@ -134,62 +134,70 @@
 }
 
 /* ─── Reset & base ───────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  margin: 0;
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  line-height: var(--leading-normal);
-  /* Tabular figures only on mono / numeric contexts (see .tabular). Avoid
-     stylistic-set features at body level — they alter digit shapes in Geist
-     and produce inconsistent renders for Counter/StatsBand. */
-  font-feature-settings: "kern", "liga";
-}
-
-.tabular {
-  font-variant-numeric: tabular-nums;
-}
-
-::selection {
-  background-color: var(--color-fg);
-  color: var(--color-bg);
-}
-
-/* ─── Reduced motion ─────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
+/* Wrap base styles in @layer base so Tailwind utilities (in
+ * @layer utilities) can still override them. Without a layer,
+ * unlayered rules outrank ANY layered rule per CSS spec — that
+ * caused `text-bg` on links to be silently overridden by the
+ * `a { color: inherit }` reset, producing invisible labels on
+ * the journal active tab. */
+@layer base {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    box-sizing: border-box;
   }
-}
 
-/* ─── Focus ──────────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-}
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-normal);
+    /* Tabular figures only on mono / numeric contexts (see .tabular). Avoid
+       stylistic-set features at body level — they alter digit shapes in Geist
+       and produce inconsistent renders for Counter/StatsBand. */
+    font-feature-settings: "kern", "liga";
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  /* ─── Reduced motion ─────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ─── Focus ──────────────────────────────────────────────── */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 /* ─── Section inversion utility ──────────────────────────────────── */
