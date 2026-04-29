@@ -30,9 +30,13 @@ export function organizationSchema() {
     },
     address: {
       "@type": "PostalAddress",
-      addressLocality: SITE.contact.location,
+      streetAddress: "45 Boulevard de la Croisette",
+      postalCode: "06400",
+      addressLocality: "Cannes",
       addressCountry: "FR",
     },
+    vatID: SITE.legal.vat,
+    taxID: SITE.legal.siren,
     sameAs: [
       "https://github.com/StudioCavalli",
       "https://www.linkedin.com/in/christopher-cvlli",

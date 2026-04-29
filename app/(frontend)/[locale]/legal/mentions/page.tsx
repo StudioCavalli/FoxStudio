@@ -22,6 +22,10 @@ const T = {
   s1_publisher: tri("Éditeur", "Publisher", "Editore"),
   s1_form: tri("Forme juridique", "Legal form", "Forma giuridica"),
   s1_address: tri("Adresse", "Address", "Indirizzo"),
+  s1_siret: tri("SIRET", "SIRET", "SIRET"),
+  s1_siren: tri("SIREN", "SIREN", "SIREN"),
+  s1_ape: tri("Code APE", "APE code", "Codice APE"),
+  s1_vat: tri("TVA intracommunautaire", "VAT number", "Partita IVA"),
   s1_contact: tri("Contact", "Contact", "Contatto"),
   s1_director: tri(
     "Directeur de la publication",
@@ -29,17 +33,29 @@ const T = {
     "Direttore della pubblicazione",
   ),
   s1_publisher_value: tri(
-    "FoxStudio, filiale de FoxCase.",
-    "FoxStudio, a subsidiary of FoxCase.",
-    "FoxStudio, filiale di FoxCase.",
+    "FoxStudio — marque commerciale de FoxCase, exploitée par Christopher Cavalli.",
+    "FoxStudio — trade name of FoxCase, operated by Christopher Cavalli.",
+    "FoxStudio — denominazione commerciale di FoxCase, gestita da Christopher Cavalli.",
   ),
   s1_form_value: tri(
-    "Société par actions simplifiée (SAS) — registre du commerce à venir.",
-    "French SAS — commercial register pending.",
-    "Società per azioni semplificata (SAS) — registro del commercio in arrivo.",
+    "Entrepreneur Individuel (EI). Immatriculé le 7 novembre 2025.",
+    "French sole trader (EI). Registered on November 7, 2025.",
+    "Imprenditore individuale (EI). Registrato il 7 novembre 2025.",
   ),
-  s1_address_value: tri("Cannes, France", "Cannes, France", "Cannes, Francia"),
-  s1_director_value: tri("À nommer", "To be appointed", "Da nominare"),
+  s1_address_value: tri(
+    "45 Boulevard de la Croisette, 06400 Cannes, France",
+    "45 Boulevard de la Croisette, 06400 Cannes, France",
+    "45 Boulevard de la Croisette, 06400 Cannes, Francia",
+  ),
+  s1_siret_value: tri("834 802 407 00033", "834 802 407 00033", "834 802 407 00033"),
+  s1_siren_value: tri("834 802 407", "834 802 407", "834 802 407"),
+  s1_ape_value: tri(
+    "6201Z — Programmation informatique",
+    "6201Z — Computer programming",
+    "6201Z — Programmazione informatica",
+  ),
+  s1_vat_value: tri("FR26834802407", "FR26834802407", "FR26834802407"),
+  s1_director_value: tri("Christopher Cavalli", "Christopher Cavalli", "Christopher Cavalli"),
 
   s2: tri("Hébergement", "Hosting", "Hosting"),
   s2_app: tri("Application", "Application", "Applicazione"),
@@ -50,15 +66,15 @@ const T = {
   ),
   s2_media: tri("Médias", "Media", "Media"),
   s2_media_value: tri(
-    "Cloudflare R2 — 101 Townsend St, San Francisco, CA 94107, USA.",
-    "Cloudflare R2 — 101 Townsend St, San Francisco, CA 94107, USA.",
-    "Cloudflare R2 — 101 Townsend St, San Francisco, CA 94107, USA.",
+    "Vercel Blob — Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.",
+    "Vercel Blob — Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.",
+    "Vercel Blob — Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.",
   ),
   s2_db: tri("Base de données", "Database", "Database"),
   s2_db_value: tri(
-    "Vercel Postgres ou Neon (eu-central-1, Frankfurt).",
-    "Vercel Postgres or Neon (eu-central-1, Frankfurt).",
-    "Vercel Postgres o Neon (eu-central-1, Francoforte).",
+    "Neon Inc. — 209 Havemeyer St 3, Brooklyn, NY 11211, USA. Région us-east-1 (N. Virginia).",
+    "Neon Inc. — 209 Havemeyer St 3, Brooklyn, NY 11211, USA. us-east-1 region (N. Virginia).",
+    "Neon Inc. — 209 Havemeyer St 3, Brooklyn, NY 11211, USA. Regione us-east-1 (Virginia del Nord).",
   ),
 
   s3: tri("Propriété intellectuelle", "Intellectual property", "Proprietà intellettuale"),
@@ -122,6 +138,10 @@ export default async function MentionsPage({ params }: Args) {
         <LegalRow label={T.s1_publisher[l]} value={T.s1_publisher_value[l]} />
         <LegalRow label={T.s1_form[l]} value={T.s1_form_value[l]} />
         <LegalRow label={T.s1_address[l]} value={T.s1_address_value[l]} />
+        <LegalRow label={T.s1_siret[l]} value={T.s1_siret_value[l]} />
+        <LegalRow label={T.s1_siren[l]} value={T.s1_siren_value[l]} />
+        <LegalRow label={T.s1_ape[l]} value={T.s1_ape_value[l]} />
+        <LegalRow label={T.s1_vat[l]} value={T.s1_vat_value[l]} />
         <LegalRow label={T.s1_director[l]} value={T.s1_director_value[l]} />
         <LegalRow
           label={T.s1_contact[l]}

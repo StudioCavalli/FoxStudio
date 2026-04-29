@@ -8,8 +8,19 @@ export const SITE = {
   },
   contact: {
     email: "hello@foxstudio.fr",
-    location: "Paris, FR",
+    location: "Cannes, FR",
     timezone: "GMT+1",
+  },
+  legal: {
+    name: "Christopher Cavalli",
+    commercialName: "FoxCase",
+    form: "Entrepreneur Individuel (EI)",
+    address: "45 Boulevard de la Croisette, 06400 Cannes, France",
+    siren: "834 802 407",
+    siret: "834 802 407 00033",
+    ape: "6201Z — Programmation informatique",
+    vat: "FR26834802407",
+    director: "Christopher Cavalli",
   },
   version: "0.1.0",
 } as const;
