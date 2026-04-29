@@ -121,7 +121,7 @@ export default async function PrivacyPage({ params }: Args) {
           </a>
           {T.s3_p2[l].split("hello@foxstudio.fr")[1]}
         </p>
-        <p className="text-[var(--color-fg-secondary)]">{T.s3_p3[l]}</p>
+        <p className="text-fg-secondary">{T.s3_p3[l]}</p>
       </LegalSection>
 
       <LegalSection number="04" title={T.s4[l]}>

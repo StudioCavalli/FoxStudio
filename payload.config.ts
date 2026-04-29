@@ -50,13 +50,18 @@ export default buildConfig({
       // statements which can misbehave through pgbouncer (transaction mode).
       // Vercel's Neon integration injects POSTGRES_URL_NON_POOLING; locally
       // we set DATABASE_URL to the same direct host.
-      connectionString:
-        process.env.POSTGRES_URL_NON_POOLING ||
-        process.env.DATABASE_URL_UNPOOLED ||
-        process.env.DATABASE_URL ||
-        // Placeholder so build doesn't fail without a real DB.
-        // The pool only connects on first DB query, not at construction.
-        "postgres://postgres:postgres@localhost:5432/foxstudio",
+      // `uselibpqcompat=true` silences the pg-connection-string v3 deprecation
+      // warning about `sslmode=require` while preserving current behavior.
+      connectionString: ((): string => {
+        const raw =
+          process.env.POSTGRES_URL_NON_POOLING ||
+          process.env.DATABASE_URL_UNPOOLED ||
+          process.env.DATABASE_URL ||
+          "postgres://postgres:postgres@localhost:5432/foxstudio";
+        if (!raw.includes("sslmode=") || raw.includes("uselibpqcompat=")) return raw;
+        const sep = raw.includes("?") ? "&" : "?";
+        return `${raw}${sep}uselibpqcompat=true`;
+      })(),
     },
   }),
 

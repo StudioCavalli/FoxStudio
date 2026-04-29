@@ -63,7 +63,7 @@ export function CustomCursor() {
       aria-hidden="true"
       className={`pointer-events-none fixed top-0 left-0 z-[var(--z-cursor)] mix-blend-difference transition-[width,height] duration-[var(--duration-base)] ease-[var(--ease-default)] ${
         hover ? "h-10 w-10" : "h-3 w-3"
-      } rounded-full bg-[var(--color-fg)]`}
+      } rounded-full bg-fg`}
     />
   );
 }

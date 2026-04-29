@@ -16,14 +16,14 @@ export default function LocalizedNotFound() {
           {t("title")}
         </h1>
 
-        <p className="max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-[var(--color-fg-secondary)]">
+        <p className="max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-fg-secondary">
           {t("body")}
         </p>
       </Container>
 
       <Container>
-        <div className="mt-[var(--spacing-9)] flex flex-wrap items-baseline justify-between gap-[var(--spacing-5)] border-t border-[var(--color-border)] pt-[var(--spacing-5)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
-          <span className="text-[var(--color-fg-secondary)]">{t("hint")}</span>
+        <div className="mt-[var(--spacing-9)] flex flex-wrap items-baseline justify-between gap-[var(--spacing-5)] border-t border-border pt-[var(--spacing-5)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
+          <span className="text-fg-secondary">{t("hint")}</span>
           <ArrowLink href="/">{t("backHome")}</ArrowLink>
         </div>
       </Container>

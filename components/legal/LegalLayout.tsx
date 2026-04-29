@@ -28,7 +28,7 @@ export function LegalLayout({ number, label, title, intro, meta, children }: Leg
         </h1>
 
         {intro && (
-          <p className="mb-[var(--spacing-9)] max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-[var(--color-fg-secondary)]">
+          <p className="mb-[var(--spacing-9)] max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-fg-secondary">
             {intro}
           </p>
         )}
@@ -48,16 +48,16 @@ type LegalSectionProps = {
 export function LegalSection({ number, title, children }: LegalSectionProps) {
   return (
     <section>
-      <header className="mb-[var(--spacing-5)] flex items-baseline gap-[var(--spacing-3)] border-t border-[var(--color-fg)] pt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
-        <span className="tabular text-[var(--color-fg)]">{number}</span>
-        <span aria-hidden className="text-[var(--color-fg-tertiary)]">
+      <header className="mb-[var(--spacing-5)] flex items-baseline gap-[var(--spacing-3)] border-t border-fg pt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
+        <span className="tabular text-fg">{number}</span>
+        <span aria-hidden className="text-fg-tertiary">
           ▸
         </span>
-        <span className="text-[var(--color-fg)]">{title}</span>
+        <span className="text-fg">{title}</span>
       </header>
       <div className="grid gap-[var(--spacing-7)] md:grid-cols-[1fr_2fr]">
         <div />
-        <div className="max-w-[65ch] space-y-[var(--spacing-4)] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-[var(--color-fg)]">
+        <div className="max-w-[65ch] space-y-[var(--spacing-4)] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-fg">
           {children}
         </div>
       </div>
@@ -73,9 +73,9 @@ type LegalRowProps = {
 /** Mono-labelled row (key/value pair) for definition-style content. */
 export function LegalRow({ label, value }: LegalRowProps) {
   return (
-    <div className="grid grid-cols-[12ch_1fr] gap-[var(--spacing-3)] border-b border-[var(--color-border)] pb-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]">
-      <span className="text-[var(--color-fg-secondary)]">{label}</span>
-      <span className="text-[var(--color-fg)]">{value}</span>
+    <div className="grid grid-cols-[12ch_1fr] gap-[var(--spacing-3)] border-b border-border pb-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]">
+      <span className="text-fg-secondary">{label}</span>
+      <span className="text-fg">{value}</span>
     </div>
   );
 }

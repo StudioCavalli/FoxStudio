@@ -62,19 +62,19 @@ export default async function ProjectPage({ params }: Args) {
     <article>
       <LdJson data={ldData} />
       {/* HERO — full bleed pattern + overlay text */}
-      <section className="relative isolate flex min-h-[calc(100vh-64px)] flex-col overflow-hidden border-b border-[var(--color-border)]">
-        <div className="absolute inset-0 -z-10 opacity-40 text-[var(--color-fg)]">
+      <section className="relative isolate flex min-h-[calc(100vh-64px)] flex-col overflow-hidden border-b border-border">
+        <div className="absolute inset-0 -z-10 opacity-40 text-fg">
           <Pattern seed={project.slug} className="h-full w-full" />
         </div>
 
         {/* Top metadata strip */}
-        <div className="flex items-center justify-between border-b border-[var(--color-border)] px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+        <div className="flex items-center justify-between border-b border-border px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
           <span className="tabular">
             {project.number} ▸ {project.year}
           </span>
           <span className="hidden md:inline">{project.stack.join(" · ")}</span>
           <span>
-            <span aria-hidden className="text-[var(--color-fg)]">
+            <span aria-hidden className="text-fg">
               {project.state === "live" ? "◉" : project.state === "archived" ? "×" : "◯"}
             </span>{" "}
             {stateLabel}
@@ -91,7 +91,7 @@ export default async function ProjectPage({ params }: Args) {
 
           {project.summary && (
             <Reveal delay={120}>
-              <p className="mt-[var(--spacing-7)] max-w-[60ch] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[var(--color-fg-secondary)]">
+              <p className="mt-[var(--spacing-7)] max-w-[60ch] font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-fg-secondary">
                 {project.summary}
               </p>
             </Reveal>
@@ -127,10 +127,7 @@ export default async function ProjectPage({ params }: Args) {
             <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
               {project.context ? (
                 project.context.split(/\n\n+/).map((paragraph, i) => (
-                  <p
-                    key={paragraph.slice(0, 32)}
-                    className={i === 0 ? "" : "text-[var(--color-fg-secondary)]"}
-                  >
+                  <p key={paragraph.slice(0, 32)} className={i === 0 ? "" : "text-fg-secondary"}>
                     {paragraph}
                   </p>
                 ))
@@ -143,34 +140,34 @@ export default async function ProjectPage({ params }: Args) {
       </section>
 
       {/* ACT 2 — APPROACH */}
-      <section className="invert border-t border-[var(--color-border)] py-[var(--spacing-10)]">
+      <section className="invert border-t border-border py-[var(--spacing-10)]">
         <Container>
           <SectionHeader number="02" label={t("approach")} />
 
           <Reveal>
-            <div className="relative isolate aspect-[16/9] w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
-              <div className="absolute inset-x-0 top-0 flex items-center gap-2 border-b border-[var(--color-border)] bg-[var(--color-bg-tertiary)] px-[var(--spacing-3)] py-[var(--spacing-2)] font-[var(--font-mono)] text-[var(--text-mono-s)] text-[var(--color-fg-tertiary)]">
+            <div className="relative isolate aspect-[16/9] w-full overflow-hidden border border-border bg-bg-secondary">
+              <div className="absolute inset-x-0 top-0 flex items-center gap-2 border-b border-border bg-bg-tertiary px-[var(--spacing-3)] py-[var(--spacing-2)] font-[var(--font-mono)] text-[var(--text-mono-s)] text-fg-tertiary">
                 <span className="flex gap-1">
-                  <span className="h-2 w-2 rounded-full border border-[var(--color-fg-tertiary)]" />
-                  <span className="h-2 w-2 rounded-full border border-[var(--color-fg-tertiary)]" />
-                  <span className="h-2 w-2 rounded-full border border-[var(--color-fg-tertiary)]" />
+                  <span className="h-2 w-2 rounded-full border border-fg-tertiary" />
+                  <span className="h-2 w-2 rounded-full border border-fg-tertiary" />
+                  <span className="h-2 w-2 rounded-full border border-fg-tertiary" />
                 </span>
                 <span className="ml-3 truncate">{`${SITE.url.replace(/^https?:\/\//, "")}/works/${project.slug}`}</span>
               </div>
-              <div className="absolute inset-0 mt-[28px] opacity-50 text-[var(--color-fg)]">
+              <div className="absolute inset-0 mt-[28px] opacity-50 text-fg">
                 <Pattern seed={`${project.slug}-approach`} className="h-full w-full" />
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={200}>
-            <div className="mt-[var(--spacing-7)] max-w-[65ch] space-y-[var(--spacing-4)] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-[var(--color-fg)]">
+            <div className="mt-[var(--spacing-7)] max-w-[65ch] space-y-[var(--spacing-4)] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-fg">
               {project.approach ? (
                 project.approach
                   .split(/\n\n+/)
                   .map((paragraph) => <p key={paragraph.slice(0, 32)}>{paragraph}</p>)
               ) : (
-                <p className="text-[var(--color-fg-secondary)]">{t("approachPlaceholder")}</p>
+                <p className="text-fg-secondary">{t("approachPlaceholder")}</p>
               )}
             </div>
           </Reveal>
@@ -178,7 +175,7 @@ export default async function ProjectPage({ params }: Args) {
       </section>
 
       {/* ACT 3 — RESULTS */}
-      <section className="border-t border-[var(--color-border)] py-[var(--spacing-10)]">
+      <section className="border-t border-border py-[var(--spacing-10)]">
         <Container>
           <SectionHeader number="03" label={t("results")} />
 
@@ -203,15 +200,15 @@ export default async function ProjectPage({ params }: Args) {
 
       {/* NEXT PROJECT */}
       {next && next.slug !== project.slug && (
-        <section className="border-t border-[var(--color-border)]">
+        <section className="border-t border-border">
           <Link
             href={`/works/${next.slug}`}
-            className="group relative isolate flex min-h-[40vh] flex-col justify-between overflow-hidden p-[var(--grid-margin)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-bg-secondary)]"
+            className="group relative isolate flex min-h-[40vh] flex-col justify-between overflow-hidden p-[var(--grid-margin)] transition-colors duration-[var(--duration-fast)] hover:bg-bg-secondary"
           >
-            <div className="absolute inset-0 -z-10 opacity-15 transition-opacity duration-[var(--duration-base)] group-hover:opacity-40 text-[var(--color-fg)]">
+            <div className="absolute inset-0 -z-10 opacity-15 transition-opacity duration-[var(--duration-base)] group-hover:opacity-40 text-fg">
               <Pattern seed={next.slug} className="h-full w-full" />
             </div>
-            <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+            <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
               {t("next")} ▸ {next.number}
             </p>
             <p className="font-[var(--font-display)] font-medium leading-[var(--leading-tight)] tracking-[var(--tracking-display)] text-[clamp(48px,8vw,144px)]">
@@ -235,13 +232,13 @@ function Row({
 }) {
   return (
     <div
-      className={`border-t border-[var(--color-border)] pt-[var(--spacing-3)] ${
+      className={`border-t border-border pt-[var(--spacing-3)] ${
         stacked
           ? "flex flex-col gap-[var(--spacing-2)]"
           : "flex justify-between gap-[var(--spacing-3)]"
       }`}
     >
-      <dt className="text-[var(--color-fg-secondary)]">{label}</dt>
+      <dt className="text-fg-secondary">{label}</dt>
       <dd className={stacked ? "" : "text-right"}>{value}</dd>
     </div>
   );
@@ -272,8 +269,8 @@ function ResultCard({
         : "text-[clamp(28px,3.6vw,56px)]";
 
   return (
-    <div className="group relative flex aspect-[5/4] flex-col justify-between overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg)] p-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)] md:p-[var(--spacing-6)]">
-      <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-tertiary)]">
+    <div className="group relative flex aspect-[5/4] flex-col justify-between overflow-hidden border border-border bg-bg p-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:border-border-strong md:p-[var(--spacing-6)]">
+      <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-tertiary">
         {String(index).padStart(2, "0")}
       </span>
 
@@ -283,7 +280,7 @@ function ResultCard({
         {value}
       </p>
 
-      <p className="border-t border-[var(--color-border)] pt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg)]">
+      <p className="border-t border-border pt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg">
         {label}
       </p>
     </div>

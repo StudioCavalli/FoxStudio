@@ -12,7 +12,7 @@ export function Footer() {
 
   return (
     <footer
-      className="mt-[var(--spacing-12)] border-t border-[var(--color-border)] py-[var(--spacing-9)]"
+      className="mt-[var(--spacing-12)] border-t border-border py-[var(--spacing-9)]"
       aria-label="Site footer"
     >
       <Container>
@@ -21,13 +21,13 @@ export function Footer() {
             <p className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
               {SITE.name}
             </p>
-            <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+            <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
               {t("subsidiary")}{" "}
               <a
                 href={SITE.parent.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="text-[var(--color-fg)] underline underline-offset-[6px]"
+                className="text-fg underline underline-offset-[6px]"
               >
                 {SITE.parent.name}
               </a>
@@ -57,9 +57,9 @@ export function Footer() {
           </div>
         </div>
 
-        <hr className="my-[var(--spacing-7)] border-0 border-t border-[var(--color-border)]" />
+        <hr className="my-[var(--spacing-7)] border-0 border-t border-border" />
 
-        <div className="flex flex-col gap-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)] md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary md:flex-row md:items-center md:justify-between">
           <span>
             {SITE.contact.location} · {SITE.contact.timezone}
           </span>
@@ -80,10 +80,10 @@ function FooterGroup({
 }) {
   return (
     <div>
-      <p className="mb-[var(--spacing-4)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+      <p className="mb-[var(--spacing-4)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
         {title}
       </p>
-      <ul className="space-y-[var(--spacing-2)] [&_a]:text-[var(--text-body)] [&_a]:text-[var(--color-fg)] [&_a]:transition-colors [&_a]:duration-[var(--duration-fast)] hover:[&_a]:text-[var(--color-fg-secondary)]">
+      <ul className="space-y-[var(--spacing-2)] [&_a]:text-[var(--text-body)] [&_a]:text-fg [&_a]:transition-colors [&_a]:duration-[var(--duration-fast)] hover:[&_a]:text-fg-secondary">
         {Children.map(children, (child) => (
           <li>{child}</li>
         ))}

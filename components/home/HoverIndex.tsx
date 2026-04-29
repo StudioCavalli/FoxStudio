@@ -35,7 +35,7 @@ export function HoverIndex({ items, basePath }: HoverIndexProps) {
     <div className="grid gap-[var(--spacing-7)] md:grid-cols-[1fr_1fr] md:gap-[var(--spacing-9)]">
       {/* Pattern preview — sticks to the top on desktop while scrolling */}
       <div className="order-1 md:order-2 md:sticky md:top-[80px] md:self-start">
-        <div className="relative aspect-[4/5] w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-[var(--color-fg)] md:aspect-square">
+        <div className="relative aspect-[4/5] w-full overflow-hidden border border-border bg-bg-secondary text-fg md:aspect-square">
           {items.map((item) => (
             <div
               key={item.id}
@@ -59,13 +59,13 @@ export function HoverIndex({ items, basePath }: HoverIndexProps) {
         {items.map((item) => {
           const isActive = item.id === active?.id;
           return (
-            <li key={item.id} className="border-t border-[var(--color-border)] last:border-b">
+            <li key={item.id} className="border-t border-border last:border-b">
               <Link
                 href={`${basePath}/${item.slug}`}
                 onMouseEnter={() => setActiveId(item.id)}
                 onFocus={() => setActiveId(item.id)}
                 className={`grid grid-cols-[auto_1fr] items-baseline gap-[var(--spacing-5)] py-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] md:py-[var(--spacing-6)] ${
-                  isActive ? "text-[var(--color-fg)]" : "text-[var(--color-fg-secondary)]"
+                  isActive ? "text-fg" : "text-fg-secondary"
                 }`}
               >
                 <span className="font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]">

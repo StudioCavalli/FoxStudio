@@ -18,10 +18,7 @@ export function LabTeaser() {
   const t = useTranslations("Home");
 
   return (
-    <section
-      className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
-      aria-label={t("labLabel")}
-    >
+    <section className="border-t border-border py-[var(--spacing-10)]" aria-label={t("labLabel")}>
       <Container>
         <SectionHeader
           number="03"
@@ -34,21 +31,21 @@ export function LabTeaser() {
             <li key={exp.id}>
               <Link
                 href="/lab"
-                className="group flex aspect-[4/5] flex-col justify-between border border-[var(--color-border)] p-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)] relative overflow-hidden"
+                className="group flex aspect-[4/5] flex-col justify-between border border-border p-[var(--spacing-5)] transition-colors duration-[var(--duration-fast)] hover:border-border-strong relative overflow-hidden"
               >
-                <div className="absolute inset-0 -z-10 opacity-30 transition-opacity duration-[var(--duration-base)] group-hover:opacity-60 text-[var(--color-fg)]">
+                <div className="absolute inset-0 -z-10 opacity-30 transition-opacity duration-[var(--duration-base)] group-hover:opacity-60 text-fg">
                   <Pattern seed={exp.id} className="h-full w-full" />
                 </div>
 
-                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                   {exp.id}
                 </span>
                 <div>
                   <p className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
                     {exp.name}
                   </p>
-                  <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                    <span aria-hidden className="text-[var(--color-fg)]">
+                  <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
+                    <span aria-hidden className="text-fg">
                       {exp.state === "live" ? "◉" : "◯"}
                     </span>{" "}
                     {exp.state}
@@ -72,7 +69,7 @@ export function StudioTeaser() {
 
   return (
     <section
-      className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
+      className="border-t border-border py-[var(--spacing-10)]"
       aria-label={t("studioLabel")}
     >
       <Container>
@@ -81,7 +78,7 @@ export function StudioTeaser() {
         <div className="grid gap-[var(--spacing-7)] md:grid-cols-[2fr_1fr]">
           <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
             <p>{t("studioLead")}</p>
-            <p className="text-[var(--color-fg-secondary)]">{t("studioSecondary")}</p>
+            <p className="text-fg-secondary">{t("studioSecondary")}</p>
           </div>
           <div className="flex md:items-end md:justify-end">
             <ArrowLink href="/studio">{t("moreAboutStudio")}</ArrowLink>
@@ -98,7 +95,7 @@ export async function JournalTeaser({ locale }: { locale: "fr" | "en" | "it" }) 
 
   return (
     <section
-      className="invert border-t border-[var(--color-border)] py-[var(--spacing-10)]"
+      className="invert border-t border-border py-[var(--spacing-10)]"
       aria-label={t("journalLabel")}
     >
       <Container>
@@ -110,19 +107,19 @@ export async function JournalTeaser({ locale }: { locale: "fr" | "en" | "it" }) 
 
         <ul>
           {articles.map((entry, i) => (
-            <li key={entry.slug} className="border-t border-[var(--color-border)] last:border-b">
+            <li key={entry.slug} className="border-t border-border last:border-b">
               <Link
                 href={`/journal/${entry.slug}`}
                 className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-[var(--spacing-5)] py-[var(--spacing-6)] transition-opacity duration-[var(--duration-fast)] md:gap-[var(--spacing-7)] md:py-[var(--spacing-7)]"
               >
-                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                   {String(i + 1).padStart(2, "0")} ·{" "}
                   <span className="tabular">{entry.publishedAt?.slice(0, 10) ?? "—"}</span>
                 </span>
                 <span className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] group-hover:underline underline-offset-[6px]">
                   {entry.title}
                 </span>
-                <span className="hidden font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)] md:inline">
+                <span className="hidden font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary md:inline">
                   {entry.tag}
                   {entry.readingTimeMinutes ? ` · ${entry.readingTimeMinutes} min` : ""}
                 </span>
@@ -154,10 +151,7 @@ export function ContactTeaser() {
   ];
 
   return (
-    <section
-      className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
-      aria-label={t("talkLabel")}
-    >
+    <section className="border-t border-border py-[var(--spacing-10)]" aria-label={t("talkLabel")}>
       <Container>
         <SectionHeader number="06" label={t("talkLabel")} />
 
@@ -170,13 +164,13 @@ export function ContactTeaser() {
             <li key={door.number}>
               <Link
                 href="/contact"
-                className="group relative flex aspect-[3/4] flex-col justify-between overflow-hidden border border-[var(--color-border)] p-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)]"
+                className="group relative flex aspect-[3/4] flex-col justify-between overflow-hidden border border-border p-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:border-border-strong"
               >
-                <div className="absolute inset-0 -z-10 opacity-25 transition-opacity duration-[var(--duration-base)] group-hover:opacity-50 text-[var(--color-fg)]">
+                <div className="absolute inset-0 -z-10 opacity-25 transition-opacity duration-[var(--duration-base)] group-hover:opacity-50 text-fg">
                   <Pattern seed={door.seed} className="h-full w-full" />
                 </div>
 
-                <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                   {door.number}
                 </p>
 
@@ -184,7 +178,7 @@ export function ContactTeaser() {
                   <p className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)]">
                     {door.title}
                   </p>
-                  <p className="text-[var(--color-fg-secondary)]">{door.body}</p>
+                  <p className="text-fg-secondary">{door.body}</p>
                   <p
                     aria-hidden
                     className="pt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]"

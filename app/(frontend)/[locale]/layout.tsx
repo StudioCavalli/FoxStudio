@@ -7,8 +7,7 @@ import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { CustomCursor } from "@/components/providers/CustomCursor";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 import { routing } from "@/i18n/routing";
 import { SITE } from "@/lib/site";
 
@@ -84,8 +83,7 @@ export default async function LocaleLayout({ children, params }: Args) {
     >
       <body>
         <NextIntlClientProvider>
-          <SmoothScroll />
-          <CustomCursor />
+          <ClientProviders />
           <Header />
           <main>{children}</main>
           <Footer />

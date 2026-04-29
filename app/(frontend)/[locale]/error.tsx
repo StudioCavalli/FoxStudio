@@ -29,18 +29,18 @@ export default function LocalizedError({ error, reset }: ErrorProps) {
           quelque chose.
         </h1>
 
-        <p className="max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-[var(--color-fg-secondary)]">
+        <p className="max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-fg-secondary">
           On répare. Si le problème persiste, écris-nous — l'erreur a été enregistrée côté serveur
           et on la verra.
         </p>
       </Container>
 
       <Container>
-        <div className="mt-[var(--spacing-9)] flex flex-wrap items-baseline justify-between gap-[var(--spacing-5)] border-t border-[var(--color-border)] pt-[var(--spacing-5)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
+        <div className="mt-[var(--spacing-9)] flex flex-wrap items-baseline justify-between gap-[var(--spacing-5)] border-t border-border pt-[var(--spacing-5)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
           <button
             type="button"
             onClick={reset}
-            className="border border-[var(--color-fg)] px-[var(--spacing-5)] py-[var(--spacing-3)] hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] transition-colors duration-[var(--duration-fast)]"
+            className="border border-fg px-[var(--spacing-5)] py-[var(--spacing-3)] hover:bg-fg hover:text-bg transition-colors duration-[var(--duration-fast)]"
           >
             Réessayer ▸
           </button>

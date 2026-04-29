@@ -9,7 +9,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative isolate flex min-h-[calc(100vh-64px)] flex-col overflow-hidden border-b border-[var(--color-border)]"
+      className="relative isolate flex min-h-[calc(100vh-64px)] flex-col overflow-hidden border-b border-border"
       aria-label={t("manifestoLabel")}
     >
       {/* Subtle blueprint grid as base */}
@@ -17,14 +17,14 @@ export function Hero() {
 
       {/* Big decorative pattern, anchored to the right side */}
       <div
-        className="absolute -right-[10%] top-[40%] -z-10 hidden h-[80%] w-[60%] -translate-y-1/2 text-[var(--color-fg)] opacity-[0.06] md:block"
+        className="absolute -right-[10%] top-[40%] -z-10 hidden h-[80%] w-[60%] -translate-y-1/2 text-fg opacity-[0.06] md:block"
         aria-hidden="true"
       >
         <Pattern seed="foxstudio-hero" variant="halftone" className="h-full w-full" />
       </div>
 
       {/* Top metadata strip */}
-      <div className="flex items-center justify-between border-b border-[var(--color-border)] px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+      <div className="flex items-center justify-between border-b border-border px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
         <span>00 ▸ {t("manifestoLabel")}</span>
         <span className="hidden md:inline tabular">
           {SITE.contact.location} · {SITE.contact.timezone}
@@ -36,9 +36,9 @@ export function Hero() {
       <div className="flex flex-1 flex-col justify-between px-[var(--grid-margin)] py-[var(--spacing-9)]">
         <Reveal>
           <h1 className="font-[var(--font-display)] font-medium leading-[0.88] tracking-[-0.03em] text-[clamp(72px,14vw,240px)]">
-            FoxStudio<span className="text-[var(--color-fg-tertiary)]">.</span>
+            FoxStudio<span className="text-fg-tertiary">.</span>
             <br />
-            <span className="text-[var(--color-fg-secondary)]">R&amp;D Lab.</span>
+            <span className="text-fg-secondary">R&amp;D Lab.</span>
           </h1>
         </Reveal>
 
@@ -56,7 +56,7 @@ export function Hero() {
           </div>
 
           <Reveal delay={350}>
-            <p className="max-w-[42ch] text-[var(--color-fg-secondary)] md:text-right md:justify-self-end">
+            <p className="max-w-[42ch] text-fg-secondary md:text-right md:justify-self-end">
               {t("manifestoCoda")}
             </p>
           </Reveal>
@@ -64,11 +64,11 @@ export function Hero() {
       </div>
 
       {/* Bottom strip */}
-      <div className="flex items-center justify-between border-t border-[var(--color-border)] px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+      <div className="flex items-center justify-between border-t border-border px-[var(--grid-margin)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
         <span aria-hidden>↓ {t("scrollHint")}</span>
         <span className="hidden md:inline">FoxStudio · subsidiary of FoxCase</span>
         <span className="tabular">
-          <span className="text-[var(--color-fg)]">~ 0.18 g CO₂</span>
+          <span className="text-fg">~ 0.18 g CO₂</span>
         </span>
       </div>
     </section>

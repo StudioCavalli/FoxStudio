@@ -71,16 +71,16 @@ export default async function TeamPage({ params }: Args) {
           {T.title[l]}
         </h1>
 
-        <p className="mb-[var(--spacing-10)] max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-[var(--color-fg-secondary)]">
+        <p className="mb-[var(--spacing-10)] max-w-[60ch] font-[var(--font-display)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[clamp(20px,2vw,28px)] text-fg-secondary">
           {T.intro[l]}
         </p>
       </Container>
 
       {/* Founders section — full-bleed alternating rows */}
-      <section className="border-t border-[var(--color-border)]">
+      <section className="border-t border-border">
         <Container>
-          <header className="border-b border-[var(--color-border)] py-[var(--spacing-3)]">
-            <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+          <header className="border-b border-border py-[var(--spacing-3)]">
+            <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
               {T.founders[l]} · {members.length}
             </span>
           </header>
@@ -94,13 +94,13 @@ export default async function TeamPage({ params }: Args) {
           return (
             <Container key={member.id}>
               <div
-                className={`grid gap-[var(--spacing-7)] border-b border-[var(--color-border)] py-[var(--spacing-9)] md:gap-[var(--spacing-9)] md:py-[var(--spacing-11)] ${
+                className={`grid gap-[var(--spacing-7)] border-b border-border py-[var(--spacing-9)] md:gap-[var(--spacing-9)] md:py-[var(--spacing-11)] ${
                   isOdd ? "md:grid-cols-[2fr_1fr]" : "md:grid-cols-[1fr_2fr]"
                 }`}
               >
                 {/* Photo (order swapped on odd rows) */}
                 <figure
-                  className={`relative aspect-square w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-secondary)] ${
+                  className={`relative aspect-square w-full overflow-hidden border border-border bg-bg-secondary ${
                     isOdd ? "md:order-2" : "md:order-1"
                   }`}
                 >
@@ -113,7 +113,7 @@ export default async function TeamPage({ params }: Args) {
                     style={{ objectPosition: photoFocus(member.photoSlug) }}
                     priority={idx === 0}
                   />
-                  <figcaption className="pointer-events-none absolute right-[var(--spacing-3)] bottom-[var(--spacing-3)] left-[var(--spacing-3)] flex items-baseline justify-between font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg)] mix-blend-difference">
+                  <figcaption className="pointer-events-none absolute right-[var(--spacing-3)] bottom-[var(--spacing-3)] left-[var(--spacing-3)] flex items-baseline justify-between font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg mix-blend-difference">
                     <span>
                       0{idx + 1} ▸ {member.photoSlug}
                     </span>
@@ -128,7 +128,7 @@ export default async function TeamPage({ params }: Args) {
                 <div
                   className={`flex flex-col justify-center ${isOdd ? "md:order-1" : "md:order-2"}`}
                 >
-                  <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                  <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                     {member.role}
                   </p>
 
@@ -137,7 +137,7 @@ export default async function TeamPage({ params }: Args) {
                   </h2>
 
                   {member.bio && (
-                    <p className="mt-[var(--spacing-6)] max-w-[55ch] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-[var(--color-fg)]">
+                    <p className="mt-[var(--spacing-6)] max-w-[55ch] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-fg">
                       {member.bio}
                     </p>
                   )}
@@ -150,7 +150,7 @@ export default async function TeamPage({ params }: Args) {
                             href={link.url}
                             target="_blank"
                             rel="noreferrer noopener"
-                            className="underline underline-offset-[6px] hover:text-[var(--color-fg-secondary)]"
+                            className="underline underline-offset-[6px] hover:text-fg-secondary"
                           >
                             {link.label} ↗
                           </a>
@@ -167,7 +167,7 @@ export default async function TeamPage({ params }: Args) {
 
       {/* Footer breadcrumb */}
       <Container>
-        <p className="mt-[var(--spacing-9)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-tertiary)]">
+        <p className="mt-[var(--spacing-9)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-tertiary">
           ▸ {tNav("studio")} · {tNav("works")} · {tNav("contact")}
         </p>
       </Container>

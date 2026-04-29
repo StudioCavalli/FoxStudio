@@ -74,8 +74,8 @@ export function FootprintLive() {
 
   return (
     <span aria-label="Carbon footprint estimate for this page view">
-      <span className="tabular text-[var(--color-fg)]">{display} CO₂</span>
-      <span className="text-[var(--color-fg-secondary)]"> · {t("thisView")}</span>
+      <span className="tabular text-fg">{display} CO₂</span>
+      <span className="text-fg-secondary"> · {t("thisView")}</span>
     </span>
   );
 }

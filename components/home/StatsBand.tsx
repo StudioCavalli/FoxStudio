@@ -15,10 +15,7 @@ export function StatsBand() {
   const t = useTranslations("Home");
 
   return (
-    <section
-      className="invert border-t border-b border-[var(--color-border)]"
-      aria-label={t("statsBandLabel")}
-    >
+    <section className="invert border-t border-b border-border" aria-label={t("statsBandLabel")}>
       <Container>
         <div className="py-[var(--spacing-9)]">
           <SectionHeader number="02" label={t("statsBandLabel")} meta="Q2 · 2026" />
@@ -27,12 +24,12 @@ export function StatsBand() {
             {STATS.map((s) => (
               <li
                 key={s.key}
-                className="flex flex-col gap-[var(--spacing-3)] md:border-l md:border-[var(--color-border)] md:pl-[var(--spacing-5)] md:first:border-l-0 md:first:pl-0"
+                className="flex flex-col gap-[var(--spacing-3)] md:border-l md:border-border md:pl-[var(--spacing-5)] md:first:border-l-0 md:first:pl-0"
               >
-                <span className="font-[var(--font-display)] text-[var(--text-display-l)] leading-[0.9] tracking-[var(--tracking-display)] md:text-[clamp(64px,8vw,128px)]">
+                <span className="whitespace-nowrap font-[var(--font-display)] text-[var(--text-display-l)] leading-[0.9] tracking-[var(--tracking-display)] md:text-[clamp(56px,7vw,112px)]">
                   <Counter to={s.to} suffix={s.suffix} />
                 </span>
-                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                   {t(s.key)}
                 </span>
               </li>

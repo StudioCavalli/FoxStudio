@@ -33,28 +33,26 @@ export default async function LabPage({ params }: Args) {
         <h1 className="mt-[var(--spacing-6)] mb-[var(--spacing-3)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
           {t("title")}
         </h1>
-        <p className="mb-[var(--spacing-9)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-          {t("subtitle")}
-        </p>
+        <p className="mb-[var(--spacing-9)] max-w-[60ch] text-fg-secondary">{t("subtitle")}</p>
 
-        <ul className="border-t border-[var(--color-border)]">
+        <ul className="border-t border-border">
           {experiments.map((exp) => (
             <li
               key={exp.id}
-              className="grid gap-[var(--spacing-5)] border-b border-[var(--color-border)] py-[var(--spacing-7)] md:grid-cols-[1fr_2fr] md:gap-[var(--spacing-7)]"
+              className="grid gap-[var(--spacing-5)] border-b border-border py-[var(--spacing-7)] md:grid-cols-[1fr_2fr] md:gap-[var(--spacing-7)]"
             >
               <div>
-                <p className="font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                <p className="font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                   {exp.code}
                 </p>
-                <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                  <span aria-hidden className="text-[var(--color-fg)]">
+                <p className="mt-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
+                  <span aria-hidden className="text-fg">
                     {exp.state === "live" ? "◉" : exp.state === "archived" ? "×" : "◯"}
                   </span>{" "}
                   {t(`status.${exp.state}`)}
                 </p>
                 {exp.startedAt && (
-                  <p className="mt-[var(--spacing-2)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-tertiary)]">
+                  <p className="mt-[var(--spacing-2)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-tertiary">
                     {t("started")}: {exp.startedAt.slice(0, 10)}
                   </p>
                 )}
@@ -65,7 +63,7 @@ export default async function LabPage({ params }: Args) {
                   {exp.name}
                 </p>
                 {exp.summary && (
-                  <p className="mt-[var(--spacing-4)] max-w-[60ch] text-[var(--color-fg-secondary)]">
+                  <p className="mt-[var(--spacing-4)] max-w-[60ch] text-fg-secondary">
                     {exp.summary}
                   </p>
                 )}
@@ -93,9 +91,7 @@ export default async function LabPage({ params }: Args) {
                       </a>
                     )}
                     {exp.tags.length > 0 && (
-                      <span className="text-[var(--color-fg-tertiary)]">
-                        {exp.tags.join(" · ")}
-                      </span>
+                      <span className="text-fg-tertiary">{exp.tags.join(" · ")}</span>
                     )}
                   </div>
                 )}

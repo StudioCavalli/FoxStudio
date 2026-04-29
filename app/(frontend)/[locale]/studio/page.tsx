@@ -30,7 +30,7 @@ export default async function StudioPage({ params }: Args) {
   return (
     <article className="pt-[var(--spacing-9)] pb-[var(--spacing-12)]">
       {/* MANIFESTO */}
-      <section className="border-b border-[var(--color-border)] pb-[var(--spacing-10)]">
+      <section className="border-b border-border pb-[var(--spacing-10)]">
         <Container>
           <MonoLabel number="00">{t("label")}</MonoLabel>
 
@@ -41,15 +41,15 @@ export default async function StudioPage({ params }: Args) {
           <div className="grid gap-[var(--spacing-7)] md:grid-cols-[2fr_1fr]">
             <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
               <p>{t("manifesto1")}</p>
-              <p className="text-[var(--color-fg-secondary)]">{t("manifesto2")}</p>
-              <p className="text-[var(--color-fg-secondary)]">{t("manifesto3")}</p>
+              <p className="text-fg-secondary">{t("manifesto2")}</p>
+              <p className="text-fg-secondary">{t("manifesto3")}</p>
             </div>
           </div>
         </Container>
       </section>
 
       {/* TEAM */}
-      <section className="border-b border-[var(--color-border)] py-[var(--spacing-10)]">
+      <section className="border-b border-border py-[var(--spacing-10)]">
         <Container>
           <MonoLabel number="01">{t("teamLabel")}</MonoLabel>
 
@@ -57,16 +57,16 @@ export default async function StudioPage({ params }: Args) {
             {team.map((member) => (
               <li
                 key={member.id}
-                className="flex flex-col gap-[var(--spacing-3)] border-t border-[var(--color-border)] pt-[var(--spacing-5)]"
+                className="flex flex-col gap-[var(--spacing-3)] border-t border-border pt-[var(--spacing-5)]"
               >
-                <div className="aspect-[4/5] w-full border border-[var(--color-border)] bg-[var(--color-bg-secondary)]" />
+                <div className="aspect-[4/5] w-full border border-border bg-bg-secondary" />
                 <p className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)]">
                   {member.name}
                 </p>
-                <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                   {member.role}
                 </p>
-                {member.bio && <p className="text-[var(--color-fg-secondary)]">{member.bio}</p>}
+                {member.bio && <p className="text-fg-secondary">{member.bio}</p>}
                 {member.links.length > 0 && (
                   <ul className="mt-[var(--spacing-2)] flex flex-wrap gap-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
                     {member.links.map((link) => (
@@ -90,7 +90,7 @@ export default async function StudioPage({ params }: Args) {
       </section>
 
       {/* FOXCASE LINK */}
-      <section className="border-b border-[var(--color-border)] py-[var(--spacing-10)]">
+      <section className="border-b border-border py-[var(--spacing-10)]">
         <Container>
           <MonoLabel number="02">{t("foxcaseLabel")}</MonoLabel>
 
@@ -112,12 +112,9 @@ export default async function StudioPage({ params }: Args) {
         <Container>
           <MonoLabel number="03">{t("principlesLabel")}</MonoLabel>
 
-          <ul className="mt-[var(--spacing-7)] space-y-[var(--spacing-5)] border-t border-[var(--color-border)]">
+          <ul className="mt-[var(--spacing-7)] space-y-[var(--spacing-5)] border-t border-border">
             {[1, 2, 3, 4].map((i) => (
-              <li
-                key={`principle-${i}`}
-                className="border-b border-[var(--color-border)] py-[var(--spacing-5)]"
-              >
+              <li key={`principle-${i}`} className="border-b border-border py-[var(--spacing-5)]">
                 <p className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
                   → {t(`principle${i}` as `principle${1 | 2 | 3 | 4}`)}
                 </p>

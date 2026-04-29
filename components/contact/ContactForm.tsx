@@ -6,10 +6,10 @@ import { useActionState } from "react";
 import { type ContactState, type ContactType, submitContact } from "@/lib/contact/actions";
 
 const FIELD_BASE =
-  "w-full border-0 border-b border-[var(--color-border)] bg-transparent py-[var(--spacing-3)] text-[var(--text-body)] focus:border-[var(--color-focus)] focus:outline-none";
+  "w-full border-0 border-b border-border bg-transparent py-[var(--spacing-3)] text-[var(--text-body)] focus:border-focus focus:outline-none";
 
 const LABEL =
-  "block font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]";
+  "block font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary";
 
 const initialState: ContactState = { status: "idle" };
 
@@ -98,7 +98,7 @@ export function ContactForm({ type }: { type: ContactType }) {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center gap-2 border border-[var(--color-fg)] bg-transparent px-[var(--spacing-5)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex items-center gap-2 border border-fg bg-transparent px-[var(--spacing-5)] py-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] transition-colors duration-[var(--duration-fast)] hover:bg-fg hover:text-bg disabled:cursor-not-allowed disabled:opacity-50"
         >
           {pending ? t("sending") : t("send")} ▸
         </button>
@@ -106,7 +106,7 @@ export function ContactForm({ type }: { type: ContactType }) {
         {state.status !== "idle" && (
           <output
             className={`font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] ${
-              state.status === "ok" ? "text-[var(--color-fg)]" : "text-[var(--color-fg-secondary)]"
+              state.status === "ok" ? "text-fg" : "text-fg-secondary"
             }`}
           >
             {state.message}

@@ -24,14 +24,14 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-[var(--z-sticky)] border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-sm"
+      className="sticky top-0 z-[var(--z-sticky)] border-b border-border bg-bg/80 backdrop-blur-sm"
       aria-label="Site header"
     >
       <Container>
         <div className="flex h-[64px] items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-fg-secondary)]"
+            className="flex items-center gap-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] transition-colors duration-[var(--duration-fast)] hover:text-fg-secondary"
             aria-label={`${SITE.name} home`}
           >
             <FoxLogo className="h-[20px] w-[20px] shrink-0" />
@@ -43,7 +43,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href as "/"}
-                className="font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-fg)]"
+                className="font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary transition-colors duration-[var(--duration-fast)] hover:text-fg"
               >
                 {t(item.key)}
               </Link>
@@ -57,9 +57,7 @@ export function Header() {
                   href={pathname as "/"}
                   locale={l}
                   className={`transition-colors duration-[var(--duration-fast)] ${
-                    l === locale
-                      ? "text-[var(--color-fg)]"
-                      : "text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]"
+                    l === locale ? "text-fg" : "text-fg-secondary hover:text-fg"
                   }`}
                   aria-label={`Switch to ${l.toUpperCase()}`}
                   aria-current={l === locale ? "true" : undefined}
@@ -67,7 +65,7 @@ export function Header() {
                   {l.toUpperCase()}
                 </Link>
                 {i < routing.locales.length - 1 && (
-                  <span aria-hidden className="text-[var(--color-fg-tertiary)]">
+                  <span aria-hidden className="text-fg-tertiary">
                     ·
                   </span>
                 )}

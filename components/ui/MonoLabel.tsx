@@ -11,10 +11,10 @@ export function MonoLabel({
 }) {
   return (
     <div
-      className={`flex items-center gap-3 font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)] ${className}`}
+      className={`flex items-center gap-3 font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary ${className}`}
     >
       {number && (
-        <span aria-hidden className="text-[var(--color-fg)]">
+        <span aria-hidden className="text-fg">
           {number}
         </span>
       )}

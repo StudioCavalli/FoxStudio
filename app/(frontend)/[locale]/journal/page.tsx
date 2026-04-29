@@ -39,9 +39,7 @@ export default async function JournalPage({ params, searchParams }: Args) {
         <h1 className="mt-[var(--spacing-6)] mb-[var(--spacing-3)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
           {t("title")}
         </h1>
-        <p className="mb-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-          {t("subtitle")}
-        </p>
+        <p className="mb-[var(--spacing-7)] max-w-[60ch] text-fg-secondary">{t("subtitle")}</p>
 
         {/* Tag filters */}
         <ul className="mb-[var(--spacing-7)] flex flex-wrap gap-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)]">
@@ -51,10 +49,10 @@ export default async function JournalPage({ params, searchParams }: Args) {
               <li key={tag}>
                 <Link
                   href={tag === "all" ? "/journal" : `/journal?tag=${tag}`}
-                  className={`border border-[var(--color-border)] px-[var(--spacing-3)] py-[var(--spacing-2)] transition-colors duration-[var(--duration-fast)] ${
+                  className={`border border-border px-[var(--spacing-3)] py-[var(--spacing-2)] transition-colors duration-[var(--duration-fast)] ${
                     active
-                      ? "border-[var(--color-fg)] bg-[var(--color-fg)] text-[var(--color-bg)]"
-                      : "text-[var(--color-fg-secondary)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+                      ? "border-fg bg-fg text-bg"
+                      : "text-fg-secondary hover:border-border-strong hover:text-fg"
                   }`}
                 >
                   {tag === "all" ? t("filterAll") : tag}
@@ -64,22 +62,22 @@ export default async function JournalPage({ params, searchParams }: Args) {
           })}
         </ul>
 
-        <ul className="border-t border-[var(--color-border)]">
+        <ul className="border-t border-border">
           {filtered.map((article) => (
-            <li key={article.id} className="border-b border-[var(--color-border)]">
+            <li key={article.id} className="border-b border-border">
               <Link
                 href={`/journal/${article.slug}`}
-                className="flex flex-col gap-[var(--spacing-3)] py-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-bg-secondary)] md:flex-row md:items-baseline md:justify-between md:gap-[var(--spacing-7)]"
+                className="flex flex-col gap-[var(--spacing-3)] py-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:bg-bg-secondary md:flex-row md:items-baseline md:justify-between md:gap-[var(--spacing-7)]"
               >
                 <span className="flex flex-col gap-[var(--spacing-2)] md:flex-row md:items-baseline md:gap-[var(--spacing-5)]">
-                  <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                  <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                     {article.publishedAt?.slice(0, 10) ?? "—"}
                   </span>
                   <span className="font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
                     {article.title}
                   </span>
                 </span>
-                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                   {article.tag} ·{" "}
                   {article.readingTimeMinutes ? `${article.readingTimeMinutes} min` : "—"}
                 </span>
@@ -89,7 +87,7 @@ export default async function JournalPage({ params, searchParams }: Args) {
         </ul>
 
         {filtered.length === 0 && (
-          <p className="mt-[var(--spacing-7)] text-[var(--color-fg-secondary)]">{t("empty")}</p>
+          <p className="mt-[var(--spacing-7)] text-fg-secondary">{t("empty")}</p>
         )}
       </Container>
     </section>

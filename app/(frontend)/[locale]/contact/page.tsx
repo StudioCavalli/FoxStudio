@@ -47,25 +47,23 @@ export default async function ContactPage({ params, searchParams }: Args) {
         <h1 className="mt-[var(--spacing-6)] mb-[var(--spacing-3)] font-[var(--font-display)] font-medium text-[var(--text-display-l)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-xl)]">
           {t("title")}
         </h1>
-        <p className="mb-[var(--spacing-9)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-          {t("intro")}
-        </p>
+        <p className="mb-[var(--spacing-9)] max-w-[60ch] text-fg-secondary">{t("intro")}</p>
 
         <ul className="grid gap-[var(--spacing-4)] md:grid-cols-3">
           {VALID_TYPES.map((doorType, i) => (
             <li key={doorType}>
               <a
                 href={`/${locale}/contact?type=${doorType}`}
-                className="group flex h-full flex-col justify-between border border-[var(--color-border)] p-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-strong)]"
+                className="group flex h-full flex-col justify-between border border-border p-[var(--spacing-6)] transition-colors duration-[var(--duration-fast)] hover:border-border-strong"
               >
                 <div>
-                  <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+                  <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <p className="mt-[var(--spacing-3)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
                     {t(`door.${doorType}.title`)}
                   </p>
-                  <p className="mt-[var(--spacing-3)] text-[var(--color-fg-secondary)]">
+                  <p className="mt-[var(--spacing-3)] text-fg-secondary">
                     {t(`door.${doorType}.body`)}
                   </p>
                 </div>
@@ -80,11 +78,11 @@ export default async function ContactPage({ params, searchParams }: Args) {
           ))}
         </ul>
 
-        <p className="mt-[var(--spacing-9)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+        <p className="mt-[var(--spacing-9)] font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
           {t("orDirect")}{" "}
           <a
             href={`mailto:${SITE.contact.email}`}
-            className="text-[var(--color-fg)] underline underline-offset-[6px]"
+            className="text-fg underline underline-offset-[6px]"
           >
             {SITE.contact.email}
           </a>
@@ -105,7 +103,7 @@ async function ContactPicked({ type }: { type: ContactType }) {
         <h1 className="mt-[var(--spacing-6)] mb-[var(--spacing-3)] font-[var(--font-display)] font-medium text-[var(--text-display-m)] leading-[var(--leading-tight)] tracking-[var(--tracking-display)] md:text-[var(--text-display-l)]">
           {t(`door.${type}.title`)}
         </h1>
-        <p className="mb-[var(--spacing-9)] max-w-[60ch] text-[var(--color-fg-secondary)]">
+        <p className="mb-[var(--spacing-9)] max-w-[60ch] text-fg-secondary">
           {t(`door.${type}.body`)}
         </p>
 

@@ -125,14 +125,14 @@ export default async function FootprintPage({ params }: Args) {
       </LegalSection>
 
       <LegalSection number="02" title={T.s2[l]}>
-        <p className="text-[var(--color-fg-secondary)]">{T.s2_intro[l]}</p>
+        <p className="text-fg-secondary">{T.s2_intro[l]}</p>
         {PAGES.map((p) => (
           <LegalRow
             key={p.key}
             label={T[p.key][l]}
             value={
               <span className="tabular">
-                {p.kb} · <span className="text-[var(--color-fg)]">{p.co2}</span>
+                {p.kb} · <span className="text-fg">{p.co2}</span>
               </span>
             }
           />

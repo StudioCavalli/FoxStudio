@@ -21,7 +21,7 @@ export async function Index({ locale }: { locale: "fr" | "en" | "it" }) {
 
   return (
     <section
-      className="border-t border-[var(--color-border)] py-[var(--spacing-10)]"
+      className="border-t border-border py-[var(--spacing-10)]"
       aria-label={t("latestWorks")}
     >
       <Container>

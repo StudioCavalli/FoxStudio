@@ -60,13 +60,13 @@ export default async function JournalArticlePage({ params }: Args) {
       <Container>
         <Link
           href="/journal"
-          className="inline-flex items-center gap-2 font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)] hover:text-[var(--color-fg)]"
+          className="inline-flex items-center gap-2 font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary hover:text-fg"
         >
           ◂ {t("backToJournal")}
         </Link>
 
-        <header className="mt-[var(--spacing-7)] mb-[var(--spacing-9)] border-b border-[var(--color-border)] pb-[var(--spacing-9)]">
-          <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
+        <header className="mt-[var(--spacing-7)] mb-[var(--spacing-9)] border-b border-border pb-[var(--spacing-9)]">
+          <p className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary">
             {article.publishedAt?.slice(0, 10) ?? "—"} · {article.tag}
             {article.readingTimeMinutes ? ` · ${article.readingTimeMinutes} min` : ""}
           </p>
@@ -74,7 +74,7 @@ export default async function JournalArticlePage({ params }: Args) {
             {article.title}
           </h1>
           {article.lead && (
-            <p className="mt-[var(--spacing-7)] max-w-[60ch] font-[var(--font-display)] text-[var(--text-display-m)] italic leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-[var(--color-fg-secondary)]">
+            <p className="mt-[var(--spacing-7)] max-w-[60ch] font-[var(--font-display)] text-[var(--text-display-m)] italic leading-[var(--leading-snug)] tracking-[var(--tracking-display)] text-fg-secondary">
               {article.lead}
             </p>
           )}
@@ -85,7 +85,7 @@ export default async function JournalArticlePage({ params }: Args) {
             <RichText data={article.body} />
           </div>
         ) : (
-          <div className="max-w-[65ch] space-y-[var(--spacing-5)] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-[var(--color-fg-secondary)]">
+          <div className="max-w-[65ch] space-y-[var(--spacing-5)] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-fg-secondary">
             <p>{t("bodyPlaceholder")}</p>
             <p>{t("bodyPlaceholderHint")}</p>
           </div>
