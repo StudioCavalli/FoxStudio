@@ -154,7 +154,14 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: var(--leading-normal);
-  font-feature-settings: "ss01", "cv01";
+  /* Tabular figures only on mono / numeric contexts (see .tabular). Avoid
+     stylistic-set features at body level — they alter digit shapes in Geist
+     and produce inconsistent renders for Counter/StatsBand. */
+  font-feature-settings: "kern", "liga";
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
 }
 
 ::selection {

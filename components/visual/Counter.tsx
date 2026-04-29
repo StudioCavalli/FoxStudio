@@ -72,7 +72,7 @@ export function Counter({
   const formatted = formatNumber(done ? to : value, decimals, separator);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={`tabular ${className}`}>
       {formatted}
       {suffix}
     </span>
