@@ -34,7 +34,7 @@ const MOCK: TeamMember[] = [
     order: 0,
     links: [
       { label: "GitHub", url: "https://github.com/SwaynIO" },
-      { label: "LinkedIn", url: "https://www.linkedin.com/in/christopher-cavalli/" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/in/christopher-cvlli" },
     ],
   },
   {
@@ -45,7 +45,12 @@ const MOCK: TeamMember[] = [
     bio: "Cofondateur et Co-CEO, basé à Paris. C'est lui qui casse le code de Christopher quand ça va pas.",
     location: "Paris",
     order: 1,
-    links: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/chahine-benlahcen-tlemcani/" }],
+    links: [
+      {
+        label: "LinkedIn",
+        url: "https://www.linkedin.com/in/chahine-benlahcen-tlemcani-999031202",
+      },
+    ],
   },
 ];
 

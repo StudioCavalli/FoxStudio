@@ -29,6 +29,16 @@ const T = {
   countPlural: tri("{n} membres", "{n} members", "{n} membri"),
 } as const;
 
+/**
+ * Per-photo crop focus. Defaults to "center" — overridden when a photo's
+ * subject sits off the geometric centre (e.g. landscape framing with the
+ * subject on the left third).
+ */
+function photoFocus(slug: string): string {
+  if (slug === "christopher") return "30% center"; // body sits left of centre
+  return "center";
+}
+
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const { locale } = await params;
   const l = locale as Locale;
@@ -95,6 +105,7 @@ export default async function TeamPage({ params }: Args) {
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover grayscale transition duration-[var(--duration-base)] hover:grayscale-0"
+                    style={{ objectPosition: photoFocus(member.photoSlug) }}
                     priority={idx === 0}
                   />
                   <figcaption className="pointer-events-none absolute right-[var(--spacing-3)] bottom-[var(--spacing-3)] left-[var(--spacing-3)] flex items-baseline justify-between font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg)] mix-blend-difference">

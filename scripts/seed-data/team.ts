@@ -42,7 +42,7 @@ export const TEAM: TeamMemberSeed[] = [
     ),
     links: [
       { label: "GitHub", url: "https://github.com/SwaynIO" },
-      { label: "LinkedIn", url: "https://www.linkedin.com/in/christopher-cavalli/" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/in/christopher-cvlli" },
     ],
   },
   {
@@ -63,7 +63,7 @@ export const TEAM: TeamMemberSeed[] = [
     links: [
       {
         label: "LinkedIn",
-        url: "https://www.linkedin.com/in/chahine-benlahcen-tlemcani/",
+        url: "https://www.linkedin.com/in/chahine-benlahcen-tlemcani-999031202",
       },
     ],
   },
