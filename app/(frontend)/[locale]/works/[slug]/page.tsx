@@ -114,7 +114,10 @@ export default async function ProjectPage({ params }: Args) {
             <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
               {project.context ? (
                 project.context.split(/\n\n+/).map((paragraph, i) => (
-                  <p key={`ctx-${i}`} className={i === 0 ? "" : "text-[var(--color-fg-secondary)]"}>
+                  <p
+                    key={paragraph.slice(0, 32)}
+                    className={i === 0 ? "" : "text-[var(--color-fg-secondary)]"}
+                  >
                     {paragraph}
                   </p>
                 ))
@@ -152,7 +155,7 @@ export default async function ProjectPage({ params }: Args) {
               {project.approach ? (
                 project.approach
                   .split(/\n\n+/)
-                  .map((paragraph, i) => <p key={`appr-${i}`}>{paragraph}</p>)
+                  .map((paragraph) => <p key={paragraph.slice(0, 32)}>{paragraph}</p>)
               ) : (
                 <p className="text-[var(--color-fg-secondary)]">{t("approachPlaceholder")}</p>
               )}

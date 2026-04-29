@@ -39,6 +39,7 @@ export function Footer() {
               <Link href="/works">{tNav("works")}</Link>
               <Link href="/lab">{tNav("lab")}</Link>
               <Link href="/studio">{tNav("studio")}</Link>
+              <Link href="/team">{tNav("team")}</Link>
               <Link href="/journal">{tNav("journal")}</Link>
             </FooterGroup>
 

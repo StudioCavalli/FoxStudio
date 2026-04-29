@@ -27,6 +27,11 @@ export const TeamMembers: CollectionConfig = {
       localized: true,
     },
     {
+      name: "location",
+      type: "text",
+      admin: { description: "City of residence (proper noun, same in all locales)." },
+    },
+    {
       name: "bio",
       type: "textarea",
       localized: true,

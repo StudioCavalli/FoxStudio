@@ -404,6 +404,10 @@ export interface TeamMember {
   id: number;
   name: string;
   role: string;
+  /**
+   * City of residence (proper noun, same in all locales).
+   */
+  location?: string | null;
   bio?: string | null;
   photo?: (number | null) | Media;
   links?:
@@ -813,6 +817,7 @@ export interface JournalArticlesSelect<T extends boolean = true> {
 export interface TeamMembersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
+  location?: T;
   bio?: T;
   photo?: T;
   links?:

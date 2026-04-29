@@ -15,6 +15,7 @@ import dotenv from "dotenv";
 import { JOURNAL_ARTICLES, type JournalArticleSeed } from "./seed-data/journal";
 import { LAB_EXPERIMENTS, type LabExperimentSeed } from "./seed-data/lab";
 import { type Locale, PROJECTS, type ProjectSeed } from "./seed-data/projects";
+import { TEAM, type TeamMemberSeed } from "./seed-data/team";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
@@ -34,6 +35,7 @@ async function main() {
   await seedProjects(payload);
   await seedLab(payload);
   await seedJournal(payload);
+  await seedTeam(payload);
 
   console.log("\n✓ Seed complete.");
   process.exit(0);
@@ -273,6 +275,68 @@ function journalLocalePayload(a: JournalArticleSeed, locale: Locale) {
     title: a.title[locale],
     lead: a.lead[locale],
     body: lexicalFromParagraphs(a.body[locale]),
+  };
+}
+
+/* ─── Team seeding ─────────────────────────────────────────────── */
+
+async function seedTeam(payload: Awaited<ReturnType<typeof import("payload").getPayload>>) {
+  console.log(`\n→ Seeding ${TEAM.length} team members (en + fr + it)…`);
+
+  let created = 0;
+  let skipped = 0;
+
+  for (const member of TEAM) {
+    const existing = await payload.find({
+      collection: "team-members",
+      where: { name: { equals: member.name } },
+      limit: 1,
+      locale: "en",
+    });
+
+    if (existing.docs.length > 0) {
+      console.log(`  · ${member.name} already exists, skipping`);
+      skipped++;
+      continue;
+    }
+
+    const enDoc = await payload.create({
+      collection: "team-members",
+      locale: "en",
+      data: teamEnPayload(member),
+    });
+
+    for (const locale of SECONDARY_LOCALES) {
+      await payload.update({
+        collection: "team-members",
+        id: enDoc.id,
+        locale,
+        data: teamLocalePayload(member, locale),
+      });
+    }
+
+    console.log(`  ✓ ${member.name}`);
+    created++;
+  }
+
+  console.log(`  → Team: ${created} created, ${skipped} skipped.`);
+}
+
+function teamEnPayload(m: TeamMemberSeed) {
+  return {
+    name: m.name,
+    role: m.role.en,
+    bio: m.bio.en,
+    location: m.location,
+    order: m.order,
+    links: m.links,
+  };
+}
+
+function teamLocalePayload(m: TeamMemberSeed, locale: Locale) {
+  return {
+    role: m.role[locale],
+    bio: m.bio[locale],
   };
 }
 
