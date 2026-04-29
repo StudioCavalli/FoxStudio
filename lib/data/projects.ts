@@ -32,6 +32,8 @@ export type Project = {
   slug: string;
   name: string;
   summary?: string;
+  context?: string;
+  approach?: string;
   year: number;
   stack: string[];
   state: ProjectState;
@@ -71,6 +73,8 @@ function fromPayloadDoc(doc: PayloadProject): Project {
     slug: doc.slug,
     name: doc.name,
     summary: doc.summary ?? undefined,
+    context: (doc as unknown as { context?: string | null }).context ?? undefined,
+    approach: (doc as unknown as { approach?: string | null }).approach ?? undefined,
     year: doc.year,
     stack: (doc.stack ?? []).map((s) => s.tech).filter((t): t is string => Boolean(t)),
     state: doc.state,

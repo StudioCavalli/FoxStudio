@@ -22,7 +22,7 @@ export default async function HomePage({ params }: Args) {
       <StatsBand />
       <LabTeaser />
       <StudioTeaser />
-      <JournalTeaser />
+      <JournalTeaser locale={locale as "fr" | "en" | "it"} />
       <ContactTeaser />
     </>
   );

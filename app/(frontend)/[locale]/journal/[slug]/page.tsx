@@ -13,8 +13,8 @@ type Args = {
 };
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
-  const { slug } = await params;
-  const article = await getJournalArticleBySlug(slug);
+  const { slug, locale } = await params;
+  const article = await getJournalArticleBySlug(slug, locale as "fr" | "en" | "it");
   if (!article) return { title: "Not found" };
   return {
     title: article.title,
@@ -37,7 +37,7 @@ export default async function JournalArticlePage({ params }: Args) {
   const { slug, locale } = await params;
   setRequestLocale(locale);
 
-  const article = await getJournalArticleBySlug(slug);
+  const article = await getJournalArticleBySlug(slug, locale as "fr" | "en" | "it");
   if (!article) notFound();
 
   const t = await getTranslations("Journal");

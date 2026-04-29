@@ -12,6 +12,7 @@
 
 import dotenv from "dotenv";
 
+import { JOURNAL_ARTICLES, type JournalArticleSeed } from "./seed-data/journal";
 import { LAB_EXPERIMENTS, type LabExperimentSeed } from "./seed-data/lab";
 import { type Locale, PROJECTS, type ProjectSeed } from "./seed-data/projects";
 
@@ -32,9 +33,44 @@ async function main() {
 
   await seedProjects(payload);
   await seedLab(payload);
+  await seedJournal(payload);
 
   console.log("\n✓ Seed complete.");
   process.exit(0);
+}
+
+/* ─── Lexical helpers ──────────────────────────────────────────── */
+
+function lexicalFromParagraphs(paragraphs: string[]) {
+  return {
+    root: {
+      type: "root",
+      format: "" as const,
+      indent: 0,
+      version: 1,
+      direction: "ltr" as const,
+      children: paragraphs.map((text) => ({
+        type: "paragraph",
+        format: "" as const,
+        indent: 0,
+        version: 1,
+        direction: "ltr" as const,
+        textFormat: 0,
+        textStyle: "",
+        children: [
+          {
+            type: "text",
+            format: 0,
+            mode: "normal" as const,
+            style: "",
+            text,
+            version: 1,
+            detail: 0,
+          },
+        ],
+      })),
+    },
+  };
 }
 
 async function seedProjects(payload: Awaited<ReturnType<typeof import("payload").getPayload>>) {
@@ -131,6 +167,8 @@ function enPayload(p: ProjectSeed) {
     slug: p.slug,
     name: p.name.en,
     summary: p.summary.en,
+    context: p.context.en,
+    approach: p.approach.en,
     year: p.year,
     state: p.state,
     stack: p.stack,
@@ -144,6 +182,8 @@ function localePayload(p: ProjectSeed, locale: Locale) {
   return {
     name: p.name[locale],
     summary: p.summary[locale],
+    context: p.context[locale],
+    approach: p.approach[locale],
     results: p.results.map((r) => ({ value: r.value, label: r.label[locale] })),
   };
 }
@@ -168,6 +208,71 @@ function labLocalePayload(e: LabExperimentSeed, locale: Locale) {
   return {
     name: e.name[locale],
     summary: e.summary[locale],
+  };
+}
+
+/* ─── Journal seeding ──────────────────────────────────────────── */
+
+async function seedJournal(payload: Awaited<ReturnType<typeof import("payload").getPayload>>) {
+  console.log(`\n→ Seeding ${JOURNAL_ARTICLES.length} journal articles (en + fr + it)…`);
+
+  let created = 0;
+  let skipped = 0;
+
+  for (const article of JOURNAL_ARTICLES) {
+    const existing = await payload.find({
+      collection: "journal-articles",
+      where: { slug: { equals: article.slug } },
+      limit: 1,
+      locale: "en",
+    });
+
+    if (existing.docs.length > 0) {
+      console.log(`  · ${article.slug} already exists, skipping`);
+      skipped++;
+      continue;
+    }
+
+    const enDoc = await payload.create({
+      collection: "journal-articles",
+      locale: "en",
+      data: journalEnPayload(article) as never,
+      draft: false,
+    });
+
+    for (const locale of SECONDARY_LOCALES) {
+      await payload.update({
+        collection: "journal-articles",
+        id: enDoc.id,
+        locale,
+        data: journalLocalePayload(article, locale),
+      });
+    }
+
+    console.log(`  ✓ ${article.slug}`);
+    created++;
+  }
+
+  console.log(`  → Journal: ${created} created, ${skipped} skipped.`);
+}
+
+function journalEnPayload(a: JournalArticleSeed) {
+  return {
+    slug: a.slug,
+    title: a.title.en,
+    lead: a.lead.en,
+    body: lexicalFromParagraphs(a.body.en),
+    tag: a.tag,
+    readingTimeMinutes: a.readingTimeMinutes,
+    publishedAt: a.publishedAt,
+  };
+}
+
+function journalLocalePayload(a: JournalArticleSeed, locale: Locale) {
+  return {
+    title: a.title[locale],
+    lead: a.lead[locale],
+    body: lexicalFromParagraphs(a.body[locale]),
   };
 }
 

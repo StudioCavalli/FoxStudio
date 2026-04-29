@@ -27,7 +27,7 @@ export default async function JournalPage({ params, searchParams }: Args) {
   setRequestLocale(locale);
   const { tag: filter } = await searchParams;
 
-  const articles = await getJournalArticles();
+  const articles = await getJournalArticles(locale as "fr" | "en" | "it");
   const filtered = filter && filter !== "all" ? articles.filter((a) => a.tag === filter) : articles;
   const t = await getTranslations("Journal");
 

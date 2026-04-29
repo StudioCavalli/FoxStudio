@@ -1,10 +1,12 @@
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Container } from "@/components/ui/Container";
 import { Pattern } from "@/components/visual/Pattern";
 import { SectionHeader } from "@/components/visual/SectionHeader";
 import { Link } from "@/i18n/navigation";
+import { getJournalArticles } from "@/lib/data/journal";
 
 const LAB_EXPERIMENTS = [
   { id: "exp_004", name: "WebGPU compute shader", state: "live" as const },
@@ -90,24 +92,9 @@ export function StudioTeaser() {
   );
 }
 
-const JOURNAL_PREVIEWS = [
-  { date: "2026-04-15", title: "Rewriting a Next router in 80 lines", tag: "perf", read: "6 min" },
-  {
-    date: "2026-03-28",
-    title: "Why we replaced WebGL with WebGPU on the X pipeline",
-    tag: "3d",
-    read: "12 min",
-  },
-  {
-    date: "2026-03-12",
-    title: "Notes on running compute shaders on entry-level laptops",
-    tag: "perf",
-    read: "8 min",
-  },
-];
-
-export function JournalTeaser() {
-  const t = useTranslations("Home");
+export async function JournalTeaser({ locale }: { locale: "fr" | "en" | "it" }) {
+  const articles = (await getJournalArticles(locale)).slice(0, 3);
+  const t = await getTranslations("Home");
 
   return (
     <section
@@ -118,24 +105,26 @@ export function JournalTeaser() {
         <SectionHeader
           number="05"
           label={t("journalLabel")}
-          meta={`${JOURNAL_PREVIEWS.length} · ${t("latestNotes")}`}
+          meta={`${articles.length} · ${t("latestNotes")}`}
         />
 
         <ul>
-          {JOURNAL_PREVIEWS.map((entry, i) => (
-            <li key={entry.title} className="border-t border-[var(--color-border)] last:border-b">
+          {articles.map((entry, i) => (
+            <li key={entry.slug} className="border-t border-[var(--color-border)] last:border-b">
               <Link
-                href="/journal"
+                href={`/journal/${entry.slug}`}
                 className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-[var(--spacing-5)] py-[var(--spacing-6)] transition-opacity duration-[var(--duration-fast)] md:gap-[var(--spacing-7)] md:py-[var(--spacing-7)]"
               >
                 <span className="font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)]">
-                  {String(i + 1).padStart(2, "0")} · {entry.date}
+                  {String(i + 1).padStart(2, "0")} ·{" "}
+                  <span className="tabular">{entry.publishedAt?.slice(0, 10) ?? "—"}</span>
                 </span>
                 <span className="font-[var(--font-display)] text-[var(--text-display-m)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] group-hover:underline underline-offset-[6px]">
                   {entry.title}
                 </span>
                 <span className="hidden font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-[var(--color-fg-secondary)] md:inline">
-                  {entry.tag} · {entry.read}
+                  {entry.tag}
+                  {entry.readingTimeMinutes ? ` · ${entry.readingTimeMinutes} min` : ""}
                 </span>
               </Link>
             </li>

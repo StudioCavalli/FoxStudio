@@ -76,6 +76,26 @@ export const Projects: CollectionConfig = {
       admin: { description: "One-line description, shown in /works index." },
     },
     {
+      name: "context",
+      type: "textarea",
+      localized: true,
+      maxLength: 2000,
+      admin: {
+        description:
+          "Act 1 of the project page — the 'why'. Multiple paragraphs separated by a blank line.",
+      },
+    },
+    {
+      name: "approach",
+      type: "textarea",
+      localized: true,
+      maxLength: 2000,
+      admin: {
+        description:
+          "Act 2 of the project page — the 'how'. Multiple paragraphs separated by a blank line.",
+      },
+    },
+    {
       name: "year",
       type: "number",
       required: true,

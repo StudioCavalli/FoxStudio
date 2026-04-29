@@ -112,8 +112,15 @@ export default async function ProjectPage({ params }: Args) {
             </aside>
 
             <div className="space-y-[var(--spacing-5)] font-[var(--font-display)] text-[var(--text-heading)] leading-[var(--leading-snug)] tracking-[var(--tracking-display)] md:text-[var(--text-display-m)]">
-              <p>{project.summary}</p>
-              <p className="text-[var(--color-fg-secondary)]">{t("placeholderSubBody")}</p>
+              {project.context ? (
+                project.context.split(/\n\n+/).map((paragraph, i) => (
+                  <p key={`ctx-${i}`} className={i === 0 ? "" : "text-[var(--color-fg-secondary)]"}>
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p>{project.summary}</p>
+              )}
             </div>
           </div>
         </Container>
@@ -141,9 +148,15 @@ export default async function ProjectPage({ params }: Args) {
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="mt-[var(--spacing-7)] max-w-[60ch] text-[var(--color-fg-secondary)]">
-              {t("approachPlaceholder")}
-            </p>
+            <div className="mt-[var(--spacing-7)] max-w-[65ch] space-y-[var(--spacing-4)] text-[var(--text-body-l)] leading-[var(--leading-relaxed)] text-[var(--color-fg)]">
+              {project.approach ? (
+                project.approach
+                  .split(/\n\n+/)
+                  .map((paragraph, i) => <p key={`appr-${i}`}>{paragraph}</p>)
+              ) : (
+                <p className="text-[var(--color-fg-secondary)]">{t("approachPlaceholder")}</p>
+              )}
+            </div>
           </Reveal>
         </Container>
       </section>

@@ -257,6 +257,14 @@ export interface Project {
    * One-line description, shown in /works index.
    */
   summary?: string | null;
+  /**
+   * Act 1 of the project page — the 'why'. Multiple paragraphs separated by a blank line.
+   */
+  context?: string | null;
+  /**
+   * Act 2 of the project page — the 'how'. Multiple paragraphs separated by a blank line.
+   */
+  approach?: string | null;
   year: number;
   /**
    * Editorial state (avoid name 'status' which collides with Payload's draft system).
@@ -728,6 +736,8 @@ export interface ProjectsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   summary?: T;
+  context?: T;
+  approach?: T;
   year?: T;
   state?: T;
   stack?:

@@ -54,7 +54,7 @@ function fromDoc(doc: PayloadJournalArticle): JournalArticle {
   };
 }
 
-async function fromPayload(): Promise<JournalArticle[] | null> {
+async function fromPayload(locale?: "fr" | "en" | "it"): Promise<JournalArticle[] | null> {
   if (!process.env.DATABASE_URL) return null;
 
   try {
@@ -69,6 +69,7 @@ async function fromPayload(): Promise<JournalArticle[] | null> {
       limit: 50,
       sort: "-publishedAt",
       depth: 0,
+      locale: locale ?? "en",
     });
 
     if (result.docs.length === 0) return null;
@@ -78,12 +79,17 @@ async function fromPayload(): Promise<JournalArticle[] | null> {
   }
 }
 
-export async function getJournalArticles(): Promise<JournalArticle[]> {
-  const fromCms = await fromPayload();
+type JournalLocale = "fr" | "en" | "it";
+
+export async function getJournalArticles(locale?: JournalLocale): Promise<JournalArticle[]> {
+  const fromCms = await fromPayload(locale);
   return fromCms ?? MOCK;
 }
 
-export async function getJournalArticleBySlug(slug: string): Promise<JournalArticle | null> {
-  const all = await getJournalArticles();
+export async function getJournalArticleBySlug(
+  slug: string,
+  locale?: JournalLocale,
+): Promise<JournalArticle | null> {
+  const all = await getJournalArticles(locale);
   return all.find((a) => a.slug === slug) ?? null;
 }
