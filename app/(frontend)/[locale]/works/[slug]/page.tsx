@@ -5,10 +5,12 @@ import { notFound } from "next/navigation";
 import { Reveal } from "@/components/effects/Reveal";
 import { LdJson } from "@/components/seo/LdJson";
 import { Container } from "@/components/ui/Container";
+import { Architecture } from "@/components/visual/Architecture";
 import { Pattern } from "@/components/visual/Pattern";
 import { SectionHeader } from "@/components/visual/SectionHeader";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { getArchitecture } from "@/lib/data/architectures";
 import { getProjectBySlug, getProjects } from "@/lib/data/projects";
 import { breadcrumbSchema, creativeWorkSchema } from "@/lib/seo/schema";
 import { SITE } from "@/lib/site";
@@ -146,7 +148,7 @@ export default async function ProjectPage({ params }: Args) {
 
           <Reveal>
             <div className="relative isolate aspect-[16/9] w-full overflow-hidden border border-border bg-bg-secondary">
-              <div className="absolute inset-x-0 top-0 flex items-center gap-2 border-b border-border bg-bg-tertiary px-[var(--spacing-3)] py-[var(--spacing-2)] font-[var(--font-mono)] text-[var(--text-mono-s)] text-fg-tertiary">
+              <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-2 border-b border-border bg-bg-tertiary px-[var(--spacing-3)] py-[var(--spacing-2)] font-[var(--font-mono)] text-[var(--text-mono-s)] text-fg-tertiary">
                 <span className="flex gap-1">
                   <span className="h-2 w-2 rounded-full border border-fg-tertiary" />
                   <span className="h-2 w-2 rounded-full border border-fg-tertiary" />
@@ -154,8 +156,21 @@ export default async function ProjectPage({ params }: Args) {
                 </span>
                 <span className="ml-3 truncate">{`${SITE.url.replace(/^https?:\/\//, "")}/works/${project.slug}`}</span>
               </div>
-              <div className="absolute inset-0 mt-[28px] opacity-50 text-fg">
-                <Pattern seed={`${project.slug}-approach`} className="h-full w-full" />
+              <div className="absolute inset-0 mt-[28px] p-[var(--spacing-5)] text-fg">
+                {(() => {
+                  const arch = getArchitecture(project.slug);
+                  return arch ? (
+                    <Architecture
+                      architecture={arch}
+                      locale={locale as LocaleParam}
+                      className="h-full w-full"
+                    />
+                  ) : (
+                    <div className="opacity-50">
+                      <Pattern seed={`${project.slug}-approach`} className="h-full w-full" />
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           </Reveal>

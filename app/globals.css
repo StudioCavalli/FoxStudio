@@ -256,3 +256,42 @@ a {
     animation: none;
   }
 }
+
+/* ─── Architecture diagram ──────────────────────────────────────── */
+/* Nodes / edges / labels start hidden; the parent component flips
+ * `.arch--in` once the SVG enters the viewport via IntersectionObserver,
+ * triggering a staggered fade-in via per-element `--d` delays. */
+.arch-node,
+.arch-edge,
+.arch-edge-label {
+  opacity: 0;
+  transition: opacity var(--duration-slow, 600ms) var(--ease-reveal), transform
+    var(--duration-slow, 600ms) var(--ease-reveal);
+  transition-delay: var(--d, 0ms);
+}
+
+.arch-node {
+  transform: translateY(6px);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.arch--in .arch-node,
+.arch--in .arch-edge,
+.arch--in .arch-edge-label {
+  opacity: 1;
+}
+
+.arch--in .arch-node {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arch-node,
+  .arch-edge,
+  .arch-edge-label {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
