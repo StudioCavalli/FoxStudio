@@ -8,13 +8,12 @@ const intlMiddleware = createIntlMiddleware(routing);
 /**
  * Static CSP — kept compatible with Next.js App Router.
  *
- * We previously tried a nonce-based policy with `'strict-dynamic'`, but
+ * A nonce-based policy with `'strict-dynamic'` was attempted but
  * Next.js does not reliably auto-tag every inline boot script with the
- * request nonce. With `'strict-dynamic'` active the browser ignores
- * `'self'` and `'unsafe-inline'`, so the chunk loader was blocked and
- * the site failed to hydrate. Re-opened #74 to track a proper Next.js
- * nonce integration; meanwhile we keep CSP strict but with the standard
- * `'unsafe-inline'` allowance shipped by next-intl + Tailwind.
+ * request nonce when next-intl's rewrite is in the chain. With
+ * `'strict-dynamic'` active the browser ignores `'self'` /
+ * `'unsafe-inline'` and the chunk loader is blocked. #74 stays open
+ * to track a proper nonce integration.
  */
 const CSP = [
   "default-src 'self'",

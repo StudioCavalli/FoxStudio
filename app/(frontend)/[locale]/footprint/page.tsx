@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 
+import { RouteFootprints } from "@/components/footprint/RouteFootprints";
 import { LegalLayout, LegalRow, LegalSection } from "@/components/legal/LegalLayout";
 
 type Locale = "fr" | "en" | "it";
@@ -31,9 +32,9 @@ const T = {
 
   s2: tri("Mesures actuelles", "Current measurements", "Misure attuali"),
   s2_intro: tri(
-    "Mesuré au build du commit en cours.",
-    "Measured at the build of the current commit.",
-    "Misurato al build del commit corrente.",
+    "Mesuré dans ton navigateur, à l'instant — fetch des routes + assets liés, somme des octets, conversion via le coefficient SWD v3 (3,33 × 10⁻⁷ g CO₂e / octet).",
+    "Measured in your browser right now — fetching each route + linked assets, summing bytes, converting via the SWD v3 coefficient (3.33 × 10⁻⁷ gCO₂e / byte).",
+    "Misurato nel tuo browser ora — fetch di ogni route + asset collegati, somma byte, conversione tramite il coefficiente SWD v3 (3,33 × 10⁻⁷ gCO₂e / byte).",
   ),
   s2_home: tri("Home /", "Home /", "Home /"),
   s2_works: tri("Works /works", "Works /works", "Works /works"),
@@ -92,12 +93,17 @@ const T = {
   ),
 } as const;
 
-const PAGES = [
-  { key: "s2_home" as const, kb: "121 kB", co2: "0,04 g CO₂" },
-  { key: "s2_works" as const, kb: "120 kB", co2: "0,04 g CO₂" },
-  { key: "s2_project" as const, kb: "121 kB", co2: "0,04 g CO₂" },
-  { key: "s2_lab" as const, kb: "121 kB", co2: "0,04 g CO₂" },
-  { key: "s2_studio" as const, kb: "121 kB", co2: "0,04 g CO₂" },
+/**
+ * Routes whose footprint we want to display in the table.
+ * Paths are locale-relative — the client component prepends the active
+ * locale at runtime so /works actually fetches /fr/works (or /en/works).
+ */
+const ROUTE_DEFS = [
+  { key: "s2_home" as const, path: "" },
+  { key: "s2_works" as const, path: "/works" },
+  { key: "s2_project" as const, path: "/works/memoria" },
+  { key: "s2_lab" as const, path: "/lab" },
+  { key: "s2_studio" as const, path: "/studio" },
 ];
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
@@ -126,17 +132,12 @@ export default async function FootprintPage({ params }: Args) {
 
       <LegalSection number="02" title={T.s2[l]}>
         <p className="text-fg-secondary">{T.s2_intro[l]}</p>
-        {PAGES.map((p) => (
-          <LegalRow
-            key={p.key}
-            label={T[p.key][l]}
-            value={
-              <span className="tabular">
-                {p.kb} · <span className="text-fg">{p.co2}</span>
-              </span>
-            }
-          />
-        ))}
+        <RouteFootprints
+          routes={ROUTE_DEFS.map((r) => ({
+            path: `/${l}${r.path}` || `/${l}`,
+            label: T[r.key][l],
+          }))}
+        />
         <LegalRow label={T.s2_admin[l]} value={T.s2_admin_value[l]} />
       </LegalSection>
 
