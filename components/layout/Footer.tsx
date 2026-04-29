@@ -47,6 +47,7 @@ export function Footer() {
             <FooterGroup title={t("contact")}>
               <a href={`mailto:${SITE.contact.email}`}>{SITE.contact.email}</a>
               <Link href="/studio">{SITE.contact.location}</Link>
+              <Link href="/ombrys">{t("ombrys")}</Link>
             </FooterGroup>
 
             <FooterGroup title={t("legal")}>

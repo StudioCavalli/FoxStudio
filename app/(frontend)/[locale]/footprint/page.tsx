@@ -50,14 +50,19 @@ const T = {
 
   s3: tri("Budget", "Budget", "Budget"),
   s3_p1: tri(
-    "Notre budget carbone par vue est ≤ 0,20 g CO₂e (cf. cahier des charges §7.2). On est dans le top 10 % du web mondial selon websitecarbon.com.",
-    "Our per-view carbon budget is ≤ 0.20 gCO₂e (see specs §7.2). That puts us in the top 10 % of the web according to websitecarbon.com.",
-    "Il nostro budget carbonio per vista è ≤ 0,20 gCO₂e (cfr. capitolato §7.2). Siamo nel top 10 % del web globale secondo websitecarbon.com.",
+    "Notre cible est ≤ 0,20 g CO₂e par vue (cahier des charges §7.2). Les valeurs réelles sont dans la section précédente — mesurées dans ton navigateur, pas estimées par un tiers.",
+    "Our target is ≤ 0.20 gCO₂e per view (specs §7.2). Real values sit in the section above — measured in your browser, not estimated by a third party.",
+    "Il nostro obiettivo è ≤ 0,20 gCO₂e per vista (capitolato §7.2). I valori reali sono nella sezione sopra — misurati nel tuo browser, non stimati da un terzo.",
   ),
   s3_p2: tri(
-    "Le budget est appliqué automatiquement en CI : si une PR fait dépasser le seuil, le build échoue. Le script qui le fait est dans scripts/measure-carbon.ts.",
-    "The budget is enforced automatically in CI: if a PR pushes us over the threshold, the build fails. The enforcement script lives in scripts/measure-carbon.ts.",
-    "Il budget è applicato automaticamente in CI: se una PR ci porta sopra la soglia, il build fallisce. Lo script di enforcement è in scripts/measure-carbon.ts.",
+    "Pour comparer, la médiane d'une page web en 2024 transfère ≈ 2,5 Mo (HTTP Archive), soit ≈ 0,83 g CO₂e par vue — environ quatre fois notre cible.",
+    "For context, the 2024 web page median transfers ≈ 2.5 MB (HTTP Archive), roughly 0.83 gCO₂e per view — about four times our target.",
+    "Per riferimento, la mediana di una pagina web nel 2024 trasferisce ≈ 2,5 MB (HTTP Archive), circa 0,83 gCO₂e per vista — circa quattro volte il nostro obiettivo.",
+  ),
+  s3_p3: tri(
+    "Le budget est appliqué en CI : sur chaque PR, le workflow `Performance` lance `scripts/measure-carbon.ts` qui calcule le poids gzip des chunks de la home et exit 1 si ça dépasse 0,20 g. Vérifiable dans `.github/workflows/perf.yml`.",
+    "The budget is enforced in CI: on every PR, the `Performance` workflow runs `scripts/measure-carbon.ts`, which gzips the home chunks and exits 1 over 0.20 g. See `.github/workflows/perf.yml`.",
+    "Il budget è applicato in CI: su ogni PR, il workflow `Performance` lancia `scripts/measure-carbon.ts` che calcola il peso gzip dei chunk della home ed esce con 1 se supera 0,20 g. Vedi `.github/workflows/perf.yml`.",
   ),
 
   s4: tri("Hébergement", "Hosting", "Hosting"),
@@ -144,6 +149,7 @@ export default async function FootprintPage({ params }: Args) {
       <LegalSection number="03" title={T.s3[l]}>
         <p>{T.s3_p1[l]}</p>
         <p>{T.s3_p2[l]}</p>
+        <p>{T.s3_p3[l]}</p>
       </LegalSection>
 
       <LegalSection number="04" title={T.s4[l]}>
