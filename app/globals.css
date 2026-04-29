@@ -296,6 +296,35 @@ a {
   }
 }
 
+/* ─── Skeleton placeholder ──────────────────────────────────────── */
+/* Used by route-level `loading.tsx` files. The animation is purely
+ * visual feedback — the actual "wait" is Next.js suspending on real
+ * server data. Pulse is neutralised under prefers-reduced-motion. */
+.skeleton {
+  background-color: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--color-bg-tertiary) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: skeleton-shimmer 1.6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* ─── Footprint loader ──────────────────────────────────────────── */
 /* Three thin bars rising/falling in sequence — fits the
  * mono-typographic feel of /footprint. */
