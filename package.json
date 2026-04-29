@@ -24,18 +24,13 @@
     "payload:migrate": "PAYLOAD_CONFIG_PATH=payload.config.ts payload migrate",
     "payload:types": "PAYLOAD_CONFIG_PATH=payload.config.ts payload generate:types",
     "payload:importmap": "PAYLOAD_CONFIG_PATH=payload.config.ts payload generate:importmap",
-    "payload:seed": "tsx scripts/seed.ts",
-    "services:up": "docker compose up -d postgres minio && docker compose up minio-init && docker compose ps",
-    "services:down": "docker compose down",
-    "services:logs": "docker compose logs -f postgres minio",
-    "services:reset": "docker compose down -v && pnpm services:up",
-    "services:status": "docker compose ps"
+    "payload:seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",
     "@payloadcms/next": "^3.84.1",
     "@payloadcms/richtext-lexical": "^3.84.1",
-    "@payloadcms/storage-s3": "^3.84.1",
+    "@payloadcms/storage-vercel-blob": "^3.84.1",
     "@payloadcms/ui": "^3.84.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",

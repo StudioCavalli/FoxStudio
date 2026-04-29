@@ -24,7 +24,7 @@ const SECONDARY_LOCALES: Locale[] = ["fr", "it"];
 
 async function main() {
   if (!process.env.DATABASE_URL) {
-    console.error("✖ DATABASE_URL is not set. Did you `cp .env.docker.example .env.local`?");
+    console.error("✖ DATABASE_URL is not set. Copy .env.example to .env.local and fill it in.");
     process.exit(1);
   }
 

@@ -37,6 +37,7 @@ export default async function OpengraphImage({
       <div
         style={{
           display: "flex",
+          alignItems: "center",
           justifyContent: "space-between",
           fontFamily: "ui-monospace, monospace",
           fontSize: 18,
@@ -45,7 +46,26 @@ export default async function OpengraphImage({
           color: "#a0a0a0",
         }}
       >
-        <span>00 ▸ Manifesto</span>
+        <span style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <svg
+            width="42"
+            height="42"
+            viewBox="0 0 32 32"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="#f4f4f4"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          >
+            <title>FoxStudio</title>
+            <path d="M 8 3 L 12 11 L 16 7 L 20 11 L 24 3 L 27 11 L 24 18 L 16 28 L 8 18 L 5 11 Z" />
+            <circle cx="12.5" cy="15.5" r="0.9" fill="#f4f4f4" />
+            <circle cx="19.5" cy="15.5" r="0.9" fill="#f4f4f4" />
+          </svg>
+          <span style={{ color: "#f4f4f4" }}>FoxStudio</span>
+          <span>00 ▸ Manifesto</span>
+        </span>
         <span>v{SITE.version}</span>
       </div>
 

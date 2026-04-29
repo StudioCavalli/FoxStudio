@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { s3Storage } from "@payloadcms/storage-s3";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 
@@ -20,12 +20,7 @@ import { Settings } from "./cms/globals/Settings";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-const r2Configured = Boolean(
-  process.env.R2_ACCESS_KEY_ID &&
-    process.env.R2_SECRET_ACCESS_KEY &&
-    process.env.R2_BUCKET &&
-    process.env.R2_ENDPOINT,
-);
+const blobConfigured = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 
 export default buildConfig({
   admin: {
@@ -51,7 +46,13 @@ export default buildConfig({
 
   db: postgresAdapter({
     pool: {
+      // Prefer the non-pooled URL: Payload uses transactions and prepared
+      // statements which can misbehave through pgbouncer (transaction mode).
+      // Vercel's Neon integration injects POSTGRES_URL_NON_POOLING; locally
+      // we set DATABASE_URL to the same direct host.
       connectionString:
+        process.env.POSTGRES_URL_NON_POOLING ||
+        process.env.DATABASE_URL_UNPOOLED ||
         process.env.DATABASE_URL ||
         // Placeholder so build doesn't fail without a real DB.
         // The pool only connects on first DB query, not at construction.
@@ -67,20 +68,11 @@ export default buildConfig({
     fallback: true,
   },
 
-  plugins: r2Configured
+  plugins: blobConfigured
     ? [
-        s3Storage({
+        vercelBlobStorage({
           collections: { media: true },
-          bucket: process.env.R2_BUCKET || "",
-          config: {
-            endpoint: process.env.R2_ENDPOINT,
-            credentials: {
-              accessKeyId: process.env.R2_ACCESS_KEY_ID || "",
-              secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "",
-            },
-            region: process.env.R2_REGION || "auto",
-            forcePathStyle: true,
-          },
+          token: process.env.BLOB_READ_WRITE_TOKEN || "",
         }),
       ]
     : [],
