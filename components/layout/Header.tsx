@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 
 import { Container } from "@/components/ui/Container";
+import { FoxLogo } from "@/components/visual/FoxLogo";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { SITE } from "@/lib/site";
@@ -30,10 +31,11 @@ export function Header() {
         <div className="flex h-[64px] items-center justify-between">
           <Link
             href="/"
-            className="font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)]"
+            className="flex items-center gap-[var(--spacing-3)] font-[var(--font-mono)] text-[var(--text-mono-m)] uppercase tracking-[var(--tracking-mono)] transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-fg-secondary)]"
             aria-label={`${SITE.name} home`}
           >
-            {SITE.name}
+            <FoxLogo className="h-[20px] w-[20px] shrink-0" />
+            <span>{SITE.name}</span>
           </Link>
 
           <nav className="hidden gap-7 md:flex" aria-label="Primary">

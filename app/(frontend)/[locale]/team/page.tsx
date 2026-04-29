@@ -35,7 +35,9 @@ const T = {
  * subject on the left third).
  */
 function photoFocus(slug: string): string {
-  if (slug === "christopher") return "30% center"; // body sits left of centre
+  // Christopher: body sits left of centre, hands-at-belt are at the bottom —
+  // crop them out by lifting the visible window up.
+  if (slug === "christopher") return "30% 18%";
   return "center";
 }
 
