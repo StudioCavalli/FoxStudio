@@ -22,7 +22,9 @@ export default defineConfig({
 
   webServer: {
     command: "pnpm start",
-    url: BASE_URL,
+    // `/` redirects to /fr via i18n middleware → use a real route for the
+    // health check, otherwise reuseExistingServer never matches.
+    url: `${BASE_URL}/fr`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
