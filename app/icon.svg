@@ -1,8 +1,6 @@
 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FoxStudio">
   <title>FoxStudio</title>
   <style>
-    .stroke { stroke: #0a0a0a; }
-    .dot { fill: #0a0a0a; }
     @media (prefers-color-scheme: dark) {
       .stroke { stroke: #f4f4f4; }
       .dot { fill: #f4f4f4; }
@@ -10,12 +8,13 @@
   </style>
   <path
     class="stroke"
+    d="M 8 3 L 12 11 L 16 7 L 20 11 L 24 3 L 27 11 L 24 18 L 16 28 L 8 18 L 5 11 Z"
     fill="none"
+    stroke="#0a0a0a"
     stroke-width="1.6"
     stroke-linejoin="round"
     stroke-linecap="round"
-    d="M 8 3 L 12 11 L 16 7 L 20 11 L 24 3 L 27 11 L 24 18 L 16 28 L 8 18 L 5 11 Z"
   />
-  <circle class="dot" cx="12.5" cy="15.5" r="0.9" />
-  <circle class="dot" cx="19.5" cy="15.5" r="0.9" />
+  <circle class="dot" cx="12.5" cy="15.5" r="0.9" fill="#0a0a0a" />
+  <circle class="dot" cx="19.5" cy="15.5" r="0.9" fill="#0a0a0a" />
 </svg>
