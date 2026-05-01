@@ -44,25 +44,36 @@ export function ContactForm({ type }: { type: ContactType }) {
       return;
     }
 
+    const get = (k: string) => String(data.get(k) ?? "");
+
+    // Build a plain-text "details" block containing only the rows
+    // relevant to the selected type. The template renders it inside a
+    // <pre>-style div so newlines + alignment are preserved. Avoids
+    // {{#if}} conditionals (not reliable across EmailJS template tiers)
+    // while keeping the email visually structured.
+    const rows: Array<[string, string]> = [];
+    if (type === "incubator") {
+      if (get("organization")) rows.push(["Structure", get("organization")]);
+      if (get("program")) rows.push(["Programme", get("program")]);
+    } else if (type === "company") {
+      if (get("company")) rows.push(["Société", get("company")]);
+      if (get("topic")) rows.push(["Sujet", get("topic")]);
+      if (get("budget")) rows.push(["Budget", get("budget")]);
+    } else {
+      if (get("role")) rows.push(["Rôle", get("role")]);
+      if (get("portfolioUrl")) rows.push(["Portfolio", get("portfolioUrl")]);
+    }
+    const labelWidth = Math.max(...rows.map(([k]) => k.length), 0);
+    const details = rows.map(([k, v]) => `${k.padEnd(labelWidth, " ")}  ${v}`).join("\n");
+
     const params: Record<string, string> = {
       type,
-      name: String(data.get("name") ?? ""),
-      email: String(data.get("email") ?? ""),
-      message: String(data.get("message") ?? ""),
-      subject: `[FoxStudio · ${type}] ${data.get("name") ?? ""}`,
+      name: get("name"),
+      email: get("email"),
+      message: get("message"),
+      details,
+      subject: `[FoxStudio · ${type}] ${get("name")}`,
     };
-
-    if (type === "incubator") {
-      params.organization = String(data.get("organization") ?? "");
-      params.program = String(data.get("program") ?? "");
-    } else if (type === "company") {
-      params.company = String(data.get("company") ?? "");
-      params.topic = String(data.get("topic") ?? "");
-      params.budget = String(data.get("budget") ?? "");
-    } else {
-      params.role = String(data.get("role") ?? "");
-      params.portfolioUrl = String(data.get("portfolioUrl") ?? "");
-    }
 
     setPending(true);
     try {

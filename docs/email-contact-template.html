@@ -1,21 +1,29 @@
 <!--
   FoxStudio — EmailJS contact template.
-  Paste this HTML into the "Content" of template_9sy95se on emailjs.com
+  Paste into the "Content" of template_9sy95se on emailjs.com
   ("Edit Content" → switch to HTML mode).
 
-  Variables sent by ContactForm (components/contact/ContactForm.tsx):
-    Always: type, name, email, message, subject
-    type=incubator: organization, program
-    type=company:   company, topic, budget
-    type=talent:    role, portfolioUrl
+  Variables sent by ContactForm (components/contact/ContactForm.tsx) —
+  always present, never optional, no {{#if}} blocks needed:
+    type    : "incubator" | "company" | "talent"
+    name    : sender name
+    email   : sender email
+    subject : "[FoxStudio · <type>] <name>"
+    details : pre-formatted multi-line string (key/value pairs aligned),
+              built client-side from the relevant type-specific fields.
+              Empty if the sender filled no extra field.
+    message : free-text message body
 
-  EmailJS supports {{#if VAR}}…{{/if}} conditionals — fields not sent
-  for the current form simply do not render.
+  In the template Settings tab:
+    To Email   : <your inbox>
+    From Name  : FoxStudio (or {{name}} if you prefer per-sender)
+    Reply To   : {{email}}
+    Subject    : {{subject}}
 
   Design constraints:
   - System fonts only (Geist not loadable in mail clients).
   - Inline styles only (Gmail/Outlook strip <style>).
-  - Single 600 px table, single column — works on iOS Mail / Outlook.
+  - Single 600 px table — works on iOS Mail / Outlook desktop.
   - No external images.
 -->
 <!doctype html>
@@ -77,127 +85,17 @@
 
       <!-- ── 01 · DÉTAILS ───────────────────────────── -->
       <tr>
-        <td style="border-top:1px solid #0a0a0a; padding:24px 24px 8px;">
+        <td style="border-top:1px solid #0a0a0a; padding:24px;">
           <p
-            style="margin:0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373;"
+            style="margin:0 0 12px; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373;"
           >
             01 · Détails
           </p>
+          <pre
+            style="margin:0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:13px; line-height:1.7; color:#0a0a0a; white-space:pre-wrap; word-wrap:break-word; background:transparent;"
+          >{{details}}</pre>
         </td>
       </tr>
-
-      {{#if organization}}
-      <tr>
-        <td style="padding:0 24px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d4d4d4;">
-            <tr>
-              <td
-                style="padding:12px 0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373; width:130px; vertical-align:top;"
-              >
-                Structure
-              </td>
-              <td style="padding:12px 0; font-size:14px; color:#0a0a0a; vertical-align:top;">{{organization}}</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {{/if}} {{#if program}}
-      <tr>
-        <td style="padding:0 24px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d4d4d4;">
-            <tr>
-              <td
-                style="padding:12px 0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373; width:130px; vertical-align:top;"
-              >
-                Programme
-              </td>
-              <td style="padding:12px 0; font-size:14px; color:#0a0a0a; vertical-align:top;">{{program}}</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {{/if}} {{#if company}}
-      <tr>
-        <td style="padding:0 24px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d4d4d4;">
-            <tr>
-              <td
-                style="padding:12px 0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373; width:130px; vertical-align:top;"
-              >
-                Société
-              </td>
-              <td style="padding:12px 0; font-size:14px; color:#0a0a0a; vertical-align:top;">{{company}}</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {{/if}} {{#if topic}}
-      <tr>
-        <td style="padding:0 24px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d4d4d4;">
-            <tr>
-              <td
-                style="padding:12px 0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373; width:130px; vertical-align:top;"
-              >
-                Sujet
-              </td>
-              <td style="padding:12px 0; font-size:14px; color:#0a0a0a; vertical-align:top;">{{topic}}</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {{/if}} {{#if budget}}
-      <tr>
-        <td style="padding:0 24px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d4d4d4;">
-            <tr>
-              <td
-                style="padding:12px 0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373; width:130px; vertical-align:top;"
-              >
-                Budget
-              </td>
-              <td style="padding:12px 0; font-size:14px; color:#0a0a0a; vertical-align:top;">{{budget}}</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {{/if}} {{#if role}}
-      <tr>
-        <td style="padding:0 24px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d4d4d4;">
-            <tr>
-              <td
-                style="padding:12px 0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373; width:130px; vertical-align:top;"
-              >
-                Rôle
-              </td>
-              <td style="padding:12px 0; font-size:14px; color:#0a0a0a; vertical-align:top;">{{role}}</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {{/if}} {{#if portfolioUrl}}
-      <tr>
-        <td style="padding:0 24px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #d4d4d4;">
-            <tr>
-              <td
-                style="padding:12px 0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373; width:130px; vertical-align:top;"
-              >
-                Portfolio
-              </td>
-              <td style="padding:12px 0; font-size:14px; vertical-align:top;">
-                <a
-                  href="{{portfolioUrl}}"
-                  style="color:#0a0a0a; text-decoration:underline; text-underline-offset:4px; word-break:break-all;"
-                  >{{portfolioUrl}}</a
-                >
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      {{/if}}
 
       <!-- ── 02 · MESSAGE ───────────────────────────── -->
       <tr>
@@ -217,7 +115,7 @@
       <tr>
         <td style="border-top:1px solid #0a0a0a; padding:24px; text-align:center;">
           <a
-            href="mailto:{{email}}?subject=Re:%20{{subject}}"
+            href="mailto:{{email}}"
             style="display:inline-block; padding:14px 28px; border:1px solid #0a0a0a; background:#0a0a0a; color:#f4f4f4; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;"
             >Répondre à {{name}} ▸</a
           >
