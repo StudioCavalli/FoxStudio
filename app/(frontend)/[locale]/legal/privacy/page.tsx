@@ -33,9 +33,9 @@ const T = {
   s2: tri("Ce qu'on collecte", "What we collect", "Cosa raccogliamo"),
   s2_form: tri("Formulaire de contact", "Contact form", "Modulo di contatto"),
   s2_form_value: tri(
-    "Nom, email, et le contenu de votre message. Stockés dans notre boîte mail (Resend) le temps de vous répondre.",
-    "Name, email, and the content of your message. Stored in our inbox (Resend) for as long as needed to reply.",
-    "Nome, email e il contenuto del messaggio. Memorizzati nella nostra casella mail (Resend) per il tempo necessario a rispondere.",
+    "Nom, email, et le contenu de votre message. Transmis via EmailJS jusqu'à notre boîte mail, conservés le temps de vous répondre.",
+    "Name, email, and the content of your message. Relayed via EmailJS to our inbox, kept for as long as needed to reply.",
+    "Nome, email e il contenuto del messaggio. Trasmessi tramite EmailJS alla nostra casella mail, conservati per il tempo necessario a rispondere.",
   ),
   s2_audience: tri("Audience", "Analytics", "Statistiche"),
   s2_audience_value: tri(

@@ -21,7 +21,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://*.public.blob.vercel-storage.com https://*.r2.cloudflarestorage.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.public.blob.vercel-storage.com https://*.r2.cloudflarestorage.com https://api.resend.com https://plausible.io https://vitals.vercel-insights.com",
+  "connect-src 'self' https://*.public.blob.vercel-storage.com https://*.r2.cloudflarestorage.com https://api.emailjs.com https://plausible.io https://vitals.vercel-insights.com",
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",

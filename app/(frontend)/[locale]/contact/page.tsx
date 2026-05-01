@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { ContactForm } from "@/components/contact/ContactForm";
+import { ContactForm, type ContactType } from "@/components/contact/ContactForm";
 import { Container } from "@/components/ui/Container";
 import { MonoLabel } from "@/components/ui/MonoLabel";
-import type { ContactType } from "@/lib/contact/actions";
 import { SITE } from "@/lib/site";
 
 type Args = {

@@ -149,7 +149,9 @@
     "portfolioUrl": "Portfolio / GitHub URL",
     "message": "Message",
     "send": "Send",
-    "sending": "Sending"
+    "sending": "Sending",
+    "successMsg": "Thanks, we'll get back to you.",
+    "errorSend": "Failed to send. Try again or email us directly."
   },
   "ScrollHint": "Scroll to explore",
   "NotFound": {

@@ -1,9 +1,8 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { useTranslations } from "next-intl";
-import { useActionState } from "react";
-
-import { type ContactState, type ContactType, submitContact } from "@/lib/contact/actions";
+import { useState } from "react";
 
 const FIELD_BASE =
   "w-full border-0 border-b border-border bg-transparent py-[var(--spacing-3)] text-[var(--text-body)] focus:border-focus focus:outline-none";
@@ -11,15 +10,75 @@ const FIELD_BASE =
 const LABEL =
   "block font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] text-fg-secondary";
 
-const initialState: ContactState = { status: "idle" };
+export type ContactType = "incubator" | "company" | "talent";
+
+type Status =
+  | { kind: "idle" }
+  | { kind: "ok"; message: string }
+  | { kind: "error"; message: string };
+
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 export function ContactForm({ type }: { type: ContactType }) {
   const t = useTranslations("Contact");
-  const [state, formAction, pending] = useActionState(submitContact, initialState);
+  const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const [pending, setPending] = useState(false);
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (pending) return;
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    if ((data.get("hp") as string)?.length) {
+      setStatus({ kind: "ok", message: t("successMsg") });
+      form.reset();
+      return;
+    }
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      setStatus({ kind: "error", message: t("errorSend") });
+      return;
+    }
+
+    const params: Record<string, string> = {
+      type,
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      message: String(data.get("message") ?? ""),
+      subject: `[FoxStudio · ${type}] ${data.get("name") ?? ""}`,
+    };
+
+    if (type === "incubator") {
+      params.organization = String(data.get("organization") ?? "");
+      params.program = String(data.get("program") ?? "");
+    } else if (type === "company") {
+      params.company = String(data.get("company") ?? "");
+      params.topic = String(data.get("topic") ?? "");
+      params.budget = String(data.get("budget") ?? "");
+    } else {
+      params.role = String(data.get("role") ?? "");
+      params.portfolioUrl = String(data.get("portfolioUrl") ?? "");
+    }
+
+    setPending(true);
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, params, { publicKey: PUBLIC_KEY });
+      setStatus({ kind: "ok", message: t("successMsg") });
+      form.reset();
+    } catch (err) {
+      console.error("[contact] EmailJS error:", err);
+      setStatus({ kind: "error", message: t("errorSend") });
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
-    <form action={formAction} className="space-y-[var(--spacing-6)]">
-      <input type="hidden" name="type" value={type} />
+    <form onSubmit={onSubmit} className="space-y-[var(--spacing-6)]">
       {/* Honeypot — visually hidden but reachable to bots */}
       <input
         type="text"
@@ -103,13 +162,13 @@ export function ContactForm({ type }: { type: ContactType }) {
           {pending ? t("sending") : t("send")} ▸
         </button>
 
-        {state.status !== "idle" && (
+        {status.kind !== "idle" && (
           <output
             className={`font-[var(--font-mono)] text-[var(--text-mono-s)] uppercase tracking-[var(--tracking-mono)] ${
-              state.status === "ok" ? "text-fg" : "text-fg-secondary"
+              status.kind === "ok" ? "text-fg" : "text-fg-secondary"
             }`}
           >
-            {state.message}
+            {status.message}
           </output>
         )}
       </div>
