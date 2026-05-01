@@ -1,31 +1,3 @@
-<!--
-  FoxStudio — EmailJS contact template.
-  Paste into the "Content" of template_9sy95se on emailjs.com
-  ("Edit Content" → switch to HTML mode).
-
-  Variables sent by ContactForm (components/contact/ContactForm.tsx) —
-  always present, never optional, no {{#if}} blocks needed:
-    type    : "incubator" | "company" | "talent"
-    name    : sender name
-    email   : sender email
-    subject : "[FoxStudio · <type>] <name>"
-    details : pre-formatted multi-line string (key/value pairs aligned),
-              built client-side from the relevant type-specific fields.
-              Empty if the sender filled no extra field.
-    message : free-text message body
-
-  In the template Settings tab:
-    To Email   : <your inbox>
-    From Name  : FoxStudio (or {{name}} if you prefer per-sender)
-    Reply To   : {{email}}
-    Subject    : {{subject}}
-
-  Design constraints:
-  - System fonts only (Geist not loadable in mail clients).
-  - Inline styles only (Gmail/Outlook strip <style>).
-  - Single 600 px table — works on iOS Mail / Outlook desktop.
-  - No external images.
--->
 <!doctype html>
 <html lang="fr">
   <head>
@@ -46,7 +18,6 @@
       width="600"
       style="max-width:600px; width:100%; margin:0 auto; background:#f4f4f4; border:1px solid #0a0a0a;"
     >
-      <!-- ── HEADER strip ───────────────────────────── -->
       <tr>
         <td
           style="border-bottom:1px solid #0a0a0a; padding:12px 20px; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373;"
@@ -54,19 +25,18 @@
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>
               <td align="left" style="color:#737373;">FoxStudio · Lab R&amp;D</td>
-              <td align="right" style="color:#0a0a0a;">▸ Nouveau contact</td>
+              <td align="right" style="color:#0a0a0a;">&#9656; Nouveau contact</td>
             </tr>
           </table>
         </td>
       </tr>
 
-      <!-- ── IDENTITY block ─────────────────────────── -->
       <tr>
         <td style="padding:44px 24px 32px;">
           <p
             style="margin:0 0 16px; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373;"
           >
-            ▸ {{type}}
+            &#9656; {{type}}
           </p>
           <p
             style="margin:0 0 12px; font-size:40px; font-weight:500; line-height:0.95; letter-spacing:-0.03em; color:#0a0a0a;"
@@ -83,13 +53,12 @@
         </td>
       </tr>
 
-      <!-- ── 01 · DÉTAILS ───────────────────────────── -->
       <tr>
         <td style="border-top:1px solid #0a0a0a; padding:24px;">
           <p
             style="margin:0 0 12px; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373;"
           >
-            01 · Détails
+            01 &middot; D&eacute;tails
           </p>
           <pre
             style="margin:0; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:13px; line-height:1.7; color:#0a0a0a; white-space:pre-wrap; word-wrap:break-word; background:transparent;"
@@ -97,13 +66,12 @@
         </td>
       </tr>
 
-      <!-- ── 02 · MESSAGE ───────────────────────────── -->
       <tr>
         <td style="border-top:1px solid #0a0a0a; padding:24px;">
           <p
             style="margin:0 0 16px; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#737373;"
           >
-            02 · Message
+            02 &middot; Message
           </p>
           <div
             style="font-size:16px; line-height:1.55; color:#0a0a0a; white-space:pre-wrap; word-wrap:break-word;"
@@ -111,25 +79,23 @@
         </td>
       </tr>
 
-      <!-- ── ACTION button ──────────────────────────── -->
       <tr>
         <td style="border-top:1px solid #0a0a0a; padding:24px; text-align:center;">
           <a
             href="mailto:{{email}}"
             style="display:inline-block; padding:14px 28px; border:1px solid #0a0a0a; background:#0a0a0a; color:#f4f4f4; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;"
-            >Répondre à {{name}} ▸</a
+            >R&eacute;pondre &agrave; {{name}} &#9656;</a
           >
         </td>
       </tr>
 
-      <!-- ── FOOTER strip ───────────────────────────── -->
       <tr>
         <td
           style="border-top:1px solid #0a0a0a; padding:14px 20px; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#737373;"
         >
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>
-              <td align="left">FoxStudio · Cannes</td>
+              <td align="left">FoxStudio &middot; Cannes</td>
               <td align="right">studio.foxcase.fr</td>
             </tr>
           </table>
@@ -137,11 +103,10 @@
       </tr>
     </table>
 
-    <!-- Bottom note -->
     <p
       style="max-width:600px; margin:16px auto 0; padding:0 12px; font-family:'SF Mono',Monaco,Consolas,'Courier New',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#a3a3a3; text-align:center;"
     >
-      Envoyé via le formulaire de studio.foxcase.fr
+      Envoy&eacute; via le formulaire de studio.foxcase.fr
     </p>
   </body>
 </html>
