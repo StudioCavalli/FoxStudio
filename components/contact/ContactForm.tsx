@@ -70,7 +70,8 @@ export function ContactForm({ type }: { type: ContactType }) {
       setStatus({ kind: "ok", message: t("successMsg") });
       form.reset();
     } catch (err) {
-      console.error("[contact] EmailJS error:", err);
+      const e = err as { status?: number; text?: string };
+      console.error("[contact] EmailJS error:", e.status, e.text, err);
       setStatus({ kind: "error", message: t("errorSend") });
     } finally {
       setPending(false);
