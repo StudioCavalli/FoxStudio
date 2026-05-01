@@ -66,13 +66,25 @@ export function ContactForm({ type }: { type: ContactType }) {
     const labelWidth = Math.max(...rows.map(([k]) => k.length), 0);
     const details = rows.map(([k, v]) => `${k.padEnd(labelWidth, " ")}  ${v}`).join("\n");
 
+    const name = get("name");
+    const email = get("email");
+    const subject = `[FoxStudio · ${type}] ${name}`;
+
+    // EmailJS default templates often reference reserved-looking
+    // variables (from_name, from_email, reply_to, to_name) in their
+    // Settings tab. Sending them as aliases avoids "dynamic variables
+    // are corrupted" 400s when the template uses any of them.
     const params: Record<string, string> = {
       type,
-      name: get("name"),
-      email: get("email"),
-      message: get("message"),
+      name,
+      email,
+      subject,
       details,
-      subject: `[FoxStudio · ${type}] ${get("name")}`,
+      message: get("message"),
+      from_name: name,
+      from_email: email,
+      reply_to: email,
+      to_name: "FoxStudio",
     };
 
     setPending(true);
